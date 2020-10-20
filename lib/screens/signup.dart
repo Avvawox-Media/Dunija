@@ -34,17 +34,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
     //TextField TextStyle
     final textStyle = TextStyle(
       fontSize: 18.0,
-      color: AppSettings.primaryOrange,
+      color: AppSettings.primaryColor,
     );
 
     //Button TextStyle
     final btnTextStyle = TextStyle(
       fontSize: 18.0,
-      color: AppSettings.primaryOrange,
+      color: AppSettings.primaryColor,
     );
 
     //First Name TextField Object
-    var fullName = TextField(
+    var fullName = TextFormField(
       obscureText: false,
       controller: nameController,
       textAlign: TextAlign.start,
@@ -62,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
 
     //Create Phone TextField Object
-    var email = TextField(
+    var email = TextFormField(
       obscureText: false,
       controller: emailController,
       textAlign: TextAlign.start,
@@ -79,7 +79,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
 
     //Create PasswordField Object
-    var password = TextField(
+    var password = TextFormField(
       obscureText: _passwordHidden,
       controller: passwordController,
       textAlign: TextAlign.start,

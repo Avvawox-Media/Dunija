@@ -23,7 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-    flutter_sessions:
+  flutter_session:
+
     
 
 

@@ -90,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
         //color: Welcome.darkAccent,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0)),
-        color: AppSettings.primaryOrange,
+        color: AppSettings.primaryColor,
         onPressed: () {
           Navigator.push(context, BouncyPageRoute(widget: Dashboard()));
         },
@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Text(
             "Join",
             style: TextStyle(
-              color: AppSettings.primaryOrange,
+              color: AppSettings.primaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),

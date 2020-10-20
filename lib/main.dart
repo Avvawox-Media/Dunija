@@ -1,12 +1,27 @@
+import 'package:dunija/screens/dashboard.dart';
 import 'package:dunija/screens/welcome.dart';
 import 'package:dunija/settings/Appsettings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_session/flutter_session.dart';
 
-void main() {
-  runApp(Main());
+void main() async {
+  var token;
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await FlutterSession()
+      .get('token')
+      .then((value) => token = value == null ? '' : value.toString());
+
+  runApp(Dunija(token: token));
 }
 
-class Main extends StatelessWidget {
+class Dunija extends StatelessWidget {
+  //Session Token
+  final token;
+
+  Dunija({this.token});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -21,7 +36,7 @@ class Main extends StatelessWidget {
       ),
 
       //Home Screen
-      home: WelcomeScreen(),
+      home: token != '' ? Dashboard() : WelcomeScreen(),
     );
   }
 }
