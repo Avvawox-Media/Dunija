@@ -1,4 +1,4 @@
-package com.example.dunija
+package com.dunija.app
 
 import io.flutter.embedding.android.FlutterActivity
 

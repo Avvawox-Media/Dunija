@@ -24,6 +24,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_session:
+  flutter_svg:
+  tab_indicator_styler:
 
     
 
@@ -61,12 +63,18 @@ flutter:
     - assets/imgs/fried_foods.png
     - assets/imgs/porridges.png
     - assets/imgs/salads.png
-    - assets/imgs/soups.png 
+    - assets/imgs/soups.png
+    - assets/imgs/dunija.png
+    - assets/imgs/top_food.png
+    - assets/imgs/top_right.png
     
   fonts:
     - family: Amplify
       fonts:
         - asset: assets/fonts/Amplify_PersonalUseOnly.ttf
+    - family:  CustomIcon
+      fonts:
+        - asset: assets/fonts/CustomIcon.ttf
 
 
   # To add assets to your application, add an assets section, like this:
