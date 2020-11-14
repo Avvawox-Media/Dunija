@@ -1,5 +1,4 @@
-import 'package:dunija/screens/dashboard.dart';
-import 'package:dunija/screens/welcome.dart';
+import 'package:dunija/layout/homescreen.dart';
 import 'package:dunija/settings/Appsettings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
@@ -25,6 +24,7 @@ class Dunija extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    //
     return MaterialApp(
       title: AppSettings.appName,
       debugShowCheckedModeBanner: false,
@@ -36,7 +36,7 @@ class Dunija extends StatelessWidget {
       ),
 
       //Home Screen
-      home: token != '' ? Dashboard() : WelcomeScreen(),
+      home: HomeScreen(),
     );
   }
 }

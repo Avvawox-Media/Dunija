@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dunija/routes/bouncypageroute.dart';
 import 'package:dunija/settings/Appsettings.dart';
-import 'package:dunija/screens/login.dart';
-import 'package:dunija/screens/signup.dart';
+import 'package:dunija/layout/auth/login.dart';
+import 'package:dunija/layout/auth/signup.dart';
 
 class WelcomeScreen extends StatefulWidget {
   WelcomeScreen({Key key, this.title}) : super(key: key);

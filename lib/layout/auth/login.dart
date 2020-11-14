@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:dunija/settings/Appsettings.dart';
-import 'package:dunija/screens/dashboard.dart';
-import 'package:dunija/screens/login.dart';
+import 'package:dunija/layout/auth/signup.dart';
 import 'package:dunija/routes/slidepageroute.dart';
 import 'package:dunija/routes/bouncypageroute.dart';
 
-class SignUpScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
 final style = TextStyle(color: AppSettings.bgColor);
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   //
   var _passwordHidden = true;
 
   //
-  var nameController = TextEditingController();
   var passwordController = TextEditingController();
   var emailController = TextEditingController();
 
@@ -34,31 +32,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
     //TextField TextStyle
     final textStyle = TextStyle(
       fontSize: 18.0,
-      color: AppSettings.primaryColor,
+      color: AppSettings.primaryOrange,
     );
 
     //Button TextStyle
     final btnTextStyle = TextStyle(
       fontSize: 18.0,
-      color: AppSettings.primaryColor,
-    );
-
-    //First Name TextField Object
-    var fullName = TextFormField(
-      obscureText: false,
-      controller: nameController,
-      textAlign: TextAlign.start,
-      style: textStyle,
-      decoration: InputDecoration(
-        hintText: "Full Name",
-        prefixIcon: Icon(Icons.account_box),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32.0),
-        ),
-        contentPadding: EdgeInsets.all(15.0),
-      ),
-      textCapitalization: TextCapitalization.words,
-      autocorrect: false,
+      color: AppSettings.primaryOrange,
     );
 
     //Create Phone TextField Object
@@ -101,7 +81,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       textInputAction: TextInputAction.send,
     );
 
-    var signupBtn = SizedBox(
+    var loginBtn = SizedBox(
       width: 180.0,
       height: 50.0,
       child: RaisedButton(
@@ -111,10 +91,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0)),
         color: AppSettings.primaryColor,
         onPressed: () {
-          Navigator.push(context, BouncyPageRoute(widget: Dashboard()));
+          // Navigator.push(context, BouncyPageRoute(widget: Dashboard()));
         },
         child: Text(
-          "JOIN",
+          "LOGIN",
           style: TextStyle(
             color: Colors.white,
             fontSize: 16.0,
@@ -123,39 +103,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
       ),
     );
 
-    var termsText = GestureDetector(
-      child: Text(
-        "Terms of Use",
-        style: TextStyle(
-          decoration: TextDecoration.underline,
-        ),
-      ),
-      onTap: () {},
-    );
-    var privacyText = GestureDetector(
-      child: Text(
-        "Privacy Policy",
-        style: TextStyle(
-          decoration: TextDecoration.underline,
-        ),
-      ),
-      onTap: () {},
-    );
-
-    final loginLink = Row(
+    final signUpLink = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Already an Adventurer? '),
+        Text('Not an Adventurer yet? '),
         GestureDetector(
           child: Text(
-            "Login",
+            "Join",
             style: TextStyle(
               color: AppSettings.primaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),
           onTap: () {
-            Navigator.push(context, SlidePageRoute(widget: LoginScreen()));
+            Navigator.push(context, SlidePageRoute(widget: SignUpScreen()));
           },
         )
       ],
@@ -196,75 +157,48 @@ class _SignUpScreenState extends State<SignUpScreen> {
             bottom: 0,
             right: 0,
           ),
-          Positioned(
-            child: Image(
-              image: AssetImage('assets/imgs/random.png'),
-            ),
-            bottom: 150.0,
-            right: 50.0,
-          ),
           Stack(
             //fit: StackFit.expand,
             alignment: Alignment.center,
             children: [
               Image(
                 image: AssetImage('assets/imgs/transp.png'),
-                height: 500.0,
               ),
               Container(
                 width: 300.0,
-                height: 400.0,
+                height: 350.0,
                 child: Column(
                   children: [
                     SizedBox(
                       height: 0.0,
                     ),
                     Text(
-                      'Join the Adventure',
+                      'Welcome Back!',
                       style: TextStyle(
                           fontFamily: 'Amplify',
-                          fontSize: 36.0,
-                          color: AppSettings.primaryColor,
-                          fontWeight: FontWeight.w500),
+                          fontSize: 24.0,
+                          color: AppSettings.primaryOrange,
+                          fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 15.0,
-                    ),
-                    fullName,
-                    SizedBox(
-                      height: 10.0,
+                      height: 35.0,
                     ),
                     email,
                     SizedBox(
-                      height: 10.0,
+                      height: 25.0,
                     ),
                     password,
                     SizedBox(
-                      height: 10.0,
-                    ),
-                    Text(
-                      'By clicking \'JOIN\', you agree to these',
-                      style: TextStyle(
-                        fontSize: 12.0,
-                      ),
-                      textAlign: TextAlign.center,
+                      height: 25.0,
                     ),
                     SizedBox(
-                      height: 5.0,
+                      height: 35.0,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [termsText, Text(' and '), privacyText],
-                    ),
+                    loginBtn,
                     SizedBox(
                       height: 25.0,
                     ),
-                    signupBtn,
-                    SizedBox(
-                      height: 15.0,
-                    ),
-                    loginLink,
+                    signUpLink,
                   ],
                 ),
               )

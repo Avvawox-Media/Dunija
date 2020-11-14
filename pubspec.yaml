@@ -26,8 +26,7 @@ dependencies:
   flutter_session:
   flutter_svg:
   tab_indicator_styler:
-
-    
+  flutter_native_splash: ^0.1.9    
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -67,6 +66,7 @@ flutter:
     - assets/imgs/dunija.png
     - assets/imgs/top_food.png
     - assets/imgs/top_right.png
+    - assets/imgs/dunija_bg.png
     
   fonts:
     - family: Amplify
