@@ -1,3 +1,4 @@
+import 'package:dunija/layout/auth/login_screen.dart';
 import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/strings.dart';
@@ -58,15 +59,20 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
               SizedBox(
                 width: 10.0,
               ),
-              InkWell(
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  color: AppColors.whiteColor,
+              Column(children: [
+                SizedBox(
+                  height: 10.0,
                 ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
+                InkWell(
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.whiteColor,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ]),
               SizedBox(
                 width: 5.0,
               ),
@@ -84,9 +90,43 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
           ),
         ),
         Positioned(
-          top: 130.0,
+          top: 120.0,
           child: Padding(
-            child: Container(child: Text(pageName, style: AppStyles.pageTitle)),
+            child: Row(children: [
+              Container(child: Text(pageName, style: AppStyles.pageTitle)),
+              SizedBox(
+                width: 100.0,
+              ),
+              Container(
+                child: RaisedButton(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return LoginScreen();
+                    }));
+                  },
+                  color: AppColors.transparent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(Numbers.largeBoxBorderRadius),
+                    side: BorderSide(width: 1, color: AppColors.whiteColor),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.lock,
+                        color: AppColors.whiteColor,
+                        size: 15.0,
+                      ),
+                      Text(
+                        ' Login',
+                        style: AppStyles.whiteLabel,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ]),
             padding: EdgeInsets.only(left: 20.0),
           ),
         ),

@@ -60,15 +60,20 @@ class _BakedFoodScreenState extends State<BakedFoodScreen> {
               SizedBox(
                 width: 10.0,
               ),
-              InkWell(
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  color: AppColors.whiteColor,
+              Column(children: [
+                SizedBox(
+                  height: 15.0,
                 ),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
+                InkWell(
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.whiteColor,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ]),
               SizedBox(
                 width: 5.0,
               ),

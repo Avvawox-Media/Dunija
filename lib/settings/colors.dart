@@ -19,5 +19,8 @@ class AppColors {
 
   ///Apps Main Colors (Transparent versions)
   static Color whiteColorTrans2 = Color(0xAAFFFFFF),
+      brightColorTrans2 = Color(0xAAFFEECF),
       blackColorTrans2 = Color(0xAA000000);
+
+  static Color transparent = Color(0x00FFFFFF);
 }

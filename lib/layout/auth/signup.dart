@@ -1,27 +1,51 @@
-import 'package:dunija/layout/bakedfoodsscreen.dart';
-import 'package:dunija/layout/barbicuescreen.dart';
-import 'package:dunija/layout/friedfoodsscreen.dart';
-import 'package:dunija/layout/porridgesscreen.dart';
-import 'package:dunija/layout/saladsscreen.dart';
-import 'package:dunija/layout/soupsscreen.dart';
+import 'package:dunija/layout/auth/login_screen.dart';
 import 'package:dunija/settings/colors.dart';
-import 'package:dunija/settings/custom_icon_icons.dart';
-import 'package:dunija/settings/lists.dart';
 import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/styles.dart';
+import 'package:dunija/widgets/interest_dropdown.dart';
+import 'package:dunija/widgets/textfield_custom.dart';
 import 'package:flutter/material.dart';
-import 'package:tab_indicator_styler/tab_indicator_styler.dart';
+import 'package:flutter/services.dart';
+import 'package:dunija/settings/Appsettings.dart';
+import 'package:dunija/routes/slidepageroute.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
+final style = TextStyle(color: AppSettings.bgColor);
+
 class _SignUpScreenState extends State<SignUpScreen> {
+  //
+  var _passwordHidden = true;
+
+  //
+  var passwordController = TextEditingController();
+  var emailController = TextEditingController();
+
+  var pageName = 'Register';
+
   @override
   Widget build(BuildContext context) {
-    Numbers.deviceHeight = MediaQuery.of(context).size.height;
-    Numbers.deviceWidth = MediaQuery.of(context).size.width;
+    //
+    void togglePasswordVisibility() {
+      setState(() {
+        _passwordHidden = !_passwordHidden;
+      });
+    }
+
+    //TextField TextStyle
+    final textStyle = TextStyle(
+      fontSize: 18.0,
+      color: AppSettings.primaryOrange,
+    );
+
+    //Button TextStyle
+    final btnTextStyle = TextStyle(
+      fontSize: 18.0,
+      color: AppSettings.primaryOrange,
+    );
 
     //
     return Scaffold(
@@ -34,8 +58,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         Positioned(
           top: 0.0,
           child: Image(
-            image: AssetImage('assets/imgs/top_food.png'),
-            fit: BoxFit.contain,
+            image: AssetImage('assets/imgs/dunija_bg.png'),
+            fit: BoxFit.fitHeight,
             width: Numbers.deviceWidth,
           ),
         ),
@@ -64,32 +88,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(
                 width: 10.0,
               ),
+              Column(children: [
+                SizedBox(
+                  height: 10.0,
+                ),
+                InkWell(
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppColors.whiteColor,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ]),
+              SizedBox(
+                width: 5.0,
+              ),
               Image(
                 image: AssetImage('assets/imgs/dunija.png'),
                 width: 120.0,
               ),
-              //SvgPicture.asset('assets/imgs/home.svg'),
               SizedBox(
-                width: Numbers.deviceWidth - 250,
-              ),
-              InkWell(
-                child: Icon(
-                  Icons.search,
-                  color: AppColors.whiteColor,
-                ),
-                onTap: () {
-                  //Handle on tap
-                },
-              ),
-              SizedBox(
-                width: 40.0,
-              ),
-              InkWell(
-                child: Icon(
-                  Icons.favorite,
-                  color: AppColors.whiteColor,
-                ),
-                onTap: () {},
+                width: Numbers.deviceWidth - 230,
               ),
               SizedBox(
                 width: 20.0,
@@ -98,20 +119,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
         Positioned(
-          bottom: 0,
+          top: 150.0,
+          child: Padding(
+            child: Row(children: [
+              Container(child: Text(pageName, style: AppStyles.pageTitle)),
+              SizedBox(
+                width: 100.0,
+              ),
+            ]),
+            padding: EdgeInsets.only(left: 20.0),
+          ),
+        ),
+        Positioned(
+          bottom: 10.0,
           child: Container(
             width: Numbers.deviceWidth,
-            height: Numbers.deviceHeight * (3 / 4),
+            height: Numbers.deviceHeight * (3 / 4) - 30,
             decoration: BoxDecoration(
-              color: AppColors.whiteColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(
-                  Numbers.smallBoxBorderRadius,
-                ),
-                topRight: Radius.circular(
-                  Numbers.largeBoxBorderRadius,
-                ),
-              ),
+              color: AppColors.brightColorTrans2,
               boxShadow: [
                 BoxShadow(
                     color: Color(0x33000000),
@@ -119,207 +144,168 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     blurRadius: 15.0)
               ],
             ),
-            child: _tabSection(context),
-          ),
-        ),
-      ]),
-    );
-  }
+            child: ListView(children: [
+              Column(
+                children: [
+                  SizedBox(
+                    height: 0.0,
+                  ),
+                  Text(
+                    'Join the Adventure',
+                    style: AppStyles.cursiveTitle,
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
 
-  Widget _tabSection(BuildContext context) {
-    return (DefaultTabController(
-      length: 4,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(left: 10.0, right: 10.0),
-            //Add this to give height
-            height: MediaQuery.of(context).size.height * (2 / 3),
-            child: TabBarView(children: [
-              Container(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  shrinkWrap: true,
-                  crossAxisSpacing: 20.0,
-                  mainAxisSpacing: 20.0,
-                  children: AppLists.foodCatList.map((e) {
-                    return buildMainCateries(title: e.title, image: e.image);
-                  }).toList(),
-                ),
-              ),
-              Container(
-                alignment: Alignment.center,
-                child: Text("Downloaded Recipe"),
-              ),
-              Container(
-                alignment: Alignment.center,
-                child: Text("User Account Info"),
-              ),
-              Container(
-                alignment: Alignment.center,
-                child: Text("Notifications"),
+                  //Full Name Textfield
+                  Align(
+                    child: Container(
+                      width: Numbers.centerBoxWidth,
+                      height: Numbers.buttonHeight,
+                      child: CustomeTextField(
+                        controller: emailController,
+                        hint: 'Full Name',
+                        icon: Icons.person,
+                        hidden: false,
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 10.0,
+                  ),
+
+                  //Email Textfield
+                  Align(
+                    child: Container(
+                      width: Numbers.centerBoxWidth,
+                      height: Numbers.buttonHeight,
+                      child: CustomeTextField(
+                        controller: emailController,
+                        hint: 'Email',
+                        icon: Icons.email,
+                        hidden: false,
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 10.0,
+                  ),
+
+                  //Password Textfield
+                  Align(
+                    child: Container(
+                      width: Numbers.centerBoxWidth,
+                      height: Numbers.buttonHeight,
+                      child: CustomeTextField(
+                        controller: passwordController,
+                        hint: 'Password',
+                        icon: Icons.lock,
+                        hidden: true,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+
+                  //Interest Textfield
+                  Align(
+                    child: Container(
+                      width: Numbers.centerBoxWidth,
+                      height: Numbers.buttonHeight,
+                      child: InterestsDropdown(
+                          // controller: passwordController,
+                          // hint: 'Password',
+                          // icon: Icons.favorite
+                          // hidden: true,
+                          ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
+
+                  Align(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 10.0),
+                      width: Numbers.centerBoxWidth,
+                      alignment: Alignment.center,
+                      child: Column(children: [
+                        Text(
+                          'By signing up, you agree to our',
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              child: Text(
+                                'Terms of Service',
+                                style: AppStyles.boldBrownSmallLabel,
+                              ),
+                            ),
+                            Text(' & '),
+                            InkWell(
+                              child: Text(
+                                'Privacy Policy',
+                                style: AppStyles.boldBrownSmallLabel,
+                              ),
+                            ),
+                          ],
+                        )
+                      ]),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+
+                  //Terms of Service and Privacy Policy
+                  Container(
+                      width: Numbers.centerBoxWidth / 2,
+                      height: Numbers.buttonHeight,
+                      child: FlatButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Register',
+                          style: AppStyles.whiteLabel,
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                Numbers.inputBorderRadius)),
+                        color: AppColors.darkAccent,
+                      )),
+
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Already in? '),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return LoginScreen();
+                          }));
+                        },
+                        child: Text(
+                          'Login',
+                          style: AppStyles.boldBrownLabel,
+                        ),
+                      )
+                    ],
+                  )
+                ],
               ),
             ]),
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: AppColors.whiteColor,
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.shade200,
-                    blurRadius: 2.0,
-                    spreadRadius: 0.5)
-              ],
-            ),
-            child: TabBar(
-              indicator: MaterialIndicator(
-                tabPosition: TabPosition.top,
-                topLeftRadius: 0,
-                topRightRadius: 0,
-                height: 1,
-                color: AppColors.accent,
-              ),
-              tabs: [
-                Tab(icon: Icon(CustomIcon.food, size: 24)),
-                Tab(icon: Icon(CustomIcon.download, size: 21)),
-                Tab(icon: Icon(CustomIcon.user_alt, size: 20)),
-                Tab(icon: Icon(CustomIcon.notifications_none, size: 25)),
-              ],
-              labelColor: AppColors.accent,
-              unselectedLabelColor: Colors.grey,
-            ),
-          ),
-        ],
-      ),
-    ));
-  }
-
-  Widget buildMainCateries({@required title, @required image}) {
-    return InkWell(
-      child: Align(
-        child: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(Numbers.smallBoxBorderRadius),
-            color: AppColors.brightColor,
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.shade300,
-                  blurRadius: 3.0,
-                  spreadRadius: 1.0)
-            ],
-          ),
-          constraints: BoxConstraints(
-            maxWidth: 150.0,
-            minWidth: 100.0,
-            minHeight: 200.0,
-          ),
-          clipBehavior: Clip.hardEdge,
-          child: Column(
-            children: [
-              //
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(Numbers.smallBoxBorderRadius),
-                  color: AppColors.lightAccent,
-                  boxShadow: [
-                    BoxShadow(
-                        color: AppColors.darkAccentTrans,
-                        blurRadius: 10.0,
-                        spreadRadius: 1.0)
-                  ],
-                ),
-                constraints: BoxConstraints(
-                  maxWidth: 150.0,
-                  maxHeight: 130.0,
-                  minWidth: 100.0,
-                  minHeight: 100.0,
-                ),
-                child: Image(
-                  image: AssetImage(image),
-                  fit: BoxFit.contain,
-                  width: 100.0,
-                ),
-                alignment: Alignment.center,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 10),
-                child: Text(
-                  title,
-                  style: AppStyles.catLabel,
-                ),
-              )
-            ],
-          ),
         ),
-      ),
-      onTap: () {
-        //Switch Category title
-        switch (title) {
-          case 'Baked Foods':
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) {
-                      return BakedFoodScreen();
-                    },
-                    settings: RouteSettings(name: '/Baked')));
-            break;
-
-          case 'Barbicues':
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) {
-                      return BarbicueScreen();
-                    },
-                    settings: RouteSettings(name: '/Barbicues')));
-            break;
-
-          case 'Fried Foods':
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) {
-                      return FriedFoodsScreen();
-                    },
-                    settings: RouteSettings(name: '/Frieds')));
-            break;
-
-          case 'Porridges':
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) {
-                      return PorridgesScreen();
-                    },
-                    settings: RouteSettings(name: '/Porridges')));
-            break;
-
-          case 'Salads':
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) {
-                      return SaladsScreen();
-                    },
-                    settings: RouteSettings(name: '/Salads')));
-            break;
-
-          case 'Soups':
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) {
-                      return SoupsScreen();
-                    },
-                    settings: RouteSettings(name: '/Soups')));
-            break;
-        }
-      },
+      ]),
     );
   }
 }

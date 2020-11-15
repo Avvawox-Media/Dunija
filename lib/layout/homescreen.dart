@@ -156,7 +156,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Container(
                 alignment: Alignment.center,
-                child: Text("Downloaded Recipe"),
+                child: ListView(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  children: AppLists.foodList.map((e) {
+                    return buildDownloadItem(
+                        title: e.name, description: e.description);
+                  }).toList(),
+                ),
               ),
               Container(
                   alignment: Alignment.center,
@@ -171,7 +177,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         )),
               Container(
                 alignment: Alignment.center,
-                child: Text("Notifications"),
+                child: AppLists.notificationList.isNotEmpty
+                    ? ListView(
+                        children: AppLists.notificationList.map((e) {
+                          return buildNotificationWidget(
+                              title: e.title,
+                              description: e.description,
+                              status: e.status);
+                        }).toList(),
+                      )
+                    : Text("Notifications"),
               ),
             ]),
           ),
@@ -208,6 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
   }
 
+  //
   Widget buildMainCateries({@required title, @required image}) {
     return InkWell(
       child: Align(
@@ -335,6 +351,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  //
   Widget buildFavItem({@required title, @required description}) {
     return InkWell(
       onTap: () {},
@@ -408,5 +425,117 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildDownloadItem() {}
+  //
+  Widget buildDownloadItem({@required title, @required description}) {
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 10.0),
+        constraints: BoxConstraints(minHeight: 120.0, maxWidth: 300.0),
+        padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(Numbers.smallBoxBorderRadius),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade400,
+              blurRadius: 10,
+              offset: Offset(0, 1),
+              spreadRadius: 1.0,
+            )
+          ],
+          color: AppColors.whiteColor,
+        ),
+        child: Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: AppColors.accent,
+              radius: 40.0,
+            ),
+            SizedBox(
+              width: 15.0,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: AppStyles.titleStyle,
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Container(
+                  constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * (0.5)),
+                  child: Text(
+                    description = description.toString().length > 40
+                        ? description.toString().substring(0, 40) + '...'
+                        : description,
+                    textAlign: TextAlign.justify,
+                    style: AppStyles.favItemDesc,
+                  ),
+                ),
+                Container(
+                  alignment: Alignment.bottomRight,
+                  width: MediaQuery.of(context).size.width * (0.55),
+                  child: InkWell(
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.accent,
+                      child: Icon(
+                        Icons.delete,
+                        color: AppColors.brightColor,
+                        size: 15,
+                      ),
+                      radius: 12,
+                    ),
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  //
+  Widget buildNotificationWidget(
+      {@required title, @required description, status}) {
+    return InkWell(
+      child: Card(
+        elevation: 3.0,
+        color: status.toString().toLowerCase() == 'seen'
+            ? AppColors.whiteColor
+            : AppColors.brightColor,
+        margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        child: Container(
+          alignment: Alignment.centerLeft,
+          margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+          constraints: BoxConstraints(minHeight: 80.0),
+          child: (Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: AppStyles.titleStyle,
+                textAlign: TextAlign.start,
+              ),
+              SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                description,
+                style: AppStyles.greyLabel,
+              )
+            ],
+          )),
+        ),
+      ),
+      onTap: () {},
+    );
+  }
+
+  onClickedNotification() {}
 }
