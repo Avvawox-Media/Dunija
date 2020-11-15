@@ -25,109 +25,112 @@ class _HomeScreenState extends State<HomeScreen> {
     Numbers.deviceWidth = MediaQuery.of(context).size.width;
 
     //
-    return Scaffold(
-      body: Stack(children: [
-        Container(
-          color: AppColors.accent,
-          width: Numbers.deviceWidth,
-          height: Numbers.deviceHeight,
-        ),
-        Positioned(
-          top: 0.0,
-          child: Image(
-            image: AssetImage('assets/imgs/top_food.png'),
-            fit: BoxFit.contain,
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+        body: Stack(children: [
+          Container(
+            color: AppColors.accent,
             width: Numbers.deviceWidth,
+            height: Numbers.deviceHeight,
           ),
-        ),
-        Positioned(
-          top: 0.0,
-          right: 0.0,
-          child: Image(
-            image: AssetImage('assets/imgs/top_right.png'),
-            width: 200.0,
+          Positioned(
+            top: 0.0,
+            child: Image(
+              image: AssetImage('assets/imgs/top_food.png'),
+              fit: BoxFit.contain,
+              width: Numbers.deviceWidth,
+            ),
           ),
-        ),
-        Positioned(
-          top: 0.0,
-          right: -50.0,
-          child: Image(
-            image: AssetImage('assets/imgs/top_right.png'),
-            width: 200.0,
+          Positioned(
+            top: 0.0,
+            right: 0.0,
+            child: Image(
+              image: AssetImage('assets/imgs/top_right.png'),
+              width: 200.0,
+            ),
           ),
-        ),
-        Positioned(
-          top: 40.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 10.0,
-              ),
-              Image(
-                image: AssetImage('assets/imgs/dunija.png'),
-                width: 120.0,
-              ),
-              SizedBox(
-                width: Numbers.deviceWidth - 250,
-              ),
-              InkWell(
-                child: Icon(
-                  Icons.search,
-                  color: AppColors.whiteColor,
-                ),
-                onTap: () {
-                  //Handle on tap
-                },
-              ),
-              SizedBox(
-                width: 40.0,
-              ),
-              InkWell(
-                child: Icon(
-                  CustomIcon.user_alt,
-                  size: 20,
-                  color: AppColors.whiteColor,
-                ),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (c) {
-                    return FavoriteScreen();
-                  }));
-                },
-              ),
-              SizedBox(
-                width: 20.0,
-              ),
-            ],
+          Positioned(
+            top: 0.0,
+            right: -50.0,
+            child: Image(
+              image: AssetImage('assets/imgs/top_right.png'),
+              width: 200.0,
+            ),
           ),
-        ),
-        Positioned(
-          bottom: 0,
-          child: Container(
-            width: Numbers.deviceWidth,
-            height: Numbers.deviceHeight * (3 / 4),
-            decoration: BoxDecoration(
-              color: AppColors.whiteColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(
-                  Numbers.smallBoxBorderRadius,
+          Positioned(
+            top: 40.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 10.0,
                 ),
-                topRight: Radius.circular(
-                  Numbers.largeBoxBorderRadius,
+                Image(
+                  image: AssetImage('assets/imgs/dunija.png'),
+                  width: 120.0,
                 ),
-              ),
-              boxShadow: [
-                BoxShadow(
-                    color: Color(0x33000000),
-                    spreadRadius: 1.0,
-                    blurRadius: 15.0)
+                SizedBox(
+                  width: Numbers.deviceWidth - 250,
+                ),
+                InkWell(
+                  child: Icon(
+                    Icons.search,
+                    color: AppColors.whiteColor,
+                  ),
+                  onTap: () {
+                    //Handle on tap
+                  },
+                ),
+                SizedBox(
+                  width: 40.0,
+                ),
+                InkWell(
+                  child: Icon(
+                    CustomIcon.user_alt,
+                    size: 20,
+                    color: AppColors.whiteColor,
+                  ),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (c) {
+                      return FavoriteScreen();
+                    }));
+                  },
+                ),
+                SizedBox(
+                  width: 20.0,
+                ),
               ],
             ),
-            child: _tabSection(context),
           ),
-        ),
-      ]),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              width: Numbers.deviceWidth,
+              height: Numbers.deviceHeight * (3 / 4),
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(
+                    Numbers.smallBoxBorderRadius,
+                  ),
+                  topRight: Radius.circular(
+                    Numbers.largeBoxBorderRadius,
+                  ),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                      color: Color(0x33000000),
+                      spreadRadius: 1.0,
+                      blurRadius: 15.0)
+                ],
+              ),
+              child: _tabSection(context),
+            ),
+          ),
+        ]),
+      ),
     );
   }
 
@@ -437,7 +440,7 @@ class _HomeScreenState extends State<HomeScreen> {
           borderRadius: BorderRadius.circular(Numbers.smallBoxBorderRadius),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.shade400,
+              color: Colors.grey.shade300,
               blurRadius: 10,
               offset: Offset(0, 1),
               spreadRadius: 1.0,
@@ -535,6 +538,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       onTap: () {},
     );
+  }
+
+  Future<bool> _onBackPressed() {
+    //
   }
 
   onClickedNotification() {}
