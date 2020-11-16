@@ -173,7 +173,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
                       width: Numbers.deviceWidth <= 415.0
                           ? Numbers.deviceWidth
                           : 415.0,
-                      height: 300.0,
+                      height: 280.0,
                       // ,
                       margin: EdgeInsets.all(5.0),
                       //Inner Image Container
@@ -181,7 +181,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
                         children: [
                           Container(
                             width: Numbers.deviceWidth,
-                            height: 200.0,
+                            height: 190.0,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                   Numbers.mediumBoxBorderRadius),
@@ -203,7 +203,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: 35.0,
+                            height: 25.0,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -231,10 +231,19 @@ class _KitchenScreenState extends State<KitchenScreen> {
                               ),
                               //Count-down Time
                               Container(
-                                alignment: Alignment.centerLeft,
+                                alignment: Alignment.center,
                                 width: 50.0,
-                                color: AppColors.accent,
-                                padding: EdgeInsets.symmetric(vertical: 2.0),
+                                decoration: BoxDecoration(
+                                  color: AppColors.accent,
+                                  borderRadius: BorderRadius.circular(
+                                    Numbers.smallBoxBorderRadius,
+                                  ),
+                                  border: Border.all(
+                                      width: 0.5,
+                                      color: AppColors.brightColorTrans2),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 5.0, vertical: 3.0),
                                 child: Text(
                                   '2:30',
                                   style: AppStyles.boldWhiteLabel,
@@ -253,16 +262,10 @@ class _KitchenScreenState extends State<KitchenScreen> {
                         // shrinkWrap: true,
                         // scrollDirection: Axis.vertical,
                         children: [
-                          Text('data1'),
+                          Text(''),
                           Text('data2'),
                           Text('data3'),
-                          Text('data4'),
-                          Text('data5'),
-                          Text('data6'),
-                          Text('data7'),
-                          Text('data8'),
-                          Text('data9'),
-                          Text('data0')
+                          Text('data4')
                         ],
                       ),
                     ),
