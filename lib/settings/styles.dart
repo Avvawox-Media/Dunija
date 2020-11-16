@@ -47,6 +47,12 @@ class AppStyles {
     fontSize: 14.0,
     fontWeight: FontWeight.normal,
   );
+
+  static final boldWhiteLabel = TextStyle(
+    color: Colors.white,
+    fontSize: 14.0,
+    fontWeight: FontWeight.bold,
+  );
   static final textFieldLabel = TextStyle(
     color: AppColors.darkAccent,
     fontSize: 15.0,
