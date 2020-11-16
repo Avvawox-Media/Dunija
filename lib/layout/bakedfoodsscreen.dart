@@ -1,3 +1,4 @@
+import 'package:dunija/layout/kitchen_screen.dart';
 import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/custom_icon_icons.dart';
 import 'package:dunija/settings/quantities.dart';
@@ -140,7 +141,18 @@ class _BakedFoodScreenState extends State<BakedFoodScreen> {
                     blurRadius: 15.0)
               ],
             ),
-            child: Container(),
+            child: Container(
+              alignment: Alignment.center,
+              child: InkWell(
+                child: Text('Kitchen'),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    //
+                    return KitchenScreen();
+                  }));
+                },
+              ),
+            ),
           ),
         ),
       ]),
