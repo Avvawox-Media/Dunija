@@ -134,6 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  //
   Widget _tabSection(BuildContext context) {
     return (DefaultTabController(
       length: 4,
@@ -193,6 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ]),
           ),
+          //Tab Bar
           Container(
             decoration: BoxDecoration(
               color: AppColors.whiteColor,
@@ -265,14 +267,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 constraints: BoxConstraints(
                   maxWidth: 150.0,
-                  maxHeight: 130.0,
+                  // maxHeight: 150.0,
                   minWidth: 100.0,
                   minHeight: 100.0,
                 ),
                 child: Image(
                   image: AssetImage(image),
                   fit: BoxFit.contain,
-                  width: 100.0,
+                  width: 120.0,
                 ),
                 alignment: Alignment.center,
               ),
@@ -378,7 +380,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             CircleAvatar(
               backgroundColor: AppColors.accent,
-              radius: 40.0,
+              radius: 35.0,
             ),
             SizedBox(
               width: 15.0,
@@ -452,7 +454,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             CircleAvatar(
               backgroundColor: AppColors.accent,
-              radius: 40.0,
+              radius: 35.0,
             ),
             SizedBox(
               width: 15.0,

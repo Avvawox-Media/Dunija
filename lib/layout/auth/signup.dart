@@ -23,6 +23,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   //
   var passwordController = TextEditingController();
   var emailController = TextEditingController();
+  var nameController = TextEditingController();
 
   var pageName = 'Register';
 
@@ -34,18 +35,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         _passwordHidden = !_passwordHidden;
       });
     }
-
-    //TextField TextStyle
-    final textStyle = TextStyle(
-      fontSize: 18.0,
-      color: AppSettings.primaryOrange,
-    );
-
-    //Button TextStyle
-    final btnTextStyle = TextStyle(
-      fontSize: 18.0,
-      color: AppSettings.primaryOrange,
-    );
 
     //
     return Scaffold(
@@ -148,7 +137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Column(
                 children: [
                   SizedBox(
-                    height: 0.0,
+                    height: 10.0,
                   ),
                   Text(
                     'Join the Adventure',
@@ -165,7 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       width: Numbers.centerBoxWidth,
                       height: Numbers.buttonHeight,
                       child: CustomeTextField(
-                        controller: emailController,
+                        controller: nameController,
                         hint: 'Full Name',
                         icon: Icons.person,
                         hidden: false,
