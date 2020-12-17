@@ -1,11 +1,7 @@
 import 'dart:async';
-
-import 'package:dunija/layout/auth/login_screen.dart';
 import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/styles.dart';
-import 'package:dunija/widgets/interest_dropdown.dart';
-import 'package:dunija/widgets/textfield_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:dunija/settings/Appsettings.dart';
 import 'package:flutter/rendering.dart';
@@ -22,13 +18,21 @@ class _KitchenScreenState extends State<KitchenScreen> {
 
   var pageName = 'Kitchen', foodTitle = 'Food Title';
 
+  //Screen type
+  bool isLongScreen = Numbers.deviceHeight > 960 ? true : false;
+
   Future<bool> _onBackPressed() {
     //
+    Navigator.pop(context);
   }
 
+  //Progress Bar rate
   var progressRate = 0.0;
 
-  var progressBar = LinearProgressIndicator();
+  //Scroll Controller
+  ScrollController _scrollController = ScrollController();
+
+  bool isPlay = false;
 
   computeProgress() {
     var timer;
@@ -50,6 +54,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // print(Numbers.deviceHeight);
     //
     var progress = Align(
         alignment: Alignment.centerLeft,
@@ -87,207 +92,294 @@ class _KitchenScreenState extends State<KitchenScreen> {
           automaticallyImplyLeading: false,
           elevation: 0,
           title: Container(
-            child: Row(children: [
-              GestureDetector(
-                child: Container(
-                  padding: EdgeInsets.only(top: 12.0),
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: AppColors.accent,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      // GestureDetector(
+                      //   child: Container(
+                      //     padding: EdgeInsets.only(top: 12.0),
+                      //     child: Icon(
+                      //       Icons.arrow_back_ios,
+                      //       color: AppColors.accent,
+                      //     ),
+                      //   ),
+                      //   onTap: () {
+                      //     //
+                      //     Navigator.pop(context);
+                      //   },
+                      // ),
+                      Image(
+                        image: AssetImage('assets/imgs/dunija.png'),
+                        width: 100.0,
+                      ),
+                    ],
                   ),
-                ),
-                onTap: () {
-                  //
-                },
-              ),
-              Image(
-                image: AssetImage('assets/imgs/dunija.png'),
-                width: 100.0,
-              ),
-              SizedBox(
-                width: 20.0,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.circular(Numbers.largeBoxBorderRadius),
-                    color: AppColors.accent),
-                width: Numbers.deviceWidth / 2 - 20,
-                height: 30.0,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 5.0,
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Numbers.largeBoxBorderRadius),
+                        color: AppColors.accent),
+                    width: Numbers.deviceWidth / 2 - 20,
+                    height: 30.0,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        Image(
+                          image: AssetImage('assets/imgs/icon.png'),
+                          width: 28.0,
+                        ),
+                        SizedBox(
+                          width: 5.0,
+                        ),
+                        Text(
+                          foodTitle,
+                          style: AppStyles.whiteLabel,
+                        )
+                      ],
                     ),
-                    Image(
-                      image: AssetImage('assets/imgs/icon.png'),
-                      width: 28.0,
-                    ),
-                    SizedBox(
-                      width: 5.0,
-                    ),
-                    Text(
-                      foodTitle,
-                      style: AppStyles.whiteLabel,
-                    )
-                  ],
-                ),
-              )
-            ]),
+                  )
+                ]),
           ),
         ),
-        body: Stack(
+        body: Column(
           children: [
-            Positioned(
-              top: 0,
+            Expanded(
               child: Container(
-                width: Numbers.deviceWidth,
-                child: Column(
-                  children: [
-                    SizedBox(height: 5.0),
-                    Container(
-                      padding: EdgeInsets.all(10.0),
-                      width: Numbers.deviceWidth <= 415.0
-                          ? Numbers.deviceWidth
-                          : 415.0,
-                      child: Text(
-                        'Step 1',
-                        style: AppStyles.titleStyle,
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(15.0),
-                      alignment: Alignment.topCenter,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                            Numbers.mediumBoxBorderRadius),
-                        color: AppColors.accent,
-                        gradient: LinearGradient(
-                            begin: Alignment.bottomCenter,
-                            end: Alignment.topCenter,
-                            colors: [
-                              AppColors.accent,
-                              AppColors.lightAccent,
-                            ]),
-                      ),
-                      width: Numbers.deviceWidth <= 415.0
-                          ? Numbers.deviceWidth
-                          : 415.0,
-                      height: 280.0,
-                      // ,
-                      margin: EdgeInsets.all(5.0),
-                      //Inner Image Container
-                      child: Column(
-                        children: [
-                          Container(
-                            width: Numbers.deviceWidth,
-                            height: 190.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                  Numbers.mediumBoxBorderRadius),
-                              color: AppColors.whiteColor,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: AppColors.darkAccent,
-                                    spreadRadius: 1,
-                                    blurRadius: 25,
-                                    offset: Offset(0, 15))
-                              ],
-                              gradient: LinearGradient(
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                  colors: [
-                                    AppColors.brightColor,
-                                    AppColors.whiteColor,
-                                  ]),
+                // top: 0,
+                child: SafeArea(
+                  child: Container(
+                    width: Numbers.deviceWidth,
+                    child: Column(
+                      children: [
+                        SizedBox(height: 5.0),
+                        Container(
+                          padding: EdgeInsets.all(10.0),
+                          width: Numbers.deviceWidth,
+                          child: RichText(
+                            text: TextSpan(
+                              children: [TextSpan(text: '2')],
+                              text: 'Step ',
+                              style: AppStyles.titleStyle,
                             ),
                           ),
-                          SizedBox(
-                            height: 25.0,
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(15.0),
+                          alignment: Alignment.topCenter,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                                Numbers.mediumBoxBorderRadius),
+                            color: AppColors.accent,
+                            gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                                  AppColors.accent,
+                                  AppColors.lightAccent,
+                                ]),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          width: Numbers.deviceWidth,
+                          //height: 0.40 * Numbers.deviceHeight,
+                          margin: EdgeInsets.all(5.0),
+                          //Inner Image Container
+                          child: Column(
                             children: [
-                              //Progress Bar
                               Container(
-                                alignment: Alignment.centerLeft,
-                                height: 15.0,
-                                width: Numbers.deviceWidth - 150,
+                                width: Numbers.deviceWidth,
+                                height: 0.3 * Numbers.deviceHeight,
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        Numbers.smallBoxBorderRadius),
-                                    gradient: LinearGradient(
+                                  borderRadius: BorderRadius.circular(
+                                      Numbers.mediumBoxBorderRadius),
+                                  color: AppColors.whiteColor,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: AppColors.darkAccent,
+                                        spreadRadius: 1,
+                                        blurRadius: 25,
+                                        offset: Offset(0, 15))
+                                  ],
+                                  gradient: LinearGradient(
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter,
+                                      colors: [
+                                        AppColors.brightColor,
+                                        AppColors.whiteColor,
+                                      ]),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 25.0,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  //Progress Bar
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    height: 15.0,
+                                    width: Numbers.deviceWidth * 0.65,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(
+                                          Numbers.smallBoxBorderRadius),
+                                      gradient: LinearGradient(
                                         begin: Alignment.bottomLeft,
                                         end: Alignment.topRight,
                                         colors: [
                                           AppColors.whiteColor,
                                           AppColors.brightColor
-                                        ])),
-                                child: progress,
-                                clipBehavior: Clip.hardEdge,
-                              ),
-                              SizedBox(
-                                width: 10.0,
-                              ),
-                              //Count-down Time
-                              Container(
-                                alignment: Alignment.center,
-                                width: 50.0,
-                                decoration: BoxDecoration(
-                                  color: AppColors.accent,
-                                  borderRadius: BorderRadius.circular(
-                                    Numbers.smallBoxBorderRadius,
+                                        ],
+                                      ),
+                                    ),
+                                    child: progress,
+                                    clipBehavior: Clip.hardEdge,
                                   ),
-                                  border: Border.all(
-                                      width: 0.5,
-                                      color: AppColors.brightColorTrans2),
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 5.0, vertical: 3.0),
-                                child: Text(
-                                  '2:30',
-                                  style: AppStyles.boldWhiteLabel,
-                                ),
+                                  SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  //Count-down Time
+                                  Container(
+                                    alignment: Alignment.center,
+                                    width: 0.15 * Numbers.deviceWidth,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.accent,
+                                      borderRadius: BorderRadius.circular(
+                                        Numbers.smallBoxBorderRadius,
+                                      ),
+                                      border: Border.all(
+                                          width: 0.5,
+                                          color: AppColors.brightColorTrans2),
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 5.0, vertical: 3.0),
+                                    child: Text(
+                                      '2:30',
+                                      style: AppStyles.boldWhiteLabel,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Scrollbar(
+                              controller: _scrollController,
+                              child: ListView(
+                                controller: _scrollController,
+                                children: [
+                                  Text(''),
+                                  Text('data2'),
+                                  Text('data3'),
+                                  Text('data4'),
+                                  Text(''),
+                                  Text('data2'),
+                                  Text('data3'),
+                                  Text('data4'),
+                                  Text(''),
+                                  Text('data2'),
+                                  Text('data3'),
+                                  Text('data4'),
+                                  Text(''),
+                                  Text('data2'),
+                                  Text('data3'),
+                                  Text('data4'),
+                                  Text(''),
+                                  Text('data2'),
+                                  Text('data3'),
+                                  Text('data4'),
+                                  Text(''),
+                                  Text('data2'),
+                                  Text('data3'),
+                                  Text('data4'),
+                                  Text(''),
+                                  Text('data2'),
+                                  Text('data3'),
+                                  Text('data4'),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15.0),
-                      height: 200,
-                      color: AppColors.brightColor,
-                      child: ListView(
-                        // shrinkWrap: true,
-                        // scrollDirection: Axis.vertical,
-                        children: [
-                          Text(''),
-                          Text('data2'),
-                          Text('data3'),
-                          Text('data4')
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
-            Positioned(
-                bottom: 0.0,
+            Container(
+                // bottom: 0.0,
                 child: Container(
-                  width: Numbers.deviceWidth <= 415.0
-                      ? Numbers.deviceWidth
-                      : 415.0,
-                  height: 50.0,
-                  alignment: Alignment.bottomCenter,
-                  decoration: BoxDecoration(
-                    color: AppColors.accent.withAlpha(50),
+              width: Numbers.deviceWidth,
+              height: 0.07 * Numbers.deviceHeight,
+              alignment: Alignment.bottomCenter,
+              decoration: BoxDecoration(
+                  // color: AppColors.accent.withAlpha(50),
                   ),
-                ))
+              child: Stack(
+                alignment:
+                    isLongScreen ? Alignment.center : Alignment.topCenter,
+                children: [
+                  Numbers.deviceWidth > 415.0
+                      ? Container(
+                          decoration:
+                              BoxDecoration(color: AppColors.brightColor),
+                          width: Numbers.deviceWidth,
+                        )
+                      : Image(
+                          image: AssetImage('assets/imgs/player_bg.png'),
+                          width: Numbers.deviceWidth,
+                          fit: BoxFit.cover,
+                        ),
+                  InkWell(
+                    onTap: () {
+                      //Play or Pause Tapped
+                      playPause();
+                    },
+                    onTapCancel: () {
+                      //
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 80.0,
+                      height: 0.05 * Numbers.deviceHeight,
+                      decoration: BoxDecoration(
+                        color: AppColors.accent,
+                        borderRadius: BorderRadius.circular(30.0),
+                        gradient: LinearGradient(
+                          colors: [
+                            AppColors.lightAccent,
+                            AppColors.accent,
+                          ],
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                        ),
+                      ),
+                      child: Icon(
+                        isPlay ? Icons.pause : Icons.play_arrow_rounded,
+                        color: AppColors.brightColor,
+                        size: 30.0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ))
           ],
         ),
       ),
     );
+  }
+
+  playPause() {
+    setState(() {
+      isPlay = !isPlay;
+    });
   }
 }

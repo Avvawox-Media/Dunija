@@ -208,5 +208,7 @@ class _PinAuthScreenState extends State<PinAuthScreen> {
     );
   }
 
-  Future<bool> _onBackPressed() {}
+  Future<bool> _onBackPressed() {
+    Navigator.pop(context);
+  }
 }

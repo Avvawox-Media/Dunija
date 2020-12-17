@@ -1,15 +1,15 @@
-import 'package:dunija/layout/bakedfoodsscreen.dart';
-import 'package:dunija/layout/barbicuescreen.dart';
-import 'package:dunija/layout/user_screen.dart';
-import 'package:dunija/layout/friedfoodsscreen.dart';
-import 'package:dunija/layout/porridgesscreen.dart';
-import 'package:dunija/layout/saladsscreen.dart';
-import 'package:dunija/layout/soupsscreen.dart';
+import 'package:dunija/layout/tabview/bakedfoodsscreen.dart';
+import 'package:dunija/layout/tabview/barbicuescreen.dart';
+import 'package:dunija/layout/tabview/friedfoodsscreen.dart';
+import 'package:dunija/layout/tabview/porridgesscreen.dart';
+import 'package:dunija/layout/tabview/saladsscreen.dart';
+import 'package:dunija/layout/tabview/soupsscreen.dart';
 import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/custom_icon_icons.dart';
 import 'package:dunija/settings/lists.dart';
 import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/styles.dart';
+import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
@@ -18,7 +18,35 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  //Menu Collapse
+  bool isCollapsed = true;
+
+  //
+  ScrollController _scrollController = ScrollController();
+
+  //Animation Duration
+  final duration = Duration(milliseconds: 300);
+
+  //Scale Animation Controller
+  AnimationController _scaleController;
+  Animation<double> _scaleTransition;
+
+  @override
+  void initState() {
+    super.initState();
+    _scaleController = AnimationController(duration: duration, vsync: this);
+    _scaleTransition =
+        Tween<double>(begin: 1.0, end: 0.8).animate(_scaleController);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scaleController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Numbers.deviceHeight = MediaQuery.of(context).size.height;
@@ -28,108 +56,183 @@ class _HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
-        body: Stack(children: [
-          Container(
-            color: AppColors.accent,
-            width: Numbers.deviceWidth,
-            height: Numbers.deviceHeight,
-          ),
-          Positioned(
-            top: 0.0,
-            child: Image(
-              image: AssetImage('assets/imgs/top_food.png'),
-              fit: BoxFit.contain,
-              width: Numbers.deviceWidth,
-            ),
-          ),
-          Positioned(
-            top: 0.0,
-            right: 0.0,
-            child: Image(
-              image: AssetImage('assets/imgs/top_right.png'),
-              width: 200.0,
-            ),
-          ),
-          Positioned(
-            top: 0.0,
-            right: -50.0,
-            child: Image(
-              image: AssetImage('assets/imgs/top_right.png'),
-              width: 200.0,
-            ),
-          ),
-          Positioned(
-            top: 40.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 10.0,
-                ),
-                Image(
-                  image: AssetImage('assets/imgs/dunija.png'),
-                  width: 120.0,
-                ),
-                SizedBox(
-                  width: Numbers.deviceWidth - 250,
-                ),
-                InkWell(
-                  child: Icon(
-                    Icons.search,
-                    color: AppColors.whiteColor,
-                  ),
+        backgroundColor: AppColors.darkAccent,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          brightness: Brightness.dark,
+          toolbarHeight: 0.0,
+          toolbarOpacity: 0.0,
+          backgroundColor: AppColors.darkAccent.withOpacity(0.0),
+          elevation: 0,
+        ),
+        body: Stack(
+          children: [
+            //App Menu function callback
+            createAppMenu(context: context),
+
+            //Animate on Menu clicked
+            AnimatedPositioned(
+              duration: duration,
+              top: 0,
+              left: isCollapsed ? 0.0 : -0.6 * Numbers.deviceWidth,
+              right: isCollapsed ? 0.0 : 0.6 * Numbers.deviceWidth,
+              bottom: 0,
+              child: ScaleTransition(
+                scale: _scaleTransition,
+                child: InkWell(
                   onTap: () {
-                    //Handle on tap
+                    if (!isCollapsed) {
+                      print('Clicked');
+                      toggleMenu();
+                    }
                   },
-                ),
-                SizedBox(
-                  width: 40.0,
-                ),
-                InkWell(
-                  child: Icon(
-                    CustomIcon.user_alt,
-                    size: 20,
-                    color: AppColors.whiteColor,
+                  child: ClipRRect(
+                    borderRadius: isCollapsed
+                        ? BorderRadius.zero
+                        : BorderRadius.circular(30.0),
+                    child: Material(
+                      elevation: 8.0,
+                      child: Stack(children: [
+                        Container(
+                          color: AppColors.accent,
+                          width: Numbers.deviceWidth,
+                          height: Numbers.deviceHeight,
+                        ),
+                        Positioned(
+                          top: 0.0,
+                          child: Image(
+                            image: AssetImage('assets/imgs/top_food.png'),
+                            fit: BoxFit.contain,
+                            width: Numbers.deviceWidth,
+                          ),
+                        ),
+                        Positioned(
+                          top: 0.0,
+                          right: 0.0,
+                          child: Image(
+                            image: AssetImage('assets/imgs/top_right.png'),
+                            width: 200.0,
+                          ),
+                        ),
+                        Positioned(
+                          top: 0.0,
+                          right: -50.0,
+                          child: Image(
+                            image: AssetImage('assets/imgs/top_right.png'),
+                            width: 200.0,
+                          ),
+                        ),
+                        //MainContent
+                        Positioned(
+                          top: 40.0,
+                          child: Container(
+                            width: Numbers.deviceWidth,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                // SizedBox(
+                                //   width: 10.0,
+                                // ),
+                                Image(
+                                  image: AssetImage('assets/imgs/dunija.png'),
+                                  width: 0.5 * Numbers.deviceWidth,
+                                ),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      child: CircleAvatar(
+                                        backgroundColor: AppColors.darkAccent
+                                            .withOpacity(0.5),
+                                        child: Icon(
+                                          Icons.search,
+                                          size: 30.0,
+                                          color: AppColors.whiteColor,
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        //Handle on tap
+                                        if (isCollapsed == false) {
+                                          _scaleController.reverse();
+
+                                          setState(() {
+                                            isCollapsed = true;
+                                          });
+                                        }
+
+                                        showSearch(
+                                          context: context,
+                                          delegate: SearchField(),
+                                        );
+                                      },
+                                    ),
+                                    SizedBox(
+                                      width: 20.0,
+                                    ),
+                                    InkWell(
+                                      child: CircleAvatar(
+                                        backgroundColor: AppColors.darkAccent,
+                                        child: Icon(
+                                          Icons.restaurant_menu,
+                                          size: 30,
+                                          color: AppColors.whiteColor,
+                                        ),
+                                      ),
+                                      onTap: () {
+                                        // Navigator.push(context,
+                                        //     MaterialPageRoute(builder: (c) {
+                                        //   return FavoriteScreen();
+                                        // }));
+
+                                        toggleMenu();
+                                      },
+                                    ),
+                                    SizedBox(
+                                      width: 20.0,
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        // Bottom Tabs
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Container(
+                            clipBehavior: Clip.hardEdge,
+                            width: Numbers.deviceWidth,
+                            height: Numbers.deviceHeight * (3 / 4),
+                            decoration: BoxDecoration(
+                              color: AppColors.whiteColor,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(
+                                  Numbers.mediumBoxBorderRadius,
+                                ),
+                                topRight: Radius.circular(
+                                  Numbers.mediumBoxBorderRadius,
+                                ),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Color(0x33000000),
+                                    spreadRadius: 1.0,
+                                    blurRadius: 15.0)
+                              ],
+                            ),
+                            child: _tabSection(context),
+                          ),
+                        ),
+                      ]),
+                    ),
                   ),
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (c) {
-                      return FavoriteScreen();
-                    }));
-                  },
                 ),
-                SizedBox(
-                  width: 20.0,
-                ),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            child: Container(
-              width: Numbers.deviceWidth,
-              height: Numbers.deviceHeight * (3 / 4),
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(
-                    Numbers.smallBoxBorderRadius,
-                  ),
-                  topRight: Radius.circular(
-                    Numbers.largeBoxBorderRadius,
-                  ),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                      color: Color(0x33000000),
-                      spreadRadius: 1.0,
-                      blurRadius: 15.0)
-                ],
               ),
-              child: _tabSection(context),
             ),
-          ),
-        ]),
+          ],
+        ),
       ),
     );
   }
@@ -148,14 +251,20 @@ class _HomeScreenState extends State<HomeScreen> {
             height: MediaQuery.of(context).size.height * (2 / 3),
             child: TabBarView(children: [
               Container(
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  shrinkWrap: true,
-                  crossAxisSpacing: 20.0,
-                  mainAxisSpacing: 20.0,
-                  children: AppLists.foodCatList.map((e) {
-                    return buildMainCateries(title: e.title, image: e.image);
-                  }).toList(),
+                child: Scrollbar(
+                  controller: _scrollController,
+                  child: GridView.count(
+                    padding: EdgeInsets.zero,
+                    controller: _scrollController,
+                    crossAxisCount: 2,
+                    shrinkWrap: true,
+                    crossAxisSpacing: 20.0,
+                    mainAxisSpacing: 20.0,
+                    children: AppLists.foodCatList.map((e) {
+                      return buildMainCategories(
+                          title: e.title, image: e.image);
+                    }).toList(),
+                  ),
                 ),
               ),
               Container(
@@ -229,14 +338,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   //
-  Widget buildMainCateries({@required title, @required image}) {
+  Widget buildMainCategories({@required title, @required image}) {
     return InkWell(
       child: Align(
         child: Container(
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Numbers.smallBoxBorderRadius),
-            color: AppColors.brightColor,
+            color: AppColors.accent,
             boxShadow: [
               BoxShadow(
                   color: Colors.grey.shade300,
@@ -244,13 +353,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   spreadRadius: 1.0)
             ],
           ),
-          constraints: BoxConstraints(
-            maxWidth: 150.0,
-            minWidth: 100.0,
-            minHeight: 200.0,
-          ),
+          width: 0.45 * Numbers.deviceWidth,
+          height: 0.46 * Numbers.deviceWidth,
           clipBehavior: Clip.hardEdge,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               //
               Container(
@@ -260,29 +367,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: AppColors.lightAccent,
                   boxShadow: [
                     BoxShadow(
-                        color: AppColors.darkAccentTrans,
+                        color: AppColors.darkAccent.withOpacity(0.5),
                         blurRadius: 10.0,
                         spreadRadius: 1.0)
                   ],
                 ),
-                constraints: BoxConstraints(
-                  maxWidth: 150.0,
-                  // maxHeight: 150.0,
-                  minWidth: 100.0,
-                  minHeight: 100.0,
-                ),
+                width: 0.45 * Numbers.deviceWidth,
+                height: 0.36 * Numbers.deviceWidth,
                 child: Image(
                   image: AssetImage(image),
-                  fit: BoxFit.contain,
-                  width: 120.0,
+                  fit: BoxFit.cover,
                 ),
                 alignment: Alignment.center,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 10),
+              Center(
                 child: Text(
                   title,
                   style: AppStyles.catLabel,
+                  textAlign: TextAlign.center,
                 ),
               )
             ],
@@ -547,4 +649,251 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   onClickedNotification() {}
+
+  toggleMenu() {
+    if (isCollapsed) {
+      _scaleController.forward();
+    } else {
+      _scaleController.reverse();
+    }
+    setState(() {
+      isCollapsed = !isCollapsed;
+    });
+  }
+
+  ///App Menu
+  Widget createAppMenu({@required context, username, subtext}) {
+    final menuTitleStyle = TextStyle(
+        color: AppColors.whiteColor,
+        fontSize: 16.0,
+        fontWeight: FontWeight.bold);
+    final menuItemStyle = TextStyle(
+        color: AppColors.whiteColor.withOpacity(0.8),
+        fontSize: 15.0,
+        fontWeight: FontWeight.bold);
+    final subTextStyle =
+        TextStyle(color: AppColors.whiteColor.withOpacity(0.7), fontSize: 12.0);
+
+    return Container(
+      alignment: Alignment.centerRight,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height / 3,
+            width: MediaQuery.of(context).size.width,
+            color: AppColors.darkAccent,
+            padding: EdgeInsets.only(right: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: () {
+                    toggleMenu();
+                  },
+                  child: CircleAvatar(
+                    backgroundColor: Color(0x22000000),
+                    child: Icon(
+                      Icons.clear_rounded,
+                      size: 25,
+                      color: AppColors.whiteColor,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15.0,
+                ),
+                CircleAvatar(
+                  backgroundColor: AppColors.whiteColor.withOpacity(0.5),
+                  radius: 40.0,
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                  username == null ? 'Anonymous User' : username,
+                  textAlign: TextAlign.right,
+                  style: menuTitleStyle,
+                ),
+                SizedBox(
+                  height: 4.0,
+                ),
+                Text(
+                  subtext == null ? 'Sign up and get more benefits' : subtext,
+                  textAlign: TextAlign.right,
+                  style: subTextStyle,
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+              ],
+            ),
+          ),
+          Container(
+            // width: 200,
+            height: MediaQuery.of(context).size.height * 2 / 3,
+            color: AppColors.darkAccent,
+            child: ListView(
+              children: [
+                SizedBox(
+                  height: 25.0,
+                ),
+                // InkWell(
+                //   onTap: () {
+                //     //
+                //   },
+                //   child: ListTile(
+                //     contentPadding:
+                //         EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                //     title: Text(
+                //       'Nutrition & Diet',
+                //       textAlign: TextAlign.right,
+                //       style: menuItemStyle,
+                //     ),
+                //     trailing: Icon(
+                //       Icons.accessibility,
+                //       color: AppColors.whiteColor,
+                //     ),
+                //   ),
+                // ),
+                InkWell(
+                  onTap: () {
+                    //
+                  },
+                  child: ListTile(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    title: Text(
+                      'Meal Planner',
+                      textAlign: TextAlign.right,
+                      style: menuItemStyle,
+                    ),
+                    trailing: Icon(
+                      Icons.next_plan_rounded,
+                      color: AppColors.whiteColor,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    //
+                  },
+                  child: ListTile(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    title: Text(
+                      'Puchase Premium',
+                      textAlign: TextAlign.right,
+                      style: menuItemStyle,
+                    ),
+                    trailing: Icon(
+                      Icons.wallet_travel,
+                      color: AppColors.whiteColor,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    //
+                    toggleMenu();
+                  },
+                  child: ListTile(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    title: Text(
+                      'Shopping List',
+                      textAlign: TextAlign.right,
+                      style: menuItemStyle,
+                    ),
+                    trailing: Icon(
+                      Icons.list,
+                      color: AppColors.whiteColor,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    //
+                    toggleMenu();
+                  },
+                  child: ListTile(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    title: Text(
+                      'Share App',
+                      textAlign: TextAlign.right,
+                      style: menuItemStyle,
+                    ),
+                    trailing: Icon(
+                      Icons.share,
+                      color: AppColors.whiteColor,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    //
+                    toggleMenu();
+                  },
+                  child: ListTile(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    title: Text(
+                      'Feedback',
+                      textAlign: TextAlign.right,
+                      style: menuItemStyle,
+                    ),
+                    trailing: Icon(
+                      Icons.feedback,
+                      color: AppColors.whiteColor,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    //
+                    toggleMenu();
+                  },
+                  child: ListTile(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    title: Text(
+                      'Settings',
+                      textAlign: TextAlign.right,
+                      style: menuItemStyle,
+                    ),
+                    trailing: Icon(
+                      Icons.settings,
+                      color: AppColors.whiteColor,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    //
+                  },
+                  child: ListTile(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                    title: Text(
+                      'Logout',
+                      textAlign: TextAlign.right,
+                      style: menuItemStyle,
+                    ),
+                    trailing: Icon(
+                      Icons.logout,
+                      color: AppColors.whiteColor,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  //
 }

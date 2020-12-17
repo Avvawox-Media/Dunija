@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   ///Apps Main Colors
   static Color accent = Color(0xFFE88911),
-      darkAccent = Color(0xFF990000),
+      darkAccent = Color(0xFF3B0605),
       lightAccent = Color(0xFFFFC300),
       brightColor = Color(0xFFFFEECF),
       whiteColor = Color(0xFFFFFFFF),

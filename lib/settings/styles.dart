@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 class AppStyles {
   ///TextStyles
   static final catLabel = TextStyle(
-    color: AppColors.darkAccent,
+    color: AppColors.brightColor,
+    fontWeight: FontWeight.bold,
   );
 
   static final boldBrownLabel = TextStyle(

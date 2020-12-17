@@ -6,19 +6,19 @@ import 'package:dunija/settings/strings.dart';
 import 'package:dunija/settings/styles.dart';
 import 'package:flutter/material.dart';
 
-class BakedFoodScreen extends StatefulWidget {
+class SaladsScreen extends StatefulWidget {
   @override
-  _BakedFoodScreenState createState() => _BakedFoodScreenState();
+  _SaladsScreenState createState() => _SaladsScreenState();
 }
 
-class _BakedFoodScreenState extends State<BakedFoodScreen> {
+class _SaladsScreenState extends State<SaladsScreen> {
   @override
   Widget build(BuildContext context) {
     Numbers.deviceHeight = MediaQuery.of(context).size.height;
     Numbers.deviceWidth = MediaQuery.of(context).size.width;
 
     //Page Name
-    final pageName = AppStrings.bakedFood;
+    final pageName = AppStrings.salads;
 
     //
     return Scaffold(
@@ -54,62 +54,76 @@ class _BakedFoodScreenState extends State<BakedFoodScreen> {
         ),
         Positioned(
           top: 40.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 10.0,
-              ),
-              Column(children: [
-                SizedBox(
-                  height: 15.0,
+          child: Container(
+            width: Numbers.deviceWidth,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 15.0,
+                    ),
+                    Column(children: [
+                      SizedBox(
+                        height: 15.0,
+                      ),
+                      InkWell(
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: AppColors.whiteColor,
+                        ),
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ]),
+                    SizedBox(
+                      width: 5.0,
+                    ),
+                    Image(
+                      image: AssetImage('assets/imgs/dunija.png'),
+                      width: 120.0,
+                    ),
+                  ],
                 ),
-                InkWell(
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: AppColors.whiteColor,
-                  ),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ]),
-              SizedBox(
-                width: 5.0,
-              ),
-              Image(
-                image: AssetImage('assets/imgs/dunija.png'),
-                width: 120.0,
-              ),
-              //SvgPicture.asset('assets/imgs/home.svg'),
-              SizedBox(
-                width: Numbers.deviceWidth - 280,
-              ),
-              InkWell(
-                child: Icon(
-                  Icons.search,
-                  color: AppColors.whiteColor,
-                ),
-                onTap: () {
-                  //Handle on tap
-                },
-              ),
-              SizedBox(
-                width: 40.0,
-              ),
-              InkWell(
-                child: Icon(
-                  CustomIcon.user_alt,
-                  size: 20,
-                  color: AppColors.whiteColor,
-                ),
-                onTap: () {},
-              ),
-              SizedBox(
-                width: 20.0,
-              ),
-            ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    InkWell(
+                      child: CircleAvatar(
+                        backgroundColor: AppColors.darkAccent.withOpacity(0.5),
+                        child: Icon(
+                          Icons.search,
+                          color: AppColors.whiteColor,
+                        ),
+                      ),
+                      onTap: () {
+                        //Handle on tap
+                      },
+                    ),
+                    SizedBox(
+                      width: 20.0,
+                    ),
+                    InkWell(
+                      child: CircleAvatar(
+                        backgroundColor: AppColors.darkAccent.withOpacity(0.7),
+                        child: Icon(
+                          CustomIcon.food,
+                          size: 20,
+                          color: AppColors.whiteColor,
+                        ),
+                      ),
+                      onTap: () {},
+                    ),
+                    SizedBox(
+                      width: 20.0,
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
         Positioned(
@@ -128,10 +142,10 @@ class _BakedFoodScreenState extends State<BakedFoodScreen> {
               color: AppColors.whiteColor,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(
-                  Numbers.smallBoxBorderRadius,
+                  Numbers.mediumBoxBorderRadius,
                 ),
                 topRight: Radius.circular(
-                  Numbers.largeBoxBorderRadius,
+                  Numbers.mediumBoxBorderRadius,
                 ),
               ),
               boxShadow: [
