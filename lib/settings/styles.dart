@@ -43,6 +43,16 @@ class AppStyles {
     fontWeight: FontWeight.normal,
   );
 
+  static final whiteTitleLabel = TextStyle(
+    color: Colors.white,
+    fontSize: 20.0,
+    fontWeight: FontWeight.bold,
+  );
+  static final whiteBodyLabel = TextStyle(
+    color: Colors.white,
+    fontSize: 16.0,
+    fontWeight: FontWeight.normal,
+  );
   static final whiteLabel = TextStyle(
     color: Colors.white,
     fontSize: 14.0,

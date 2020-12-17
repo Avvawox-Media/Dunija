@@ -1,3 +1,4 @@
+import 'package:dunija/layout/systemsettings.dart';
 import 'package:dunija/layout/tabview/bakedfoodsscreen.dart';
 import 'package:dunija/layout/tabview/barbicuescreen.dart';
 import 'package:dunija/layout/tabview/friedfoodsscreen.dart';
@@ -8,6 +9,7 @@ import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/custom_icon_icons.dart';
 import 'package:dunija/settings/lists.dart';
 import 'package:dunija/settings/quantities.dart';
+import 'package:dunija/settings/strings.dart';
 import 'package:dunija/settings/styles.dart';
 import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
@@ -179,10 +181,8 @@ class _HomeScreenState extends State<HomeScreen>
                                         ),
                                       ),
                                       onTap: () {
-                                        // Navigator.push(context,
-                                        //     MaterialPageRoute(builder: (c) {
-                                        //   return FavoriteScreen();
-                                        // }));
+                                        print(
+                                            'Menu is collapsed: $isCollapsed');
 
                                         toggleMenu();
                                       },
@@ -713,7 +713,7 @@ class _HomeScreenState extends State<HomeScreen>
                   height: 10.0,
                 ),
                 Text(
-                  username == null ? 'Anonymous User' : username,
+                  username == null ? AppStrings.username : username,
                   textAlign: TextAlign.right,
                   style: menuTitleStyle,
                 ),
@@ -721,7 +721,7 @@ class _HomeScreenState extends State<HomeScreen>
                   height: 4.0,
                 ),
                 Text(
-                  subtext == null ? 'Sign up and get more benefits' : subtext,
+                  subtext == null ? AppStrings.userSubText : subtext,
                   textAlign: TextAlign.right,
                   style: subTextStyle,
                 ),
@@ -855,6 +855,10 @@ class _HomeScreenState extends State<HomeScreen>
                   onTap: () {
                     //
                     toggleMenu();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return SystemSettings();
+                    }));
                   },
                   child: ListTile(
                     contentPadding:
