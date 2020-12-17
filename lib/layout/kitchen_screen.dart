@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:dunija/layout/dialog/infodialog.dart';
 import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/quantities.dart';
+import 'package:dunija/settings/strings.dart';
 import 'package:dunija/settings/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:dunija/settings/Appsettings.dart';
@@ -141,7 +143,27 @@ class _KitchenScreenState extends State<KitchenScreen> {
                         )
                       ],
                     ),
-                  )
+                  ),
+                  //Exit Kitchen Button
+                  GestureDetector(
+                    onTap: () {
+                      InfoDialog.showExitKitchenDialog(
+                          context: context,
+                          title: AppStrings.exitKitchenTitle,
+                          msg: AppStrings.exitKitchenMsg);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.darkAccent,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
+                      child: Icon(
+                        Icons.cancel_outlined,
+                      ),
+                    ),
+                  ),
                 ]),
           ),
         ),
@@ -337,7 +359,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
                           width: Numbers.deviceWidth,
                           fit: BoxFit.cover,
                         ),
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
                       //Play or Pause Tapped
                       playPause();
