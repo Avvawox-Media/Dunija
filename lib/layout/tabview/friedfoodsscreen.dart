@@ -4,6 +4,7 @@ import 'package:dunija/settings/custom_icon_icons.dart';
 import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/strings.dart';
 import 'package:dunija/settings/styles.dart';
+import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
 class FriedFoodsScreen extends StatefulWidget {
@@ -101,6 +102,10 @@ class _FriedFoodsScreenState extends State<FriedFoodsScreen> {
                       ),
                       onTap: () {
                         //Handle on tap
+                        showSearch(
+                          context: context,
+                          delegate: SearchField(),
+                        );
                       },
                     ),
                     SizedBox(
