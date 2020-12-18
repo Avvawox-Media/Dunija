@@ -402,6 +402,7 @@ class _HomeScreenState extends State<HomeScreen>
         ),
       ),
       onTap: () {
+        toggleMenu();
         //Switch Category title
         switch (title) {
           case 'Baked Foods':
@@ -713,7 +714,7 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                 ),
                 SizedBox(
-                  height: 15.0,
+                  height: 20.0,
                 ),
                 CircleAvatar(
                   backgroundColor: AppColors.whiteColor.withOpacity(0.5),
@@ -736,7 +737,7 @@ class _HomeScreenState extends State<HomeScreen>
                   style: subTextStyle,
                 ),
                 SizedBox(
-                  height: 10.0,
+                  height: 15.0,
                 ),
                 Visibility(
                   visible: !_isUserLogged,
@@ -753,11 +754,13 @@ class _HomeScreenState extends State<HomeScreen>
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 3.0),
+                              horizontal: 10.0, vertical: 5.0),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20.0),
                               border: Border.all(
-                                  width: 1.0, color: AppColors.whiteColor)),
+                                  width: 1.0,
+                                  color:
+                                      AppColors.whiteColor.withOpacity(0.5))),
                           child: Text(
                             'Login',
                             style: AppStyles.whiteLabel,
@@ -777,11 +780,13 @@ class _HomeScreenState extends State<HomeScreen>
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 3.0),
+                              horizontal: 10.0, vertical: 5.0),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20.0),
                               border: Border.all(
-                                  width: 1.0, color: AppColors.whiteColor)),
+                                  width: 1.0,
+                                  color:
+                                      AppColors.whiteColor.withOpacity(0.5))),
                           child: Text(
                             'Register',
                             style: AppStyles.whiteLabel,
@@ -834,7 +839,7 @@ class _HomeScreenState extends State<HomeScreen>
                       style: menuItemStyle,
                     ),
                     trailing: Icon(
-                      Icons.next_plan_rounded,
+                      Icons.next_plan_outlined,
                       color: AppColors.whiteColor,
                     ),
                   ),

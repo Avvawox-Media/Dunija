@@ -74,7 +74,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
                 ]),
             border: Border.all(color: AppColors.brightColor, width: 2.0),
             borderRadius: BorderRadius.circular(
-              Numbers.smallBoxBorderRadius,
+              Numbers.largeBoxBorderRadius,
             ),
             image: DecorationImage(
               image: AssetImage('assets/imgs/progress.png'),
@@ -221,11 +221,11 @@ class _KitchenScreenState extends State<KitchenScreen> {
                                 ),
                               ),
                               SizedBox(
-                                height: 25.0,
+                                height: 35.0,
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   //Progress Bar
                                   Container(
@@ -235,7 +235,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
                                     width: Numbers.deviceWidth * 0.65,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(
-                                          Numbers.smallBoxBorderRadius),
+                                          Numbers.largeBoxBorderRadius),
                                       gradient: LinearGradient(
                                         begin: Alignment.bottomLeft,
                                         end: Alignment.topRight,
@@ -273,6 +273,9 @@ class _KitchenScreenState extends State<KitchenScreen> {
                                   ),
                                 ],
                               ),
+                              SizedBox(
+                                height: 10.0,
+                              )
                             ],
                           ),
                         ),
