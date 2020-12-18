@@ -1,3 +1,5 @@
+import 'package:dunija/layout/auth/login_screen.dart';
+import 'package:dunija/layout/auth/signup.dart';
 import 'package:dunija/layout/systemsettings.dart';
 import 'package:dunija/layout/tabview/bakedfoodsscreen.dart';
 import 'package:dunija/layout/tabview/barbicuescreen.dart';
@@ -34,6 +36,9 @@ class _HomeScreenState extends State<HomeScreen>
   //Scale Animation Controller
   AnimationController _scaleController;
   Animation<double> _scaleTransition;
+
+  //User Status
+  bool _isUserLogged = false;
 
   @override
   void initState() {
@@ -357,7 +362,7 @@ class _HomeScreenState extends State<HomeScreen>
           height: 0.46 * Numbers.deviceWidth,
           clipBehavior: Clip.hardEdge,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               //
               Container(
@@ -383,9 +388,14 @@ class _HomeScreenState extends State<HomeScreen>
               Center(
                 child: Text(
                   title,
-                  style: AppStyles.catLabel,
+                  style: Numbers.deviceWidth > 500
+                      ? AppStyles.catBigLabel
+                      : AppStyles.catLabel,
                   textAlign: TextAlign.center,
                 ),
+              ),
+              SizedBox(
+                height: 2.0,
               )
             ],
           ),
@@ -650,7 +660,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   onClickedNotification() {}
 
-  toggleMenu() {
+  void toggleMenu() {
     if (isCollapsed) {
       _scaleController.forward();
     } else {
@@ -694,7 +704,7 @@ class _HomeScreenState extends State<HomeScreen>
                     toggleMenu();
                   },
                   child: CircleAvatar(
-                    backgroundColor: Color(0x22000000),
+                    backgroundColor: Color(0x66000000),
                     child: Icon(
                       Icons.clear_rounded,
                       size: 25,
@@ -727,6 +737,59 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 SizedBox(
                   height: 10.0,
+                ),
+                Visibility(
+                  visible: !_isUserLogged,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          toggleMenu();
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return LoginScreen();
+                          }));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 3.0),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              border: Border.all(
+                                  width: 1.0, color: AppColors.whiteColor)),
+                          child: Text(
+                            'Login',
+                            style: AppStyles.whiteLabel,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          toggleMenu();
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return SignUpScreen();
+                          }));
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 3.0),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              border: Border.all(
+                                  width: 1.0, color: AppColors.whiteColor)),
+                          child: Text(
+                            'Register',
+                            style: AppStyles.whiteLabel,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -900,4 +963,5 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
   //
+
 }

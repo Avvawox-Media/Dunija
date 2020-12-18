@@ -99,19 +99,6 @@ class _KitchenScreenState extends State<KitchenScreen> {
                 children: [
                   Row(
                     children: [
-                      // GestureDetector(
-                      //   child: Container(
-                      //     padding: EdgeInsets.only(top: 12.0),
-                      //     child: Icon(
-                      //       Icons.arrow_back_ios,
-                      //       color: AppColors.accent,
-                      //     ),
-                      //   ),
-                      //   onTap: () {
-                      //     //
-                      //     Navigator.pop(context);
-                      //   },
-                      // ),
                       Image(
                         image: AssetImage('assets/imgs/dunija.png'),
                         width: 100.0,
@@ -205,14 +192,14 @@ class _KitchenScreenState extends State<KitchenScreen> {
                                 ]),
                           ),
                           width: Numbers.deviceWidth,
-                          //height: 0.40 * Numbers.deviceHeight,
+                          // height: 0.50 * Numbers.deviceHeight,
                           margin: EdgeInsets.all(5.0),
                           //Inner Image Container
                           child: Column(
                             children: [
                               Container(
                                 width: Numbers.deviceWidth,
-                                height: 0.3 * Numbers.deviceHeight,
+                                height: 0.45 * Numbers.deviceHeight,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
                                       Numbers.mediumBoxBorderRadius),
@@ -243,7 +230,8 @@ class _KitchenScreenState extends State<KitchenScreen> {
                                   //Progress Bar
                                   Container(
                                     alignment: Alignment.centerLeft,
-                                    height: 15.0,
+                                    height:
+                                        Numbers.deviceWidth > 500 ? 20.0 : 15.0,
                                     width: Numbers.deviceWidth * 0.65,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(

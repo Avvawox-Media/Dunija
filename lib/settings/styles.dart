@@ -8,6 +8,13 @@ class AppStyles {
     fontWeight: FontWeight.bold,
   );
 
+  ///TextStyles
+  static final catBigLabel = TextStyle(
+    color: AppColors.brightColor,
+    fontWeight: FontWeight.bold,
+    fontSize: 24.0,
+  );
+
   static final boldBrownLabel = TextStyle(
     color: AppColors.darkAccent,
     fontWeight: FontWeight.bold,
