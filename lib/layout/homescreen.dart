@@ -147,50 +147,60 @@ class _HomeScreenState extends State<HomeScreen>
                                 ),
                                 Row(
                                   children: [
-                                    InkWell(
-                                      child: CircleAvatar(
-                                        backgroundColor: AppColors.darkAccent
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: AppColors.darkAccent
                                             .withOpacity(0.5),
-                                        child: Icon(
+                                        borderRadius:
+                                            BorderRadius.circular(32.0),
+                                      ),
+                                      child: IconButton(
+                                        // backgroundColor: AppColors.darkAccent
+                                        // .withOpacity(0.5),
+                                        icon: Icon(
                                           Icons.search,
                                           size: 30.0,
                                           color: AppColors.whiteColor,
                                         ),
+                                        onPressed: () {
+                                          //Handle on tap
+                                          if (isCollapsed == false) {
+                                            _scaleController.reverse();
+
+                                            setState(() {
+                                              isCollapsed = true;
+                                            });
+                                          }
+
+                                          showSearch(
+                                            context: context,
+                                            delegate: SearchField(),
+                                          );
+                                        },
                                       ),
-                                      onTap: () {
-                                        //Handle on tap
-                                        if (isCollapsed == false) {
-                                          _scaleController.reverse();
-
-                                          setState(() {
-                                            isCollapsed = true;
-                                          });
-                                        }
-
-                                        showSearch(
-                                          context: context,
-                                          delegate: SearchField(),
-                                        );
-                                      },
                                     ),
                                     SizedBox(
                                       width: 20.0,
                                     ),
-                                    InkWell(
-                                      child: CircleAvatar(
-                                        backgroundColor: AppColors.darkAccent,
-                                        child: Icon(
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(32.0),
+                                          color: AppColors.darkAccent
+                                              .withOpacity(0.8)),
+                                      child: IconButton(
+                                        icon: Icon(
                                           Icons.restaurant_menu,
                                           size: 30,
                                           color: AppColors.whiteColor,
                                         ),
-                                      ),
-                                      onTap: () {
-                                        print(
-                                            'Menu is collapsed: $isCollapsed');
+                                        onPressed: () {
+                                          print(
+                                              'Menu is collapsed: $isCollapsed');
 
-                                        toggleMenu();
-                                      },
+                                          toggleMenu();
+                                        },
+                                      ),
                                     ),
                                     SizedBox(
                                       width: 20.0,
