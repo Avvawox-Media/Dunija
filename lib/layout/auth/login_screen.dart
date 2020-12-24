@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     //
     return Scaffold(
-      body: Stack(children: [
+      body: Stack(fit: StackFit.expand, children: [
         Container(
           color: AppColors.accent,
           width: Numbers.deviceWidth,

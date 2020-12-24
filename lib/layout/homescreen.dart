@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dunija/layout/admin_area.dart';
 import 'package:dunija/layout/auth/login_screen.dart';
 import 'package:dunija/layout/cat_pages/bakedfoodsscreen.dart';
@@ -14,7 +16,6 @@ import 'package:dunija/utils/lists.dart';
 import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/strings.dart';
 import 'package:dunija/utils/styles.dart';
-import 'package:dunija/widgets/custom_search_bar.dart';
 import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
@@ -264,12 +265,12 @@ class _HomeScreenState extends State<HomeScreen>
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.only(left: 10.0, right: 10.0),
             //Add this to give height
             height: MediaQuery.of(context).size.height * (2 / 3),
             child: TabBarView(children: [
               Container(
                 child: Scrollbar(
+                  thickness: 5.0,
                   controller: _scrollController,
                   //Future Build Gridview's children
                   child: FutureBuilder(
@@ -286,7 +287,10 @@ class _HomeScreenState extends State<HomeScreen>
                       //If snapshot has data
                       if (snapshot.hasData) {
                         return GridView.count(
-                            padding: EdgeInsets.zero,
+                            padding: Platform.isAndroid
+                                ? EdgeInsets.all(10.0)
+                                : EdgeInsets.only(
+                                    bottom: 10.0, left: 10.0, right: 10.0),
                             controller: _scrollController,
                             crossAxisCount: 2,
                             shrinkWrap: true,

@@ -331,6 +331,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
                           image: AssetImage('assets/imgs/player_bg.png'),
                           width: Numbers.deviceWidth,
                           fit: BoxFit.cover,
+                          alignment: Alignment.topCenter,
                         ),
                   GestureDetector(
                     onTap: () {
@@ -340,27 +341,59 @@ class _KitchenScreenState extends State<KitchenScreen> {
                     onTapCancel: () {
                       //
                     },
-                    child: Container(
-                      alignment: Alignment.center,
-                      width: 80.0,
-                      height: 0.05 * Numbers.deviceHeight,
-                      decoration: BoxDecoration(
-                        color: AppColors.accent,
-                        borderRadius: BorderRadius.circular(30.0),
-                        gradient: LinearGradient(
-                          colors: [
-                            AppColors.lightAccent,
-                            AppColors.accent,
-                          ],
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        //Rewind Button
+                        IconButton(
+                          color: AppColors.brightColor,
+                          iconSize: 30.0,
+                          splashRadius: 20.0,
+                          icon: Icon(Icons.fast_rewind),
+                          onPressed: () {
+                            ///
+                          },
                         ),
-                      ),
-                      child: Icon(
-                        isPlay ? Icons.pause : Icons.play_arrow_rounded,
-                        color: AppColors.brightColor,
-                        size: 30.0,
-                      ),
+
+                        //Play Button
+                        Container(
+                          alignment: Alignment.center,
+                          width: 80.0,
+                          height: 0.06 * Numbers.deviceHeight,
+                          decoration: BoxDecoration(
+                            color: AppColors.accent,
+                            borderRadius: BorderRadius.circular(30.0),
+                            gradient: LinearGradient(
+                              colors: [
+                                AppColors.lightAccent,
+                                AppColors.accent,
+                              ],
+                              begin: Alignment.bottomCenter,
+                              end: Alignment.topCenter,
+                            ),
+                          ),
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Icon(
+                              isPlay ? Icons.pause : Icons.play_arrow_rounded,
+                              color: AppColors.brightColor,
+                              size: 30.0,
+                            ),
+                          ),
+                        ),
+
+                        //Fast Forward Button
+                        IconButton(
+                          color: AppColors.brightColor,
+                          iconSize: 30.0,
+                          splashRadius: 20.0,
+                          icon: Icon(Icons.fast_forward),
+                          onPressed: () {
+                            ///
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ],
