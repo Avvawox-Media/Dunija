@@ -28,6 +28,7 @@ dependencies:
   tab_indicator_styler:
   flutter_native_splash: ^0.1.9 
   pinput:
+  shared_preferences:
 
 
   # The following adds the Cupertino Icons font to your application.
