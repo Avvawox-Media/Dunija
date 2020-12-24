@@ -93,22 +93,22 @@ class _FriedFoodsScreenState extends State<FriedFoodsScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    InkWell(
-                      child: CircleAvatar(
-                        backgroundColor: AppColors.darkAccent.withOpacity(0.5),
-                        child: Icon(
-                          Icons.search,
-                          color: AppColors.whiteColor,
-                        ),
-                      ),
-                      onTap: () {
-                        //Handle on tap
-                        showSearch(
-                          context: context,
-                          delegate: SearchField(),
-                        );
-                      },
-                    ),
+                    // InkWell(
+                    //   child: CircleAvatar(
+                    //     backgroundColor: AppColors.darkAccent.withOpacity(0.5),
+                    //     child: Icon(
+                    //       Icons.search,
+                    //       color: AppColors.whiteColor,
+                    //     ),
+                    //   ),
+                    //   onTap: () {
+                    //     //Handle on tap
+                    //     showSearch(
+                    //       context: context,
+                    //       delegate: SearchField(),
+                    //     );
+                    //   },
+                    // ),
                     SizedBox(
                       width: 20.0,
                     ),
