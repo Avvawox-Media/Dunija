@@ -1,5 +1,5 @@
 import 'package:dunija/layout/kitchen_screen.dart';
-import 'package:dunija/layout/recipe_lists/porridge_listview.dart';
+import 'package:dunija/layout/recipe_list_views/porridge_listview.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/custom_icon_icons.dart';
 import 'package:dunija/utils/lists.dart';

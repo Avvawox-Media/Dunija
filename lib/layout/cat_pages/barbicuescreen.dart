@@ -1,6 +1,4 @@
-import 'package:dunija/layout/kitchen_screen.dart';
-import 'package:dunija/layout/recipe_lists/baked_food_listview.dart';
-import 'package:dunija/layout/recipe_lists/barbicue_listview.dart';
+import 'package:dunija/layout/recipe_list_views/barbicue_listview.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/custom_icon_icons.dart';
 import 'package:dunija/utils/lists.dart';

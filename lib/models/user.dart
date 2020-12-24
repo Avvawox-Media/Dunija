@@ -6,8 +6,8 @@ class User {
   User(
       {@required this.firstName,
       @required this.lastName,
-      @required this.dob,
-      @required this.bio,
-      @required this.gender,
-      @required this.interest});
+      this.dob,
+      this.bio,
+      this.gender,
+      this.interest});
 }

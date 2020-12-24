@@ -1,6 +1,7 @@
 import 'package:dunija/models/recipe.dart';
 import 'package:dunija/models/recipe_category.dart';
 import 'package:dunija/models/notification.dart';
+import 'package:dunija/models/user.dart';
 import 'package:flutter/material.dart';
 
 class AppLists {
@@ -142,6 +143,15 @@ class AppLists {
     return List.generate(15, (index) {
       return Recipe(
           name: 'Soup ${index + 1}', description: 'Short description');
+    });
+  }
+
+  static Future<List<User>> fetchUsersList() async {
+    return List.generate(15, (index) {
+      return User(
+          firstName: 'FirstName ',
+          lastName: 'LastName ${index + 1}',
+          interest: 'Interest');
     });
   }
 }
