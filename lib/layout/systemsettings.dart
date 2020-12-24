@@ -1,5 +1,5 @@
+import 'package:dunija/settings/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:dunija/settings/Appsettings.dart';
 
 class SystemSettings extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _SystemSettingsState extends State<SystemSettings> {
         title: Text('Settings'),
       ),
       body: Container(
-        color: AppSettings.bgColor,
+        color: AppColors.whiteColor,
       ),
     );
   }

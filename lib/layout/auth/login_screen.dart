@@ -4,17 +4,12 @@ import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/styles.dart';
 import 'package:dunija/widgets/textfield_custom.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:dunija/settings/Appsettings.dart';
 import 'package:dunija/layout/auth/signup.dart';
-import 'package:dunija/routes/slidepageroute.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
-
-final style = TextStyle(color: AppSettings.bgColor);
 
 class _LoginScreenState extends State<LoginScreen> {
   //

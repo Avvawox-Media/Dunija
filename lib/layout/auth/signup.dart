@@ -6,15 +6,12 @@ import 'package:dunija/widgets/interest_dropdown.dart';
 import 'package:dunija/widgets/textfield_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:dunija/settings/Appsettings.dart';
 import 'package:dunija/routes/slidepageroute.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
-
-final style = TextStyle(color: AppSettings.bgColor);
 
 class _SignUpScreenState extends State<SignUpScreen> {
   //

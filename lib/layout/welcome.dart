@@ -1,6 +1,6 @@
+import 'package:dunija/settings/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:dunija/routes/bouncypageroute.dart';
-import 'package:dunija/settings/Appsettings.dart';
 import 'package:dunija/layout/auth/login_screen.dart';
 import 'package:dunija/layout/auth/signup.dart';
 
@@ -29,14 +29,14 @@ class WelcomeScreenState extends State<WelcomeScreen> {
         //color: AppSettings.accentColor,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0)),
-        color: AppSettings.btnLight,
+        color: AppColors.lightAccent,
         onPressed: () {
           Navigator.push(context, BouncyPageRoute(widget: LoginScreen()));
         },
         child: Text(
           "LOGIN",
           style: TextStyle(
-            color: AppSettings.bgColor,
+            color: AppColors.lightAccent,
             fontSize: 16.0,
           ),
         ),
@@ -51,14 +51,14 @@ class WelcomeScreenState extends State<WelcomeScreen> {
         //color: Welcome.darkAccent,
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0)),
-        color: AppSettings.btnDark,
+        color: AppColors.lightAccent,
         onPressed: () {
           Navigator.push(context, BouncyPageRoute(widget: SignUpScreen()));
         },
         child: Text(
           "REGISTER",
           style: TextStyle(
-            color: AppSettings.bgColor,
+            color: AppColors.lightAccent,
             fontSize: 16.0,
           ),
         ),
@@ -69,7 +69,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
     return Scaffold(
       body: Stack(children: [
         Container(
-          color: AppSettings.primaryColor,
+          color: AppColors.darkAccent,
         ),
         Positioned(
           child: Image(image: AssetImage('assets/imgs/tl.png')),

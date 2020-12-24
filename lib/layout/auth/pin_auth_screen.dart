@@ -5,15 +5,12 @@ import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:dunija/settings/Appsettings.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 
 class PinAuthScreen extends StatefulWidget {
   @override
   _PinAuthScreenState createState() => _PinAuthScreenState();
 }
-
-final style = TextStyle(color: AppSettings.bgColor);
 
 class _PinAuthScreenState extends State<PinAuthScreen> {
   //

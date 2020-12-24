@@ -1,5 +1,6 @@
 import 'package:dunija/layout/homescreen.dart';
-import 'package:dunija/settings/Appsettings.dart';
+import 'package:dunija/settings/colors.dart';
+import 'package:dunija/settings/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 
@@ -26,12 +27,12 @@ class Dunija extends StatelessWidget {
   Widget build(BuildContext context) {
     //
     return MaterialApp(
-      title: AppSettings.appName,
+      title: AppStrings.appName,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: AppSettings.primaryColor,
-        primaryColorDark: AppSettings.primaryOrange,
-        primaryColorLight: AppSettings.primaryLight,
+        primaryColor: AppColors.primaryColor,
+        primaryColorDark: AppColors.primaryOrange,
+        primaryColorLight: AppColors.primaryLight,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
 

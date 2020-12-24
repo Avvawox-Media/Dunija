@@ -1,4 +1,7 @@
 class AppStrings {
+  //App Name
+  static String appName = "Dunija";
+
   ///Page Names
   static final barbicue = 'Barbicues',
       bakedFood = 'Baked Foods',

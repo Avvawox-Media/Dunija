@@ -1,20 +1,15 @@
 import 'dart:async';
-
-import 'package:dunija/layout/auth/login_screen.dart';
 import 'package:dunija/layout/auth/pin_auth_screen.dart';
 import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/styles.dart';
 import 'package:dunija/widgets/textfield_custom.dart';
 import 'package:flutter/material.dart';
-import 'package:dunija/settings/Appsettings.dart';
 
 class RecoveryScreen extends StatefulWidget {
   @override
   _RecoveryScreenState createState() => _RecoveryScreenState();
 }
-
-final style = TextStyle(color: AppSettings.bgColor);
 
 class _RecoveryScreenState extends State<RecoveryScreen> {
   //
@@ -34,18 +29,6 @@ class _RecoveryScreenState extends State<RecoveryScreen> {
         _passwordHidden = !_passwordHidden;
       });
     }
-
-    //TextField TextStyle
-    final textStyle = TextStyle(
-      fontSize: 18.0,
-      color: AppSettings.primaryOrange,
-    );
-
-    //Button TextStyle
-    final btnTextStyle = TextStyle(
-      fontSize: 18.0,
-      color: AppSettings.primaryOrange,
-    );
 
     //
     return Scaffold(

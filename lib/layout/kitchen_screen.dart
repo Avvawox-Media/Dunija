@@ -5,7 +5,6 @@ import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/strings.dart';
 import 'package:dunija/settings/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:dunija/settings/Appsettings.dart';
 import 'package:flutter/rendering.dart';
 
 class KitchenScreen extends StatefulWidget {
@@ -17,8 +16,6 @@ class KitchenScreen extends StatefulWidget {
   @override
   _KitchenScreenState createState() => _KitchenScreenState();
 }
-
-final style = TextStyle(color: AppSettings.bgColor);
 
 class _KitchenScreenState extends State<KitchenScreen> {
   //
