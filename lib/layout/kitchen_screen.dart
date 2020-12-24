@@ -9,6 +9,11 @@ import 'package:dunija/settings/Appsettings.dart';
 import 'package:flutter/rendering.dart';
 
 class KitchenScreen extends StatefulWidget {
+  final recipe;
+
+  //
+  KitchenScreen({@required this.recipe});
+
   @override
   _KitchenScreenState createState() => _KitchenScreenState();
 }
@@ -18,7 +23,7 @@ final style = TextStyle(color: AppSettings.bgColor);
 class _KitchenScreenState extends State<KitchenScreen> {
   //
 
-  var pageName = 'Kitchen', foodTitle = 'Food Title';
+  var pageName = 'Kitchen';
 
   //Screen type
   bool isLongScreen = Numbers.deviceHeight > 960 ? true : false;
@@ -89,6 +94,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
       onWillPop: _onBackPressed,
       child: Scaffold(
         appBar: AppBar(
+          brightness: Brightness.light,
           toolbarHeight: 80.0,
           backgroundColor: AppColors.whiteColor,
           automaticallyImplyLeading: false,
@@ -125,7 +131,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
                           width: 5.0,
                         ),
                         Text(
-                          foodTitle,
+                          widget.recipe,
                           style: AppStyles.whiteLabel,
                         )
                       ],
@@ -157,6 +163,7 @@ class _KitchenScreenState extends State<KitchenScreen> {
         body: Column(
           children: [
             Expanded(
+              // key: Key('value'),
               child: Container(
                 // top: 0,
                 child: SafeArea(
@@ -192,14 +199,15 @@ class _KitchenScreenState extends State<KitchenScreen> {
                                 ]),
                           ),
                           width: Numbers.deviceWidth,
-                          // height: 0.50 * Numbers.deviceHeight,
                           margin: EdgeInsets.all(5.0),
-                          //Inner Image Container
                           child: Column(
                             children: [
+                              //Inner Image Container
                               Container(
                                 width: Numbers.deviceWidth,
-                                height: 0.45 * Numbers.deviceHeight,
+                                height: Numbers.deviceWidth > 500
+                                    ? 0.45 * Numbers.deviceHeight
+                                    : 0.30 * Numbers.deviceHeight,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(
                                       Numbers.mediumBoxBorderRadius),
@@ -295,26 +303,6 @@ class _KitchenScreenState extends State<KitchenScreen> {
                                   Text('data2'),
                                   Text('data3'),
                                   Text('data4'),
-                                  Text(''),
-                                  Text('data2'),
-                                  Text('data3'),
-                                  Text('data4'),
-                                  Text(''),
-                                  Text('data2'),
-                                  Text('data3'),
-                                  Text('data4'),
-                                  Text(''),
-                                  Text('data2'),
-                                  Text('data3'),
-                                  Text('data4'),
-                                  Text(''),
-                                  Text('data2'),
-                                  Text('data3'),
-                                  Text('data4'),
-                                  Text(''),
-                                  Text('data2'),
-                                  Text('data3'),
-                                  Text('data4'),
                                 ],
                               ),
                             ),
@@ -326,15 +314,12 @@ class _KitchenScreenState extends State<KitchenScreen> {
                 ),
               ),
             ),
+            //Bottom bar
             Container(
-                // bottom: 0.0,
                 child: Container(
               width: Numbers.deviceWidth,
               height: 0.07 * Numbers.deviceHeight,
               alignment: Alignment.bottomCenter,
-              decoration: BoxDecoration(
-                  // color: AppColors.accent.withAlpha(50),
-                  ),
               child: Stack(
                 alignment:
                     isLongScreen ? Alignment.center : Alignment.topCenter,
