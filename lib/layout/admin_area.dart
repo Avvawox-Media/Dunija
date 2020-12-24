@@ -1,7 +1,7 @@
-import 'package:dunija/settings/colors.dart';
-import 'package:dunija/settings/custom_icon_icons.dart';
-import 'package:dunija/settings/quantities.dart';
-import 'package:dunija/settings/styles.dart';
+import 'package:dunija/utils/colors.dart';
+import 'package:dunija/utils/custom_icon_icons.dart';
+import 'package:dunija/utils/quantities.dart';
+import 'package:dunija/utils/styles.dart';
 import 'package:dunija/widgets/category_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

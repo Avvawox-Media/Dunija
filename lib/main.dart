@@ -1,6 +1,6 @@
 import 'package:dunija/layout/homescreen.dart';
-import 'package:dunija/settings/colors.dart';
-import 'package:dunija/settings/strings.dart';
+import 'package:dunija/utils/colors.dart';
+import 'package:dunija/utils/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_session/flutter_session.dart';
 

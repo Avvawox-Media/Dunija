@@ -1,11 +1,11 @@
 import 'package:dunija/layout/kitchen_screen.dart';
 import 'package:dunija/layout/recipe_lists/salads_listview.dart';
-import 'package:dunija/settings/colors.dart';
-import 'package:dunija/settings/custom_icon_icons.dart';
-import 'package:dunija/settings/lists.dart';
-import 'package:dunija/settings/quantities.dart';
-import 'package:dunija/settings/strings.dart';
-import 'package:dunija/settings/styles.dart';
+import 'package:dunija/utils/colors.dart';
+import 'package:dunija/utils/custom_icon_icons.dart';
+import 'package:dunija/utils/lists.dart';
+import 'package:dunija/utils/quantities.dart';
+import 'package:dunija/utils/strings.dart';
+import 'package:dunija/utils/styles.dart';
 import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 

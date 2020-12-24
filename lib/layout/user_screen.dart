@@ -1,8 +1,8 @@
 import 'package:dunija/layout/auth/login_screen.dart';
-import 'package:dunija/settings/colors.dart';
-import 'package:dunija/settings/quantities.dart';
-import 'package:dunija/settings/strings.dart';
-import 'package:dunija/settings/styles.dart';
+import 'package:dunija/utils/colors.dart';
+import 'package:dunija/utils/quantities.dart';
+import 'package:dunija/utils/strings.dart';
+import 'package:dunija/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteScreen extends StatefulWidget {

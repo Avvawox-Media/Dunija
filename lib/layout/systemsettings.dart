@@ -1,4 +1,4 @@
-import 'package:dunija/settings/colors.dart';
+import 'package:dunija/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class SystemSettings extends StatefulWidget {

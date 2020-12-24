@@ -1,6 +1,6 @@
 import 'package:dunija/models/recipe.dart';
 import 'package:dunija/models/recipe_list_item.dart';
-import 'package:dunija/settings/custom_icon_icons.dart';
+import 'package:dunija/utils/custom_icon_icons.dart';
 import 'package:dunija/widgets/recipe_search_bar.dart';
 import 'package:flutter/material.dart';
 

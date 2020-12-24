@@ -1,5 +1,5 @@
-import 'package:dunija/settings/colors.dart';
-import 'package:dunija/settings/quantities.dart';
+import 'package:dunija/utils/colors.dart';
+import 'package:dunija/utils/quantities.dart';
 import 'package:flutter/material.dart';
 
 class RecipeSearchBar extends StatefulWidget {

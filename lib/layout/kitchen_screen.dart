@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:dunija/layout/dialog/infodialog.dart';
-import 'package:dunija/settings/colors.dart';
-import 'package:dunija/settings/quantities.dart';
-import 'package:dunija/settings/strings.dart';
-import 'package:dunija/settings/styles.dart';
+import 'package:dunija/utils/colors.dart';
+import 'package:dunija/utils/quantities.dart';
+import 'package:dunija/utils/strings.dart';
+import 'package:dunija/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
