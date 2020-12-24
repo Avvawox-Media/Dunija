@@ -1,3 +1,4 @@
+import 'package:dunija/layout/auth/login_screen.dart';
 import 'package:dunija/settings/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -83,4 +84,19 @@ class AppStyles {
     fontFamily: 'Amplify',
     fontWeight: FontWeight.normal,
   );
+
+  static setTextStyle(
+      {String font,
+      double size,
+      int color,
+      FontWeight weight,
+      FontStyle style}) {
+    return TextStyle(
+      fontFamily: font?.toString(),
+      fontSize: size?.toDouble(),
+      color: color == null ? AppColors.darkAccent : Color(color),
+      fontWeight: weight == null ? FontWeight.normal : weight,
+      fontStyle: style == null ? FontStyle.normal : style,
+    );
+  }
 }
