@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Food {
+class Recipe {
   final String name, description;
 
-  Food({@required this.name, @required this.description});
+  Recipe({@required this.name, @required this.description});
 }
