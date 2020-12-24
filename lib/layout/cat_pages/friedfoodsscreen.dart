@@ -1,25 +1,27 @@
 import 'package:dunija/layout/kitchen_screen.dart';
+import 'package:dunija/layout/recipe_lists/fried_food_listview.dart';
 import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/custom_icon_icons.dart';
+import 'package:dunija/settings/lists.dart';
 import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/strings.dart';
 import 'package:dunija/settings/styles.dart';
 import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
-class BakedFoodScreen extends StatefulWidget {
+class FriedFoodsScreen extends StatefulWidget {
   @override
-  _BakedFoodScreenState createState() => _BakedFoodScreenState();
+  _FriedFoodsScreenState createState() => _FriedFoodsScreenState();
 }
 
-class _BakedFoodScreenState extends State<BakedFoodScreen> {
+class _FriedFoodsScreenState extends State<FriedFoodsScreen> {
   @override
   Widget build(BuildContext context) {
     Numbers.deviceHeight = MediaQuery.of(context).size.height;
     Numbers.deviceWidth = MediaQuery.of(context).size.width;
 
     //Page Name
-    final pageName = AppStrings.bakedFood;
+    final pageName = AppStrings.friedFoods;
 
     //
     return Scaffold(
@@ -160,18 +162,7 @@ class _BakedFoodScreenState extends State<BakedFoodScreen> {
                     blurRadius: 15.0)
               ],
             ),
-            child: Container(
-              alignment: Alignment.center,
-              child: InkWell(
-                child: Text('Kitchen'),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    //
-                    return KitchenScreen();
-                  }));
-                },
-              ),
-            ),
+            child: FriedFoodListView(AppLists.fetchFriedFoodsList()),
           ),
         ),
       ]),

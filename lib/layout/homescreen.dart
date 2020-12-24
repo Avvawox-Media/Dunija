@@ -1,18 +1,20 @@
+import 'package:dunija/layout/admin_area.dart';
 import 'package:dunija/layout/auth/login_screen.dart';
-import 'package:dunija/layout/auth/signup.dart';
+import 'package:dunija/layout/cat_pages/bakedfoodsscreen.dart';
+import 'package:dunija/layout/cat_pages/barbicuescreen.dart';
+import 'package:dunija/layout/cat_pages/friedfoodsscreen.dart';
+import 'package:dunija/layout/cat_pages/porridgesscreen.dart';
+import 'package:dunija/layout/cat_pages/saladsscreen.dart';
+import 'package:dunija/layout/cat_pages/soupsscreen.dart';
 import 'package:dunija/layout/systemsettings.dart';
-import 'package:dunija/layout/tabview/bakedfoodsscreen.dart';
-import 'package:dunija/layout/tabview/barbicuescreen.dart';
-import 'package:dunija/layout/tabview/friedfoodsscreen.dart';
-import 'package:dunija/layout/tabview/porridgesscreen.dart';
-import 'package:dunija/layout/tabview/saladsscreen.dart';
-import 'package:dunija/layout/tabview/soupsscreen.dart';
+import 'package:dunija/models/recipe_category.dart';
 import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/custom_icon_icons.dart';
 import 'package:dunija/settings/lists.dart';
 import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/strings.dart';
 import 'package:dunija/settings/styles.dart';
+import 'package:dunija/widgets/recipe_search_bar.dart';
 import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
@@ -29,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   //
   ScrollController _scrollController = ScrollController();
+  TextEditingController _recipeSearchController = TextEditingController();
 
   //Animation Duration
   final duration = Duration(milliseconds: 300);
@@ -268,30 +271,42 @@ class _HomeScreenState extends State<HomeScreen>
               Container(
                 child: Scrollbar(
                   controller: _scrollController,
-                  child: GridView.count(
-                    padding: EdgeInsets.zero,
-                    controller: _scrollController,
-                    crossAxisCount: 2,
-                    shrinkWrap: true,
-                    crossAxisSpacing: 20.0,
-                    mainAxisSpacing: 20.0,
-                    children: AppLists.foodCatList.map((e) {
-                      return buildMainCategories(
-                          title: e.title, image: e.image);
-                    }).toList(),
+                  //Future Build Gridview's children
+                  child: FutureBuilder(
+                    future: fetchCatList(),
+                    builder: (context, snapshot) {
+                      //If Snapshot has error
+                      if (snapshot.hasError)
+                        return Expanded(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text('Something\'s not right'),
+                          ),
+                        );
+                      //If snapshot has data
+                      if (snapshot.hasData) {
+                        return GridView.count(
+                            padding: EdgeInsets.zero,
+                            controller: _scrollController,
+                            crossAxisCount: 2,
+                            shrinkWrap: true,
+                            crossAxisSpacing: 20.0,
+                            mainAxisSpacing: 20.0,
+                            children: AppLists.foodCatList.map((e) {
+                              return buildMainCategories(
+                                  title: e.title, image: e.image);
+                            }).toList());
+                      } else {
+                        return Container(
+                          alignment: Alignment.center,
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
                   ),
                 ),
               ),
-              Container(
-                alignment: Alignment.center,
-                child: ListView(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  children: AppLists.foodList.map((e) {
-                    return buildDownloadItem(
-                        title: e.name, description: e.description);
-                  }).toList(),
-                ),
-              ),
+              //Favorite Recipe Tab
               Container(
                   alignment: Alignment.center,
                   child: AppLists.foodList.isEmpty
@@ -303,6 +318,18 @@ class _HomeScreenState extends State<HomeScreen>
                                 title: e.name, description: e.description);
                           }).toList(),
                         )),
+              //Feedback Tab
+              Container(
+                alignment: Alignment.center,
+                child: ListView(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  children: AppLists.foodList.map((e) {
+                    return buildFeedbackItem(
+                        title: e.name, description: e.description);
+                  }).toList(),
+                ),
+              ),
+              //Notification Tab
               Container(
                 alignment: Alignment.center,
                 child: AppLists.notificationList.isNotEmpty
@@ -339,8 +366,8 @@ class _HomeScreenState extends State<HomeScreen>
               ),
               tabs: [
                 Tab(icon: Icon(CustomIcon.food, size: 24)),
-                Tab(icon: Icon(CustomIcon.download, size: 21)),
                 Tab(icon: Icon(Icons.favorite, size: 20)),
+                Tab(icon: Icon(Icons.feedback_rounded, size: 21)),
                 Tab(icon: Icon(CustomIcon.notifications_none, size: 25)),
               ],
               labelColor: AppColors.accent,
@@ -350,6 +377,10 @@ class _HomeScreenState extends State<HomeScreen>
         ],
       ),
     ));
+  }
+
+  Future<List<FoodCategory>> fetchCatList() async {
+    return AppLists.foodCatList;
   }
 
   //
@@ -412,7 +443,11 @@ class _HomeScreenState extends State<HomeScreen>
         ),
       ),
       onTap: () {
-        toggleMenu();
+        // Collapse Menu
+        setState(() {
+          isCollapsed = true;
+          _scaleController.reverse();
+        });
         //Switch Category title
         switch (title) {
           case 'Baked Foods':
@@ -554,7 +589,7 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   //
-  Widget buildDownloadItem({@required title, @required description}) {
+  Widget buildFeedbackItem({@required title, @required description}) {
     return InkWell(
       onTap: () {},
       child: Container(
@@ -702,10 +737,18 @@ class _HomeScreenState extends State<HomeScreen>
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: MediaQuery.of(context).size.height / 3,
+            height: MediaQuery.of(context).size.height * 1.2 / 3,
             width: MediaQuery.of(context).size.width,
-            color: AppColors.darkAccent,
             padding: EdgeInsets.only(right: 20.0),
+            decoration: BoxDecoration(
+              color: AppColors.darkAccent,
+              border: Border(
+                bottom: BorderSide(
+                  width: 1.0,
+                  color: Colors.grey.withOpacity(0.5),
+                ),
+              ),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -739,7 +782,7 @@ class _HomeScreenState extends State<HomeScreen>
                   style: menuTitleStyle,
                 ),
                 SizedBox(
-                  height: 4.0,
+                  height: 5.0,
                 ),
                 Text(
                   subtext == null ? AppStrings.userSubText : subtext,
@@ -756,11 +799,15 @@ class _HomeScreenState extends State<HomeScreen>
                     children: [
                       GestureDetector(
                         onTap: () {
-                          toggleMenu();
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return LoginScreen();
-                          }));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              settings: RouteSettings(name: '/Login'),
+                              builder: (context) {
+                                return LoginScreen();
+                              },
+                            ),
+                          );
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(
@@ -772,51 +819,56 @@ class _HomeScreenState extends State<HomeScreen>
                                   color:
                                       AppColors.whiteColor.withOpacity(0.5))),
                           child: Text(
-                            'Login',
+                            'Login or Register',
                             style: AppStyles.whiteLabel,
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          toggleMenu();
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return SignUpScreen();
-                          }));
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 5.0),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.0),
-                              border: Border.all(
-                                  width: 1.0,
-                                  color:
-                                      AppColors.whiteColor.withOpacity(0.5))),
-                          child: Text(
-                            'Register',
-                            style: AppStyles.whiteLabel,
-                          ),
-                        ),
-                      ),
+                      // SizedBox(
+                      //   width: 10.0,
+                      // ),
+                      // GestureDetector(
+                      //   onTap: () {
+                      //     // toggleMenu();
+                      //     Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) {
+                      //             return SignUpScreen();
+                      //           },
+                      //           settings: RouteSettings(name: '/Register')),
+                      //     );
+                      //   },
+                      //   child: Container(
+                      //     padding: EdgeInsets.symmetric(
+                      //         horizontal: 10.0, vertical: 5.0),
+                      //     decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(20.0),
+                      //         border: Border.all(
+                      //             width: 1.0,
+                      //             color:
+                      //                 AppColors.whiteColor.withOpacity(0.5))),
+                      //     child: Text(
+                      //       'Register',
+                      //       style: AppStyles.whiteLabel,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: 10.0,
                 ),
               ],
             ),
           ),
-          Container(
-            // width: 200,
-            height: MediaQuery.of(context).size.height * 2 / 3,
-            color: AppColors.darkAccent,
+          Expanded(
             child: ListView(
+              padding: EdgeInsets.symmetric(vertical: 0.0),
               children: [
                 SizedBox(
-                  height: 25.0,
+                  height: 5.0,
                 ),
                 // InkWell(
                 //   onTap: () {
@@ -875,7 +927,7 @@ class _HomeScreenState extends State<HomeScreen>
                 InkWell(
                   onTap: () {
                     //
-                    toggleMenu();
+                    // toggleMenu();
                   },
                   child: ListTile(
                     contentPadding:
@@ -894,7 +946,7 @@ class _HomeScreenState extends State<HomeScreen>
                 InkWell(
                   onTap: () {
                     //
-                    toggleMenu();
+                    // toggleMenu();
                   },
                   child: ListTile(
                     contentPadding:
@@ -913,7 +965,7 @@ class _HomeScreenState extends State<HomeScreen>
                 InkWell(
                   onTap: () {
                     //
-                    toggleMenu();
+                    // toggleMenu();
                   },
                   child: ListTile(
                     contentPadding:
@@ -932,7 +984,7 @@ class _HomeScreenState extends State<HomeScreen>
                 InkWell(
                   onTap: () {
                     //
-                    toggleMenu();
+                    // toggleMenu();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return SystemSettings();
@@ -955,21 +1007,50 @@ class _HomeScreenState extends State<HomeScreen>
                 InkWell(
                   onTap: () {
                     //
+                    // toggleMenu();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) {
+                              return AdminArea();
+                            },
+                            settings: RouteSettings(name: '/AdminArea')));
                   },
                   child: ListTile(
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     title: Text(
-                      'Logout',
+                      'Admin Area',
                       textAlign: TextAlign.right,
                       style: menuItemStyle,
                     ),
                     trailing: Icon(
-                      Icons.logout,
+                      Icons.dashboard,
                       color: AppColors.whiteColor,
                     ),
                   ),
-                )
+                ),
+                InkWell(
+                  onTap: () {
+                    //
+                  },
+                  child: Visibility(
+                    visible: _isUserLogged,
+                    child: ListTile(
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+                      title: Text(
+                        'Logout',
+                        textAlign: TextAlign.right,
+                        style: menuItemStyle,
+                      ),
+                      trailing: Icon(
+                        Icons.logout,
+                        color: AppColors.whiteColor,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -977,6 +1058,4 @@ class _HomeScreenState extends State<HomeScreen>
       ),
     );
   }
-  //
-
 }

@@ -1,6 +1,8 @@
 import 'package:dunija/layout/kitchen_screen.dart';
+import 'package:dunija/layout/recipe_lists/salads_listview.dart';
 import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/custom_icon_icons.dart';
+import 'package:dunija/settings/lists.dart';
 import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/strings.dart';
 import 'package:dunija/settings/styles.dart';
@@ -141,38 +143,26 @@ class _SaladsScreenState extends State<SaladsScreen> {
         Positioned(
           bottom: 0,
           child: Container(
-            width: Numbers.deviceWidth,
-            height: Numbers.deviceHeight * (3 / 4),
-            decoration: BoxDecoration(
-              color: AppColors.whiteColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(
-                  Numbers.mediumBoxBorderRadius,
+              width: Numbers.deviceWidth,
+              height: Numbers.deviceHeight * (3 / 4),
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(
+                    Numbers.mediumBoxBorderRadius,
+                  ),
+                  topRight: Radius.circular(
+                    Numbers.mediumBoxBorderRadius,
+                  ),
                 ),
-                topRight: Radius.circular(
-                  Numbers.mediumBoxBorderRadius,
-                ),
+                boxShadow: [
+                  BoxShadow(
+                      color: Color(0x33000000),
+                      spreadRadius: 1.0,
+                      blurRadius: 15.0)
+                ],
               ),
-              boxShadow: [
-                BoxShadow(
-                    color: Color(0x33000000),
-                    spreadRadius: 1.0,
-                    blurRadius: 15.0)
-              ],
-            ),
-            child: Container(
-              alignment: Alignment.center,
-              child: InkWell(
-                child: Text('Kitchen'),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    //
-                    return KitchenScreen();
-                  }));
-                },
-              ),
-            ),
-          ),
+              child: SaladsListView(AppLists.fetchSaladList())),
         ),
       ]),
     );

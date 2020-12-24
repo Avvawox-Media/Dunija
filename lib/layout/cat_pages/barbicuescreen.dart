@@ -1,6 +1,9 @@
 import 'package:dunija/layout/kitchen_screen.dart';
+import 'package:dunija/layout/recipe_lists/baked_food_listview.dart';
+import 'package:dunija/layout/recipe_lists/barbicue_listview.dart';
 import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/custom_icon_icons.dart';
+import 'package:dunija/settings/lists.dart';
 import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/strings.dart';
 import 'package:dunija/settings/styles.dart';
@@ -19,7 +22,7 @@ class _BarbicueScreenState extends State<BarbicueScreen> {
     Numbers.deviceWidth = MediaQuery.of(context).size.width;
 
     //Page Name
-    final pageName = AppStrings.barbicue;
+    final pageName = AppStrings.bakedFood;
 
     //
     return Scaffold(
@@ -142,7 +145,7 @@ class _BarbicueScreenState extends State<BarbicueScreen> {
           bottom: 0,
           child: Container(
             width: Numbers.deviceWidth,
-            height: Numbers.deviceHeight * (3 / 4),
+            height: Numbers.deviceHeight * (3 / 4) + 20.0,
             decoration: BoxDecoration(
               color: AppColors.whiteColor,
               borderRadius: BorderRadius.only(
@@ -160,17 +163,9 @@ class _BarbicueScreenState extends State<BarbicueScreen> {
                     blurRadius: 15.0)
               ],
             ),
+            //Page List items
             child: Container(
-              alignment: Alignment.center,
-              child: InkWell(
-                child: Text('Kitchen'),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    //
-                    return KitchenScreen();
-                  }));
-                },
-              ),
+              child: BarbicueListView(AppLists.fetchBarbicueList()),
             ),
           ),
         ),

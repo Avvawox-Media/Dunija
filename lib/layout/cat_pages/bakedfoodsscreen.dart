@@ -1,25 +1,27 @@
 import 'package:dunija/layout/kitchen_screen.dart';
+import 'package:dunija/layout/recipe_lists/baked_food_listview.dart';
 import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/custom_icon_icons.dart';
+import 'package:dunija/settings/lists.dart';
 import 'package:dunija/settings/quantities.dart';
 import 'package:dunija/settings/strings.dart';
 import 'package:dunija/settings/styles.dart';
 import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
-class FriedFoodsScreen extends StatefulWidget {
+class BakedFoodScreen extends StatefulWidget {
   @override
-  _FriedFoodsScreenState createState() => _FriedFoodsScreenState();
+  _BakedFoodScreenState createState() => _BakedFoodScreenState();
 }
 
-class _FriedFoodsScreenState extends State<FriedFoodsScreen> {
+class _BakedFoodScreenState extends State<BakedFoodScreen> {
   @override
   Widget build(BuildContext context) {
     Numbers.deviceHeight = MediaQuery.of(context).size.height;
     Numbers.deviceWidth = MediaQuery.of(context).size.width;
 
     //Page Name
-    final pageName = AppStrings.friedFoods;
+    final pageName = AppStrings.bakedFood;
 
     //
     return Scaffold(
@@ -142,7 +144,7 @@ class _FriedFoodsScreenState extends State<FriedFoodsScreen> {
           bottom: 0,
           child: Container(
             width: Numbers.deviceWidth,
-            height: Numbers.deviceHeight * (3 / 4),
+            height: Numbers.deviceHeight * (3 / 4) + 20.0,
             decoration: BoxDecoration(
               color: AppColors.whiteColor,
               borderRadius: BorderRadius.only(
@@ -160,17 +162,9 @@ class _FriedFoodsScreenState extends State<FriedFoodsScreen> {
                     blurRadius: 15.0)
               ],
             ),
+            //Page List items
             child: Container(
-              alignment: Alignment.center,
-              child: InkWell(
-                child: Text('Kitchen'),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    //
-                    return KitchenScreen();
-                  }));
-                },
-              ),
+              child: BakedFoodListView(AppLists.fetchBakedFoodList()),
             ),
           ),
         ),
