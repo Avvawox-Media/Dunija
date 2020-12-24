@@ -1,7 +1,6 @@
 import 'package:dunija/settings/colors.dart';
 import 'package:dunija/settings/lists.dart';
 import 'package:dunija/settings/quantities.dart';
-import 'package:dunija/settings/styles.dart';
 import 'package:flutter/material.dart';
 
 class InterestsDropdown extends StatefulWidget {
@@ -22,7 +21,6 @@ class _InterestsDropdownState extends State<InterestsDropdown> {
       alignment: Alignment.center,
       height: Numbers.buttonHeight,
       width: Numbers.centerBoxWidth,
-      //padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(Numbers.largeBoxBorderRadius),
         border: Border.all(width: 1.0, color: AppColors.darkAccent),
@@ -46,9 +44,9 @@ class _InterestsDropdownState extends State<InterestsDropdown> {
               focusNode: focusNode,
               hint: Text('Select Interest'),
               focusColor: AppColors.darkAccent,
-              // style: AppStyles.textFieldLabel,
               underline: Container(
                 color: Colors.grey.shade200,
+                height: 0.0,
               ),
               value: selectedItem,
               items: AppLists.interests.map((e) {
@@ -57,18 +55,13 @@ class _InterestsDropdownState extends State<InterestsDropdown> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        e,
-                        style: TextStyle(fontSize: 14.0),
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
                       Container(
-                        height: 0.0,
-                        width: 200,
-                        color: Colors.grey.shade200,
-                      )
+                        constraints: BoxConstraints(minWidth: 200.0),
+                        child: Text(
+                          e,
+                          style: TextStyle(fontSize: 14.0),
+                        ),
+                      ),
                     ],
                   ),
                   value: e,
