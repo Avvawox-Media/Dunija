@@ -447,14 +447,15 @@ class _AdminAreaState extends State<AdminArea> with TickerProviderStateMixin {
     );
   }
 
-  //Create Add Stage button
+  //Create ADD STAGE button
   Row createAddStageButton() {
     return Row(
       children: [
         Container(
           child: InkWell(
             child: Container(
-              padding: EdgeInsets.only(right: 10.0),
+              padding: EdgeInsets.only(
+                  right: 10.0, top: 5.0, bottom: 5.0, left: 5.0),
               margin: EdgeInsets.all(5.0),
               decoration: BoxDecoration(
                 color: AppColors.accent.withOpacity(0.4),
@@ -495,13 +496,15 @@ class _AdminAreaState extends State<AdminArea> with TickerProviderStateMixin {
     );
   }
 
+  //Create REMOVE STAGE button
   Row createRemoveStageButton() {
     return Row(
       children: [
         Container(
           child: InkWell(
             child: Container(
-              padding: EdgeInsets.only(right: 10.0),
+              padding: EdgeInsets.only(
+                  right: 10.0, top: 5.0, bottom: 5.0, left: 5.0),
               margin: EdgeInsets.all(5.0),
               decoration: BoxDecoration(
                 color: AppColors.accent.withOpacity(0.8),
