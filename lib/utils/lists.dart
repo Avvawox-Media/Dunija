@@ -146,6 +146,13 @@ class AppLists {
     });
   }
 
+  static Future<List<Recipe>> fetchAllRecipeList() async {
+    return List.generate(15, (index) {
+      return Recipe(
+          name: 'Recipe ${index + 1}', description: 'Short description');
+    });
+  }
+
   static Future<List<User>> fetchUsersList() async {
     return List.generate(15, (index) {
       return User(

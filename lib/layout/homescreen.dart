@@ -14,7 +14,7 @@ import 'package:dunija/utils/lists.dart';
 import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/strings.dart';
 import 'package:dunija/utils/styles.dart';
-import 'package:dunija/widgets/recipe_search_bar.dart';
+import 'package:dunija/widgets/custom_search_bar.dart';
 import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';

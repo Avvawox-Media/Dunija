@@ -2,15 +2,15 @@ import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/quantities.dart';
 import 'package:flutter/material.dart';
 
-class RecipeSearchBar extends StatefulWidget {
-  final recipeSearchController;
+class CustomSearchBar extends StatefulWidget {
+  final recipeSearchController, hintText;
 
-  RecipeSearchBar({@required this.recipeSearchController});
+  CustomSearchBar({@required this.recipeSearchController, this.hintText});
   @override
-  _RecipeSearchBarState createState() => _RecipeSearchBarState();
+  _CustomSearchBarState createState() => _CustomSearchBarState();
 }
 
-class _RecipeSearchBarState extends State<RecipeSearchBar> {
+class _CustomSearchBarState extends State<CustomSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +29,7 @@ class _RecipeSearchBarState extends State<RecipeSearchBar> {
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.search),
           contentPadding: EdgeInsets.all(10.0),
-          hintText: 'Search Recipes',
+          hintText: widget.hintText,
           fillColor: AppColors.accent,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(

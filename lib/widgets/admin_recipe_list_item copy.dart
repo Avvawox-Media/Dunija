@@ -1,18 +1,20 @@
+import 'package:dunija/layout/dialog/infodialog.dart';
+import 'package:dunija/layout/kitchen_screen.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-class UserListItem extends StatelessWidget {
-  final String name, interest;
+class AdminRecipeListItem extends StatelessWidget {
+  final String title, category;
   final image;
-  UserListItem(
-      {@required this.name, @required this.interest, @required this.image});
+  AdminRecipeListItem(
+      {@required this.title, @required this.category, @required this.image});
 
   @override
   Widget build(BuildContext context) {
     ////////////////////////////////////////
-    /// User list item MODEL
+    /// Recipe list item MODEL
     ////////////////////////////////////////
 
     return Container(
@@ -31,7 +33,18 @@ class UserListItem extends StatelessWidget {
       alignment: Alignment.center,
       child: InkWell(
         onTap: () {
-          print(name.toString());
+          print(title.toString());
+          Future.delayed(Duration(seconds: 2), () {
+            //Dismiss Loading dialog
+            Navigator.pop(context);
+
+            //Navigate to Kitchen Screen
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return KitchenScreen(recipe: title.toString());
+            }));
+          });
+
+          InfoDialog.showLoadingDialog(context, msg: 'Preparing your kitchen');
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 5.0),
@@ -56,7 +69,7 @@ class UserListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name.toString(),
+                    title.toString(),
                     style: AppStyles.setTextStyle(
                         weight: FontWeight.bold, size: 16.0),
                     overflow: TextOverflow.ellipsis,
@@ -64,17 +77,24 @@ class UserListItem extends StatelessWidget {
                   SizedBox(
                     height: 5.0,
                   ),
-                  Text(interest.toString()),
+                  Text(category.toString()),
                 ],
               ),
               Spacer(),
               Column(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: Icon(Icons.edit),
                     onPressed: () {},
                     color: AppColors.accent.withOpacity(0.9),
                   ),
+
+                  ///Mark to be added as RECIPE REMINDER button in Future Version
+                  IconButton(
+                    icon: Icon(Icons.delete),
+                    onPressed: () {},
+                    color: AppColors.darkAccent.withOpacity(0.8),
+                  )
                 ],
               ),
             ],
