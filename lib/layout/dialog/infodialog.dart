@@ -74,7 +74,7 @@ class InfoDialog {
   }
 
   ///Show Loading Dialog when performing heavy liftings
-  static showLoadingDialog(BuildContext context) {
+  static showLoadingDialog(BuildContext context, {msg}) {
     showDialog(
       barrierDismissible: false,
       context: context,
@@ -84,22 +84,23 @@ class InfoDialog {
           // Aligns the container to center
           child: Container(
             // A simplified version of dialog.
-            width: 100.0,
-            height: 100.0,
+            width: 150.0,
+            height: 200.0,
             // color: Colors.green,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
                   strokeWidth: 1.5,
                 ),
                 SizedBox(
-                  height: Numbers.largeBoxBorderRadius,
+                  height: 50,
                 ),
                 Text(
-                  'Loading',
+                  msg == null ? 'Loading' : msg,
+                  textAlign: TextAlign.center,
                   style: TextStyle(color: AppColors.whiteColor),
                 ),
               ],
