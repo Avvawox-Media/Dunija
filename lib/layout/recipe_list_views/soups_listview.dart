@@ -28,8 +28,13 @@ class SoupssListView extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               } else {
-                return ListView(
-                    padding: EdgeInsets.symmetric(vertical: 0.0),
+                return GridView(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 0.8,
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10.0),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     children: snapshot.data.map((e) {
                       return RecipeListItem(
                           title: e.name,

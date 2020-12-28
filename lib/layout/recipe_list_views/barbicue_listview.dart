@@ -1,10 +1,6 @@
-import 'package:dunija/layout/kitchen_screen.dart';
 import 'package:dunija/models/recipe.dart';
 import 'package:dunija/widgets/recipe_list_item.dart';
-import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/custom_icon_icons.dart';
-import 'package:dunija/utils/quantities.dart';
-import 'package:dunija/utils/styles.dart';
 import 'package:dunija/widgets/custom_search_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -32,8 +28,15 @@ class BarbicueListView extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               } else {
-                return ListView(
-                    padding: EdgeInsets.symmetric(vertical: 0.0),
+                return GridView(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        childAspectRatio: 0.8,
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10.0),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 0.0,
+                      horizontal: 10.0,
+                    ),
                     children: snapshot.data.map((e) {
                       return RecipeListItem(
                           title: e.name,

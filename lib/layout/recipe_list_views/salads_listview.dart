@@ -28,8 +28,14 @@ class SaladsListView extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               } else {
-                return ListView(
-                    padding: EdgeInsets.symmetric(vertical: 0.0),
+                return GridView(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisSpacing: 10.0,
+                      childAspectRatio: 0.8,
+                      crossAxisCount: 2,
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
                     children: snapshot.data.map((e) {
                       return RecipeListItem(
                           title: e.name,
