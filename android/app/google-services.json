@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "360352034659",
+    "project_id": "dunija-mobile-app",
+    "storage_bucket": "dunija-mobile-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360352034659:android:cbbe58b316816558d06d56",
+        "android_client_info": {
+          "package_name": "com.dunija.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "360352034659-2bpe9rrb7u5qj372muei0mbaqugvgba9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxrc0LMZoeVI5fJR7Gg4v76kVQqN-hn1E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "360352034659-2bpe9rrb7u5qj372muei0mbaqugvgba9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

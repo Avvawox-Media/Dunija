@@ -29,6 +29,12 @@ dependencies:
   flutter_native_splash: ^0.1.9 
   pinput:
   shared_preferences:
+  flutter_spinkit:
+  # firebase_core:
+  # firebase_analytics:
+  # firebase_auth:
+  # firebase_storage:
+  # cloud_firestore:
 
 
   # The following adds the Cupertino Icons font to your application.
