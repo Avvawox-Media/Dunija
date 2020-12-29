@@ -3,6 +3,7 @@ import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class InfoDialog {
   ///Show info, warning or error dialog
@@ -76,38 +77,37 @@ class InfoDialog {
   ///Show Loading Dialog when performing heavy liftings
   static showLoadingDialog(BuildContext context, {msg}) {
     showDialog(
-      barrierDismissible: false,
       context: context,
-      builder: (context) => Material(
-        type: MaterialType.transparency,
-        child: Center(
-          // Aligns the container to center
-          child: Container(
-            // A simplified version of dialog.
-            width: 150.0,
-            height: 200.0,
-            // color: Colors.green,
+      builder: (context) {
+        return Material(
+          type: MaterialType.transparency,
+          child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-                  strokeWidth: 1.5,
+                SpinKitCircle(
+                  itemBuilder: (context, index) {
+                    return DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: AppColors.whiteColor,
+                        borderRadius: BorderRadius.circular(48.0),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(
-                  height: 50,
+                  height: 25.0,
                 ),
                 Text(
                   msg == null ? 'Loading' : msg,
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: AppColors.whiteColor),
+                  style: TextStyle(color: AppColors.whiteColor, fontSize: 14),
                 ),
               ],
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
