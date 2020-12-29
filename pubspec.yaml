@@ -79,6 +79,11 @@ flutter:
     - assets/imgs/icon.png
     - assets/imgs/progress.png
     - assets/imgs/progress_bg.png
+    - assets/imgs/stage1.png
+    - assets/imgs/stage2.png
+    - assets/imgs/stage3.png
+    - assets/imgs/stage4.png
+    - assets/offline/sample.json
     
   fonts:
     - family: Amplify

@@ -1,0 +1,42 @@
+{
+  "recipe":"Rice and Beans",
+  "steps": 4,
+  "duration": 42,
+  "image_url":"",
+  "description":"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.",
+  
+  "stages":[
+    {
+      "stage": 1,
+      "title":"Prepare Ingredient",
+      "procedure":"Perboil Rice, prepare ingredients and mix",
+      "image_url": "assets/imgs/stage1.png",
+      "duration": 12
+    },
+    
+    {
+      "stage": 2,
+      "title":"Fry and Cook",
+      "procedure":"Fry onions and tomato mixtures",
+      "image_url": "assets/imgs/stage2.png",
+      "duration": 25
+    },
+    
+    {
+      "stage": 3,
+      "title":"Add Required Ingredients",
+      "procedure":"Start putting in required amount of salt and seasoning powder",
+      "image_url": "assets/imgs/stage3.png",
+      "duration": 3
+    },
+    
+    {
+      "stage": 4,
+      "title":"Serve Hot",
+      "procedure":"Serve meal with desired methods",
+      "image_url": "assets/imgs/stage4.png",
+      "duration": 2
+    }
+  
+  ]
+}
