@@ -8,6 +8,7 @@ import 'package:dunija/layout/cat_pages/friedfoodsscreen.dart';
 import 'package:dunija/layout/cat_pages/porridgesscreen.dart';
 import 'package:dunija/layout/cat_pages/saladsscreen.dart';
 import 'package:dunija/layout/cat_pages/soupsscreen.dart';
+import 'package:dunija/layout/dialog/infodialog.dart';
 import 'package:dunija/layout/systemsettings.dart';
 import 'package:dunija/models/recipe_category.dart';
 import 'package:dunija/utils/colors.dart';
@@ -18,6 +19,7 @@ import 'package:dunija/utils/strings.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,8 +27,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   //Menu Collapse
   bool isCollapsed = true;
 
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen>
   final duration = Duration(milliseconds: 300);
 
   //Scale Animation Controller
-  AnimationController _scaleController;
+  AnimationController _scaleController, _spinController;
   Animation<double> _scaleTransition;
 
   //User Status
@@ -48,14 +49,18 @@ class _HomeScreenState extends State<HomeScreen>
   void initState() {
     super.initState();
     _scaleController = AnimationController(duration: duration, vsync: this);
+    _spinController =
+        AnimationController(duration: Duration(seconds: 1), vsync: this);
     _scaleTransition =
         Tween<double>(begin: 1.0, end: 0.8).animate(_scaleController);
   }
 
   @override
   void dispose() {
+    _spinController.dispose();
     super.dispose();
     _scaleController.dispose();
+    // _spinController.dispose();
   }
 
   @override
@@ -303,7 +308,10 @@ class _HomeScreenState extends State<HomeScreen>
                       } else {
                         return Container(
                           alignment: Alignment.center,
-                          child: CircularProgressIndicator(),
+                          child: SpinKitRotatingCircle(
+                            color: AppColors.accent,
+                            size: 50.0,
+                          ),
                         );
                       }
                     },
@@ -452,68 +460,79 @@ class _HomeScreenState extends State<HomeScreen>
           isCollapsed = true;
           _scaleController.reverse();
         });
-        //Switch Category title
-        switch (title) {
-          case 'Baked Foods':
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) {
-                      return BakedFoodScreen();
-                    },
-                    settings: RouteSettings(name: '/Baked')));
-            break;
 
-          case 'Barbicues':
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) {
-                      return BarbicueScreen();
-                    },
-                    settings: RouteSettings(name: '/Barbicues')));
-            break;
+        Future.delayed(Duration(seconds: 5), () {
+          //
+          Navigator.popUntil(context, ModalRoute.withName('/'));
 
-          case 'Fried Foods':
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) {
-                      return FriedFoodsScreen();
-                    },
-                    settings: RouteSettings(name: '/Frieds')));
-            break;
+          //Switch Category title
+          switch (title) {
+            case 'Baked Foods':
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) {
+                        return BakedFoodScreen();
+                      },
+                      settings: RouteSettings(name: '/Baked')));
+              break;
 
-          case 'Porridges':
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) {
-                      return PorridgesScreen();
-                    },
-                    settings: RouteSettings(name: '/Porridges')));
-            break;
+            case 'Barbicues':
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) {
+                        return BarbicueScreen();
+                      },
+                      settings: RouteSettings(name: '/Barbicues')));
+              break;
 
-          case 'Salads':
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) {
-                      return SaladsScreen();
-                    },
-                    settings: RouteSettings(name: '/Salads')));
-            break;
+            case 'Fried Foods':
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) {
+                        return FriedFoodsScreen();
+                      },
+                      settings: RouteSettings(name: '/Frieds')));
+              break;
 
-          case 'Soups':
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) {
-                      return SoupsScreen();
-                    },
-                    settings: RouteSettings(name: '/Soups')));
-            break;
-        }
+            case 'Porridges':
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) {
+                        return PorridgesScreen();
+                      },
+                      settings: RouteSettings(name: '/Porridges')));
+              break;
+
+            case 'Salads':
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) {
+                        return SaladsScreen();
+                      },
+                      settings: RouteSettings(name: '/Salads')));
+              break;
+
+            case 'Soups':
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) {
+                        return SoupsScreen();
+                      },
+                      settings: RouteSettings(name: '/Soups')));
+              break;
+          }
+        });
+
+        //Show dialog while navigating to next page
+        InfoDialog.showLoadingDialog(context);
+
+        //
       },
     );
   }
