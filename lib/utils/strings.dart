@@ -1,6 +1,7 @@
 class AppStrings {
   //App Name
   static String appName = "Dunija";
+  static final baseUrl = 'https://api.dunija.com/';
 
   ///Page Names
   static final barbicue = 'Barbicues',

@@ -1,16 +1,25 @@
+import 'dart:convert';
+
 import 'package:dunija/layout/dialog/infodialog.dart';
 import 'package:dunija/layout/kitchen_screen.dart';
+import 'package:dunija/models/recipe.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class RecipeListItem extends StatelessWidget {
+class RecipeListItem extends StatefulWidget {
   final String title, category;
   final image;
   RecipeListItem(
       {@required this.title, @required this.category, @required this.image});
 
+  @override
+  _RecipeListItemState createState() => _RecipeListItemState();
+}
+
+class _RecipeListItemState extends State<RecipeListItem> {
   @override
   Widget build(BuildContext context) {
     ////////////////////////////////////////
@@ -34,14 +43,15 @@ class RecipeListItem extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: InkWell(
         onTap: () {
-          print(title.toString());
+          print(widget.title.toString());
           Future.delayed(Duration(seconds: 2), () {
             //Dismiss Loading dialog
             Navigator.pop(context);
 
             //Navigate to Kitchen Screen
             Navigator.push(context, MaterialPageRoute(builder: (_) {
-              return KitchenScreen(recipe: title.toString());
+              return KitchenScreen(
+                  recipe: widget.title.toString(), recipeId: '001');
             }));
           });
 
@@ -72,7 +82,7 @@ class RecipeListItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      title.toString(),
+                      widget.title.toString(),
                       style: AppStyles.setTextStyle(
                           weight: FontWeight.bold, size: 14.0),
                       overflow: TextOverflow.ellipsis,
@@ -81,7 +91,7 @@ class RecipeListItem extends StatelessWidget {
                       height: 5.0,
                     ),
                     Text(
-                      category.toString(),
+                      widget.category.toString(),
                       style:
                           AppStyles.setTextStyle(size: 12.0, color: 0xFF6f6f6f),
                     ),

@@ -40,7 +40,9 @@ class AdminRecipeListItem extends StatelessWidget {
 
             //Navigate to Kitchen Screen
             Navigator.push(context, MaterialPageRoute(builder: (_) {
-              return KitchenScreen(recipe: title.toString());
+              return KitchenScreen(
+                recipe: title.toString(),
+              );
             }));
           });
 
