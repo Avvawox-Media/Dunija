@@ -7,6 +7,7 @@ import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/strings.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class Kitchen extends StatefulWidget {
@@ -164,7 +165,8 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
             /// Bottom bar
             //////////////////////////////////////
             SafeArea(
-              top: false,
+              top: true,
+              bottom: false,
               maintainBottomViewPadding: false,
               child: Container(
                 child: Container(
@@ -176,8 +178,11 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                         ? Alignment.center
                         : Alignment.topCenter,
                     children: [
+                      Image(
+                        image: AssetImage('assets/imgs/bottom_bar.png'),
+                      ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           /////////////////////////////////////
@@ -185,7 +190,9 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                           /////////////////////////////////////
                           InkWell(
                             child: Container(
-                              padding: EdgeInsets.all(5.0),
+                              margin: EdgeInsets.only(top: 25.0),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 5.0, horizontal: 10.0),
                               child: Icon(
                                 Icons.fast_rewind,
                                 color: AppColors.brightColor,
@@ -201,13 +208,15 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                                 ),
                                 color: AppColors.accent,
                                 borderRadius: BorderRadius.circular(
-                                  Numbers.smallBoxBorderRadius,
+                                  Numbers.largeBoxBorderRadius,
                                 ),
                                 border: Border.all(
-                                    width: 0.5,
-                                    color: AppColors.brightColorTrans2),
+                                    width: 1.0,
+                                    color: AppColors.brightColorTrans2
+                                        .withOpacity(0.3)),
                               ),
                             ),
+                            onDoubleTap: () {},
                             onTap: () {
                               if (backwardScrollable) {
                                 _pageController
@@ -224,13 +233,20 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                               }
                             },
                           ),
+                          SizedBox(
+                            width: 15.0,
+                          ),
 
-                          //Fast Forward Button
+                          /////////////////////////////////////
+                          /// Text to Speech Button
+                          /////////////////////////////////////
                           InkWell(
                             child: Container(
-                              padding: EdgeInsets.all(5.0),
+                              margin: EdgeInsets.only(top: 25.0),
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 5.0, horizontal: 10.0),
                               child: Icon(
-                                Icons.fast_forward,
+                                Icons.volume_up,
                                 color: AppColors.brightColor,
                               ),
                               decoration: BoxDecoration(
@@ -244,11 +260,61 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                                 ),
                                 color: AppColors.accent,
                                 borderRadius: BorderRadius.circular(
-                                  Numbers.smallBoxBorderRadius,
+                                  Numbers.largeBoxBorderRadius,
                                 ),
                                 border: Border.all(
-                                    width: 0.5,
-                                    color: AppColors.brightColorTrans2),
+                                    width: 1.0,
+                                    color: AppColors.brightColorTrans2
+                                        .withOpacity(0.3)),
+                              ),
+                            ),
+                            onDoubleTap: () {},
+                            onTap: () {
+                              if (backwardScrollable) {
+                                _pageController
+                                    .previousPage(
+                                        duration: Duration(milliseconds: 500),
+                                        curve: Curves.ease)
+                                    .then((value) {
+                                  setState(() {
+                                    forwardScrollable =
+                                        stageId < widget.stages.length;
+                                    backwardScrollable = stageId > 1;
+                                  });
+                                });
+                              }
+                            },
+                          ),
+                          SizedBox(
+                            width: 15.0,
+                          ),
+
+                          /////////////////////////////////////
+                          /// Fast Forward Button
+                          /////////////////////////////////////
+                          InkWell(
+                            onDoubleTap: () {},
+                            child: Container(
+                              margin: EdgeInsets.only(top: 15.0, right: 10.0),
+                              padding: EdgeInsets.all(10.0),
+                              child: Icon(
+                                Icons.forward_5_rounded,
+                                color: AppColors.brightColor,
+                              ),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.bottomLeft,
+                                  end: Alignment.topRight,
+                                  colors: [
+                                    AppColors.darkAccentTrans,
+                                    AppColors.accent,
+                                  ],
+                                ),
+                                color: AppColors.accent,
+                                borderRadius: BorderRadius.circular(32.0),
+                                border: Border.all(
+                                    width: 1.5,
+                                    color: AppColors.accent.withOpacity(0.6)),
                               ),
                             ),
                             onTap: () {
@@ -293,6 +359,7 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                 stageId: e.stageNo,
                 duration: e.duration);
           }).toList(),
+          dragStartBehavior: DragStartBehavior.down,
           controller: controller,
           scrollDirection: Axis.horizontal,
           pageSnapping: true,
@@ -443,6 +510,7 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: ListView(
+                        controller: ScrollController(),
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
