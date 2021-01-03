@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DateOfBirth extends StatefulWidget {
-  var dob;
+  final dob;
 
   DateOfBirth({@required this.dob, Key key}) : super(key: key);
   @override

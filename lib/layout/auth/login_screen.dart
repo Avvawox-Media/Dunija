@@ -13,9 +13,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   //
-  var _passwordHidden = true;
-
-  //
   var passwordController = TextEditingController();
   var emailController = TextEditingController();
 
@@ -23,13 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //
-    void togglePasswordVisibility() {
-      setState(() {
-        _passwordHidden = !_passwordHidden;
-      });
-    }
-
     //
     return Scaffold(
       body: Stack(fit: StackFit.expand, children: [

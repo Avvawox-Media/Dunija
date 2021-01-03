@@ -1,4 +1,3 @@
-import 'package:dunija/layout/dialog/infodialog.dart';
 import 'package:dunija/single_item_page/single_recipe_page.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/quantities.dart';

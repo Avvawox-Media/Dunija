@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:dunija/layout/auth/login_screen.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/styles.dart';
@@ -13,9 +12,6 @@ class PinAuthScreen extends StatefulWidget {
 }
 
 class _PinAuthScreenState extends State<PinAuthScreen> {
-  //
-  var _passwordHidden = true;
-
   //
   var otpController = TextEditingController();
 
@@ -205,7 +201,8 @@ class _PinAuthScreenState extends State<PinAuthScreen> {
     );
   }
 
-  Future<bool> _onBackPressed() {
+  Future<bool> _onBackPressed() async {
     Navigator.pop(context);
+    return Future.delayed(Duration(milliseconds: 1));
   }
 }

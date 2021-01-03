@@ -33,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   //
   ScrollController _scrollController = ScrollController();
-  TextEditingController _recipeSearchController = TextEditingController();
 
   //Animation Duration
   final duration = Duration(milliseconds: 300);
@@ -724,7 +723,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   Future<bool> _onBackPressed() {
-    //
+    return InfoDialog.showExitDialog(
+      context: context,
+      title: 'Leaving?',
+      msg: 'Your progress will be lost',
+    );
   }
 
   onClickedNotification() {}

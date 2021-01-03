@@ -10,17 +10,9 @@ class TimerWidget extends StatelessWidget {
 
   TimerWidget({this.duration});
 
-  double timeCount = 0;
-  Stream<double> i;
-
   @override
   Widget build(BuildContext context) {
     return createNewCountdown();
-  }
-
-  Stream<double> getCount() {
-    print('Streams: ${Stream.value(timeCount)}');
-    return Stream.value(timeCount);
   }
 
   Widget createNewCountdown() {

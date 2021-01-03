@@ -1,14 +1,12 @@
 import 'dart:convert';
-
 import 'package:dunija/models/prep_stage.dart';
-import 'package:dunija/utils/strings.dart';
 import 'package:flutter/material.dart';
 
 class DataManager {
   static Future<List<PrepStage>> getStageData(
       BuildContext context, final recipeId) async {
-    String baseUrl = AppStrings.baseUrl;
-    String endpoint = '/recipe/stages';
+    // String baseUrl = AppStrings.baseUrl;
+    // String endpoint = '/recipe/stages';
 
     //List containing stages
     List<PrepStage> stages = [];
@@ -23,7 +21,7 @@ class DataManager {
 
     var result = json.decode(response);
 
-    String recipe = result['recipe'];
+    // String recipe = result['recipe'];
     int steps = result['steps'];
 
     var stageResult = result['stages'];

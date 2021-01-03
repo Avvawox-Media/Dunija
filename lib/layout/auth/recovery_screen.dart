@@ -13,9 +13,6 @@ class RecoveryScreen extends StatefulWidget {
 
 class _RecoveryScreenState extends State<RecoveryScreen> {
   //
-  var _passwordHidden = true;
-
-  //
   var passwordController = TextEditingController();
   var emailController = TextEditingController();
 
@@ -23,13 +20,6 @@ class _RecoveryScreenState extends State<RecoveryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //
-    void togglePasswordVisibility() {
-      setState(() {
-        _passwordHidden = !_passwordHidden;
-      });
-    }
-
     //
     return Scaffold(
       body: Stack(children: [

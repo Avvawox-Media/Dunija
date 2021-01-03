@@ -1,12 +1,9 @@
-import 'package:dunija/layout/auth/login_screen.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:dunija/widgets/interest_dropdown.dart';
 import 'package:dunija/widgets/textfield_custom.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:dunija/routes/slidepageroute.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override

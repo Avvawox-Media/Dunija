@@ -2,7 +2,6 @@ import 'package:dunija/models/recipe.dart';
 import 'package:dunija/models/recipe_category.dart';
 import 'package:dunija/models/notification.dart';
 import 'package:dunija/models/user.dart';
-import 'package:flutter/material.dart';
 
 class AppLists {
   ///App's List

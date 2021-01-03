@@ -5,7 +5,6 @@ import 'package:dunija/utils/lists.dart';
 import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/strings.dart';
 import 'package:dunija/utils/styles.dart';
-import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
 class FriedFoodsScreen extends StatefulWidget {

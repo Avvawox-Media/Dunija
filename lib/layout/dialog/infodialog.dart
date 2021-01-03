@@ -112,7 +112,7 @@ class InfoDialog {
   }
 
   ///Show Dialog when Exit Button Clicked
-  static showExitKitchenDialog(
+  static showExitDialog(
       {@required BuildContext context, @required title, @required msg}) {
     showDialog(
       barrierDismissible: false,
@@ -155,7 +155,7 @@ class InfoDialog {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    //Exit Kitchen Action Button
+                    //Exit  Action Button
                     Align(
                       child: Container(
                         child: RaisedButton(

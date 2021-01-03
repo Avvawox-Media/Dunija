@@ -10,7 +10,7 @@ class Recipe {
 
   Recipe({this.name, this.description, this.steps, this.stages});
 
-  Future<Recipe> getRecipe({recipe_id}) async {
+  Future<Recipe> getRecipe({recipeId}) async {
     List<PrepStage> stageList = [];
 
     //Load JSON file from assets folder

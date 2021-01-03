@@ -3,7 +3,7 @@ class SharedPref {
     //Save
   }
 
-  Future<dynamic> ReadPref(key) {
+  Future<dynamic> readPref(key) {
     //Read
   }
 

@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:dunija/layout/dialog/infodialog.dart';
 import 'package:dunija/layout/kitchen/timer_widget.dart';
 import 'package:dunija/models/prep_stage.dart';
@@ -40,9 +39,9 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Navigator.pop(context);
+        // Navigator.pop(context);
 
-        InfoDialog.showExitKitchenDialog(
+        InfoDialog.showExitDialog(
           context: context,
           title: AppStrings.exitKitchenTitle,
           msg: AppStrings.exitKitchenMsg,
@@ -90,6 +89,14 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                               blurRadius: 2,
                               offset: Offset(0, 2))
                         ],
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                            AppColors.darkAccent.withOpacity(0.5),
+                            AppColors.accent.withOpacity(0.5),
+                          ],
+                        ),
                         borderRadius:
                             BorderRadius.circular(Numbers.largeBoxBorderRadius),
                         color: AppColors.accent),
@@ -97,19 +104,26 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                     height: 30.0,
                     child: Row(
                       children: [
-                        SizedBox(
-                          width: 5.0,
-                        ),
-                        Image(
-                          image: AssetImage('assets/imgs/icon.png'),
-                          width: 28.0,
+                        // SizedBox(
+                        //   width: 5.0,
+                        // ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.brightColor,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Image(
+                            image: AssetImage('assets/imgs/icon.png'),
+                            width: 25.0,
+                          ),
                         ),
                         SizedBox(
                           width: 5.0,
                         ),
                         Text(
                           widget.recipe,
-                          style: AppStyles.whiteLabel,
+                          style: AppStyles.boldWhiteLabel,
+                          overflow: TextOverflow.fade,
                         )
                       ],
                     ),
@@ -120,20 +134,36 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                   ///////////////////////////////////////
                   GestureDetector(
                     onTap: () {
-                      InfoDialog.showExitKitchenDialog(
+                      InfoDialog.showExitDialog(
                           context: context,
                           title: AppStrings.exitKitchenTitle,
                           msg: AppStrings.exitKitchenMsg);
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.darkAccent,
+                        gradient: LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [
+                            AppColors.darkAccent,
+                            AppColors.accent,
+                          ],
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                              color: AppColors.darkAccent,
+                              spreadRadius: 1.0,
+                              blurRadius: 2.0,
+                              offset: Offset(0, 1))
+                        ],
+                        // color: AppColors.darkAccent,
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                       padding:
                           EdgeInsets.symmetric(horizontal: 8.0, vertical: 5.0),
                       child: Icon(
-                        Icons.cancel_outlined,
+                        Icons.close,
+                        color: AppColors.brightColor,
                       ),
                     ),
                   ),
