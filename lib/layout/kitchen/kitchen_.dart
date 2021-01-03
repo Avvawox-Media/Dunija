@@ -1,5 +1,5 @@
 import 'package:dunija/layout/dialog/infodialog.dart';
-import 'package:dunija/layout/kitchen_/timer_widget.dart';
+import 'package:dunija/layout/kitchen/timer_widget.dart';
 import 'package:dunija/models/prep_stage.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/quantities.dart';

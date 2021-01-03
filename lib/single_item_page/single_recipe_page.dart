@@ -1,5 +1,5 @@
 import 'package:dunija/layout/dialog/infodialog.dart';
-import 'package:dunija/layout/kitchen_/kitchen_.dart';
+import 'package:dunija/layout/kitchen/kitchen_.dart';
 import 'package:dunija/services/data_manager.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/styles.dart';
