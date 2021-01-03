@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:dunija/layout/dialog/infodialog.dart';
 import 'package:dunija/layout/kitchen/timer_widget.dart';
 import 'package:dunija/models/prep_stage.dart';
@@ -19,8 +20,7 @@ class Kitchen extends StatefulWidget {
 }
 
 class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
-  //
-  Widget timer;
+  //Initial Stage
   int stageId = 1;
 
   //PageView Controller
@@ -311,43 +311,6 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
   }
 
   Widget createScene({title, procedure, imageUrl, stageId, duration}) {
-    ////////////////////////////////////////////
-    /// Progress Bar
-    ////////////////////////////////////////////
-    var progressBar = Align(
-      alignment: Alignment.centerLeft,
-      child: Container(
-        width: (Numbers.deviceWidth - 150) * 0.7, //(progressRate / 100),
-        height: Numbers.deviceWidth > 500 ? 23.0 : 18.0,
-        clipBehavior: Clip.hardEdge,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                color: AppColors.darkAccent.withOpacity(0.4),
-                spreadRadius: 1,
-                blurRadius: 1,
-                offset: Offset(0, 0))
-          ],
-          gradient: LinearGradient(
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-              colors: [
-                AppColors.accent,
-                AppColors.whiteColor,
-              ]),
-          // border: Border.all(color: AppColors.lightAccent, width: 2.0),
-          borderRadius: BorderRadius.circular(
-            Numbers.largeBoxBorderRadius,
-          ),
-          image: DecorationImage(
-            image: AssetImage('assets/imgs/progress.png'),
-            fit: BoxFit.fitHeight,
-            repeat: ImageRepeat.repeatX,
-          ),
-        ),
-      ),
-    );
-
     return Column(
       children: [
         ///////////////////////////////////////
@@ -462,70 +425,7 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                         SizedBox(
                           height: 25.0,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            ///////////////////////////////////////
-                            /// Progress Bar
-                            ///////////////////////////////////////
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              height: Numbers.deviceWidth > 500 ? 20.0 : 20.0,
-                              width: Numbers.deviceWidth * 0.60,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    style: BorderStyle.solid,
-                                    color: AppColors.lightAccent,
-                                    width: 2.50),
-                                borderRadius: BorderRadius.circular(
-                                    Numbers.largeBoxBorderRadius),
-                                gradient: LinearGradient(
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter,
-                                  colors: [
-                                    AppColors.lightAccent,
-                                    AppColors.accent
-                                  ],
-                                ),
-                              ),
-                              child: progressBar,
-                              clipBehavior: Clip.hardEdge,
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-
-                            ///////////////////////////////////////
-                            /// Count-down Time
-                            ///////////////////////////////////////
-                            Container(
-                              alignment: Alignment.center,
-                              width: 0.22 * Numbers.deviceWidth,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                    begin: Alignment.bottomCenter,
-                                    end: Alignment.topCenter,
-                                    colors: [
-                                      AppColors.darkAccent,
-                                      AppColors.accent
-                                          .withBlue(20)
-                                          .withRed(80)
-                                          .withGreen(20),
-                                    ]),
-                                borderRadius: BorderRadius.circular(
-                                  Numbers.smallBoxBorderRadius,
-                                ),
-                                border: Border.all(
-                                    width: 0.5,
-                                    color: AppColors.brightColorTrans2),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 5.0, vertical: 5.0),
-                              child: TimerWidget(duration: duration),
-                            ),
-                          ],
-                        ),
+                        TimerWidget(duration: duration),
                       ],
                     ),
                   ),
@@ -595,5 +495,10 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
