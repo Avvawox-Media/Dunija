@@ -72,6 +72,11 @@ class AppStyles {
     fontSize: 14.0,
     fontWeight: FontWeight.bold,
   );
+  static final boldTimerLabel = TextStyle(
+    color: Colors.white,
+    fontSize: 12.0,
+    fontWeight: FontWeight.bold,
+  );
   static final textFieldLabel = TextStyle(
     color: AppColors.darkAccent,
     fontSize: 15.0,

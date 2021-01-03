@@ -2,7 +2,7 @@ import 'package:dunija/layout/admin_panel_views/add_recipe_view.dart';
 import 'package:dunija/layout/admin_panel_views/recipe_list_view.dart';
 import 'package:dunija/layout/admin_panel_views/user_list_view.dart';
 import 'package:dunija/models/recipe.dart';
-import 'package:dunija/widgets/admin_recipe_list_item%20copy.dart';
+import 'package:dunija/widgets/admin_recipe_list_item.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/custom_icon_icons.dart';
 import 'package:dunija/utils/lists.dart';

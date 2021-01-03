@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:dunija/layout/dialog/infodialog.dart';
-import 'package:dunija/layout/kitchen_screen.dart';
-import 'package:dunija/models/recipe.dart';
+import 'package:dunija/single_item_page/single_recipe_page.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class RecipeListItem extends StatefulWidget {
   final String title, category;
@@ -44,18 +40,22 @@ class _RecipeListItemState extends State<RecipeListItem> {
       child: InkWell(
         onTap: () {
           print(widget.title.toString());
-          Future.delayed(Duration(seconds: 2), () {
-            //Dismiss Loading dialog
-            Navigator.pop(context);
+          //Dismiss Loading dialog
+          //Navigator.pop(context);
 
-            //Navigate to Kitchen Screen
-            Navigator.push(context, MaterialPageRoute(builder: (_) {
-              return KitchenScreen(
-                  recipe: widget.title.toString(), recipeId: '001');
-            }));
-          });
-
-          InfoDialog.showLoadingDialog(context, msg: 'Preparing your kitchen');
+          /////////////////////////////////////////////
+          ///New Ketchen Screen
+          /////////////////////////////////////////////
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) {
+                  return SinglePageView(
+                    recipe: widget.title,
+                  );
+                },
+                settings: RouteSettings(name: '/SingleRecipeView')),
+          );
         },
         child: Container(
           decoration: BoxDecoration(

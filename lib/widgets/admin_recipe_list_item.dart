@@ -1,5 +1,3 @@
-import 'package:dunija/layout/dialog/infodialog.dart';
-import 'package:dunija/layout/kitchen_screen.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/styles.dart';
@@ -34,19 +32,19 @@ class AdminRecipeListItem extends StatelessWidget {
       child: InkWell(
         onTap: () {
           print(title.toString());
-          Future.delayed(Duration(seconds: 2), () {
-            //Dismiss Loading dialog
-            Navigator.pop(context);
+          // Future.delayed(Duration(seconds: 2), () {
+          //   //Dismiss Loading dialog
+          //   Navigator.pop(context);
 
-            //Navigate to Kitchen Screen
-            Navigator.push(context, MaterialPageRoute(builder: (_) {
-              return KitchenScreen(
-                recipe: title.toString(),
-              );
-            }));
-          });
+          //   //Navigate to Kitchen Screen
+          //   Navigator.push(context, MaterialPageRoute(builder: (_) {
+          //     return KitchenScreen(
+          //       recipe: title.toString(),
+          //     );
+          //   }));
+          // });
 
-          InfoDialog.showLoadingDialog(context, msg: 'Preparing your kitchen');
+          // InfoDialog.showLoadingDialog(context, msg: 'Preparing your kitchen');
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 5.0),

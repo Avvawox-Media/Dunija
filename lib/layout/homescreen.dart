@@ -461,7 +461,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           _scaleController.reverse();
         });
 
-        Future.delayed(Duration(seconds: 5), () {
+        Future.delayed(Duration(seconds: 2), () {
           //
           Navigator.popUntil(context, ModalRoute.withName('/'));
 
