@@ -1,12 +1,9 @@
 import 'package:dunija/layout/dialog/infodialog.dart';
 import 'package:dunija/layout/kitchen_/kitchen_.dart';
-import 'package:dunija/layout/kitchen_/stage_manager.dart';
-import 'package:dunija/models/recipe.dart';
 import 'package:dunija/services/data_manager.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SinglePageView extends StatelessWidget {
   final recipe;
@@ -62,20 +59,9 @@ class SinglePageView extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) {
-                              return MultiProvider(
-                                providers: [
-                                  ChangeNotifierProvider<StageManager>(
-                                    create: (context) => StageManager(),
-                                  ),
-                                  FutureProvider<Recipe>(
-                                    lazy: true,
-                                    create: (context) => Recipe().getRecipe(),
-                                  )
-                                ],
-                                child: Kitchen(
-                                  recipe: recipe,
-                                  stages: value,
-                                ),
+                              return Kitchen(
+                                recipe: recipe,
+                                stages: value,
                               );
                             },
                           ),
