@@ -2,6 +2,7 @@ import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
@@ -17,6 +18,13 @@ class TimerWidget extends StatelessWidget {
 
   Widget createNewCountdown() {
     return Countdown(
+      onFinished: () {
+        print('Countdown Finished');
+        FlutterRingtonePlayer.play(
+          android: AndroidSounds.notification,
+          ios: IosSounds.electronic,
+        );
+      },
       controller: CountdownController(),
       seconds: duration * 60,
       build: (context, time) {

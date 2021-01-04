@@ -629,6 +629,7 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
     FlutterTts tts = FlutterTts();
     tts.setSpeechRate(0.35);
     if (ttsEnabled) {
+      await tts.stop();
       await tts.speak(ttsStageIntro);
       // await tts.setSilence(500);
       await tts.speak(ttsTitle);
