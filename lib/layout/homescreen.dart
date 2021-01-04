@@ -329,7 +329,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           padding: EdgeInsets.symmetric(horizontal: 20.0),
                           children: AppLists.foodList.map((e) {
                             return buildFavItem(
-                                title: e.name, description: e.description);
+                              title: e.name,
+                              description: e.description,
+                            );
                           }).toList(),
                         )),
 
