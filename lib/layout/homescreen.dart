@@ -9,7 +9,7 @@ import 'package:dunija/layout/cat_pages/porridgesscreen.dart';
 import 'package:dunija/layout/cat_pages/saladsscreen.dart';
 import 'package:dunija/layout/cat_pages/soupsscreen.dart';
 import 'package:dunija/layout/dialog/infodialog.dart';
-import 'package:dunija/layout/systemsettings.dart';
+import 'package:dunija/layout/app_setting_screens/app_setting_screren.dart';
 import 'package:dunija/models/recipe_category.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/custom_icon_icons.dart';
