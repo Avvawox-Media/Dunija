@@ -2,12 +2,14 @@ import 'package:dunija/layout/dialog/infodialog.dart';
 import 'package:dunija/layout/kitchen/timer_widget.dart';
 import 'package:dunija/models/prep_stage.dart';
 import 'package:dunija/utils/colors.dart';
+import 'package:dunija/utils/custom_icon_icons.dart';
 import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/strings.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class Kitchen extends StatefulWidget {
   final recipe;
@@ -23,6 +25,11 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
   //Initial Stage
   int stageId = 1;
 
+  //Text to Speech Items
+  String ttsStageIntro = 'Stage 1';
+  String ttsTitle = '';
+  String ttsMessage = '';
+
   //PageView Controller
   PageController _pageController = PageController();
 
@@ -30,13 +37,21 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
   bool forwardScrollable = true;
   bool backwardScrollable = false;
 
+  //Text to Speach Status
+  bool ttsEnabled = true;
+
+  //Text to Speach Status
+  bool isAlarmMuted = false;
+
   @override
   void initState() {
     super.initState();
+    setTtsText(stageId);
   }
 
   @override
   Widget build(BuildContext context) {
+    //Return Widget
     return WillPopScope(
       onWillPop: () async {
         // Navigator.pop(context);
@@ -216,7 +231,7 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           /////////////////////////////////////
-                          /// Rewind Button
+                          /// Alarm Button
                           /////////////////////////////////////
                           InkWell(
                             child: Container(
@@ -224,18 +239,20 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                               padding: EdgeInsets.symmetric(
                                   vertical: 5.0, horizontal: 10.0),
                               child: Icon(
-                                Icons.fast_rewind,
+                                Icons.alarm_on,
                                 color: AppColors.brightColor,
                               ),
                               decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.bottomLeft,
-                                  end: Alignment.topRight,
-                                  colors: [
-                                    AppColors.darkAccentTrans,
-                                    AppColors.accent,
-                                  ],
-                                ),
+                                gradient: !isAlarmMuted
+                                    ? LinearGradient(
+                                        begin: Alignment.bottomLeft,
+                                        end: Alignment.topRight,
+                                        colors: [
+                                          AppColors.darkAccentTrans,
+                                          AppColors.accent,
+                                        ],
+                                      )
+                                    : null,
                                 color: AppColors.accent,
                                 borderRadius: BorderRadius.circular(
                                   Numbers.largeBoxBorderRadius,
@@ -248,19 +265,21 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                             ),
                             onDoubleTap: () {},
                             onTap: () {
-                              if (backwardScrollable) {
-                                _pageController
-                                    .previousPage(
-                                        duration: Duration(milliseconds: 500),
-                                        curve: Curves.ease)
-                                    .then((value) {
-                                  setState(() {
-                                    forwardScrollable =
-                                        stageId < widget.stages.length;
-                                    backwardScrollable = stageId > 1;
-                                  });
-                                });
-                              }
+                              // if (backwardScrollable) {
+                              //   _pageController
+                              //       .previousPage(
+                              //           duration: Duration(milliseconds: 500),
+                              //           curve: Curves.ease)
+                              //       .then((value) {
+                              //     setState(() {
+                              //       forwardScrollable =
+                              //           stageId < widget.stages.length;
+                              //       backwardScrollable = stageId > 1;
+                              //     });
+                              //   });
+                              // }
+
+                              setMuteToggle();
                             },
                           ),
                           SizedBox(
@@ -276,18 +295,20 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                               padding: EdgeInsets.symmetric(
                                   vertical: 5.0, horizontal: 10.0),
                               child: Icon(
-                                Icons.volume_up,
+                                CustomIcon.bullhorn,
                                 color: AppColors.brightColor,
                               ),
                               decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.bottomLeft,
-                                  end: Alignment.topRight,
-                                  colors: [
-                                    AppColors.darkAccentTrans,
-                                    AppColors.accent,
-                                  ],
-                                ),
+                                gradient: ttsEnabled
+                                    ? LinearGradient(
+                                        begin: Alignment.bottomLeft,
+                                        end: Alignment.topRight,
+                                        colors: [
+                                          AppColors.darkAccentTrans,
+                                          AppColors.accent,
+                                        ],
+                                      )
+                                    : null,
                                 color: AppColors.accent,
                                 borderRadius: BorderRadius.circular(
                                   Numbers.largeBoxBorderRadius,
@@ -300,19 +321,7 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                             ),
                             onDoubleTap: () {},
                             onTap: () {
-                              if (backwardScrollable) {
-                                _pageController
-                                    .previousPage(
-                                        duration: Duration(milliseconds: 500),
-                                        curve: Curves.ease)
-                                    .then((value) {
-                                  setState(() {
-                                    forwardScrollable =
-                                        stageId < widget.stages.length;
-                                    backwardScrollable = stageId > 1;
-                                  });
-                                });
-                              }
+                              setTtsToggle();
                             },
                           ),
                           SizedBox(
@@ -323,46 +332,48 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                           /// Fast Forward Button
                           /////////////////////////////////////
                           InkWell(
-                            onDoubleTap: () {},
-                            child: Container(
-                              margin: EdgeInsets.only(top: 15.0, right: 10.0),
-                              padding: EdgeInsets.all(10.0),
-                              child: Icon(
-                                Icons.forward_5_rounded,
-                                color: AppColors.brightColor,
-                              ),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.bottomLeft,
-                                  end: Alignment.topRight,
-                                  colors: [
-                                    AppColors.darkAccentTrans,
-                                    AppColors.accent,
-                                  ],
+                              onDoubleTap: () {},
+                              child: Container(
+                                margin: EdgeInsets.only(top: 15.0, right: 10.0),
+                                padding: EdgeInsets.all(10.0),
+                                child: Icon(
+                                  CustomIcon.done_all,
+                                  color: AppColors.brightColor,
                                 ),
-                                color: AppColors.accent,
-                                borderRadius: BorderRadius.circular(32.0),
-                                border: Border.all(
-                                    width: 1.5,
-                                    color: AppColors.accent.withOpacity(0.6)),
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                    colors: [
+                                      AppColors.darkAccentTrans,
+                                      AppColors.accent,
+                                    ],
+                                  ),
+                                  color: AppColors.accent,
+                                  borderRadius: BorderRadius.circular(32.0),
+                                  border: Border.all(
+                                      width: 1.5,
+                                      color: AppColors.accent.withOpacity(0.6)),
+                                ),
                               ),
-                            ),
-                            onTap: () {
-                              if (forwardScrollable) {
-                                _pageController
-                                    .nextPage(
-                                        duration: Duration(milliseconds: 500),
-                                        curve: Curves.ease)
-                                    .then((value) {
-                                  setState(() {
-                                    forwardScrollable =
-                                        stageId < widget.stages.length;
-                                    backwardScrollable = stageId >= 1;
+                              onTap: () {
+                                if (forwardScrollable) {
+                                  _pageController
+                                      .nextPage(
+                                    duration: Duration(milliseconds: 500),
+                                    curve: Curves.ease,
+                                  )
+                                      .then((value) {
+                                    setState(() {
+                                      forwardScrollable =
+                                          stageId < widget.stages.length;
+                                      backwardScrollable = stageId >= 1;
+                                    });
                                   });
-                                });
-                              }
-                            },
-                          ),
+
+                                  setTtsText(stageId + 1);
+                                }
+                              }),
                         ],
                       ),
                     ],
@@ -593,6 +604,53 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
         ),
       ],
     );
+  }
+
+  void setTtsText(stageId) {
+    for (PrepStage ps in widget.stages) {
+      String title = ps.title.toString();
+      String procedure = ps.procedure.toString();
+
+      if (ps.stageNo == stageId) {
+        setState(() {
+          ttsStageIntro = 'Stage ${ps.stageNo}';
+          ttsTitle = title;
+          ttsMessage = procedure;
+        });
+      }
+    }
+    //Speak Text after 5 or 3 seconds
+    Future.delayed(Duration(seconds: stageId == 1 ? 5 : 3), () {
+      speakText();
+    });
+  }
+
+  void speakText() async {
+    FlutterTts tts = FlutterTts();
+    tts.setSpeechRate(0.35);
+    if (ttsEnabled) {
+      await tts.speak(ttsStageIntro);
+      // await tts.setSilence(500);
+      await tts.speak(ttsTitle);
+      // await tts.setSilence(500);
+      await tts.speak(ttsMessage);
+    }
+  }
+
+  void ringAlarm() {}
+
+  //Toggle Mute
+  void setTtsToggle() {
+    setState(() {
+      ttsEnabled = !ttsEnabled;
+    });
+  }
+
+  //Toggle Mute
+  void setMuteToggle() {
+    setState(() {
+      isAlarmMuted = !isAlarmMuted;
+    });
   }
 
   @override
