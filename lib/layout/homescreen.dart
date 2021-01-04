@@ -317,7 +317,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   ),
                 ),
               ),
-              //Favorite Recipe Tab
+
+              //////////////////////////////////
+              /// Favorite Recipe Tab
+              //////////////////////////////////
               Container(
                   alignment: Alignment.center,
                   child: AppLists.foodList.isEmpty
@@ -329,7 +332,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 title: e.name, description: e.description);
                           }).toList(),
                         )),
-              //Feedback Tab
+
+              /////////////////////////////////////
+              /// Health and Wellness Tab
+              /////////////////////////////////////
               Container(
                 alignment: Alignment.center,
                 child: ListView(
@@ -340,7 +346,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   }).toList(),
                 ),
               ),
-              //Notification Tab
+
+              //////////////////////////////////
+              /// Notification Tab
+              //////////////////////////////////
               Container(
                 alignment: Alignment.center,
                 child: AppLists.notificationList.isNotEmpty
@@ -356,7 +365,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
             ]),
           ),
-          //Tab Bar
+
+          ////////////////////////////////////
+          /// Tab Bar
+          ////////////////////////////////////
           Container(
             decoration: BoxDecoration(
               color: AppColors.whiteColor,
@@ -376,9 +388,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 color: AppColors.accent,
               ),
               tabs: [
-                Tab(icon: Icon(CustomIcon.food, size: 24)),
+                Tab(icon: Icon(CustomIcon.food, size: 22)),
                 Tab(icon: Icon(Icons.favorite, size: 20)),
-                Tab(icon: Icon(Icons.feedback_rounded, size: 21)),
+                Tab(icon: Icon(CustomIcon.notes_medical, size: 20)),
                 Tab(icon: Icon(CustomIcon.notifications_none, size: 25)),
               ],
               labelColor: AppColors.accent,

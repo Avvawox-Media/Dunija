@@ -71,12 +71,20 @@ class CustomIcon {
       IconData(0xe82a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData arrow_circle_left =
       IconData(0xf0a8, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData food_1 =
+      IconData(0xf0f5, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData heartbeat =
+      IconData(0xf21e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData transgender =
       IconData(0xf224, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData arrow_alt_circle_left =
       IconData(0xf359, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData user_alt =
       IconData(0xf406, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData capsules =
+      IconData(0xf46b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData notes_medical =
+      IconData(0xf481, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData church =
       IconData(0xf51d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData ring =
