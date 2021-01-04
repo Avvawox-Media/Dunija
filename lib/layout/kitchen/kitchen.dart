@@ -9,6 +9,7 @@ import 'package:dunija/utils/styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 class Kitchen extends StatefulWidget {
@@ -280,6 +281,7 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                               // }
 
                               setMuteToggle();
+                              // ringAlarm();
                             },
                           ),
                           SizedBox(
@@ -638,7 +640,14 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
     }
   }
 
-  void ringAlarm() {}
+  void ringAlarm() {
+    FlutterRingtonePlayer.play(
+      android: AndroidSounds.alarm,
+      ios: IosSounds.triTone,
+      looping: true,
+      asAlarm: true,
+    );
+  }
 
   //Toggle Mute
   void setTtsToggle() {

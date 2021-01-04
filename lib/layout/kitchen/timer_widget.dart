@@ -22,7 +22,9 @@ class TimerWidget extends StatelessWidget {
         print('Countdown Finished');
         FlutterRingtonePlayer.play(
           android: AndroidSounds.notification,
-          ios: IosSounds.electronic,
+          ios: IosSounds.triTone,
+          looping: true,
+          asAlarm: true,
         );
       },
       controller: CountdownController(),
