@@ -1,3 +1,5 @@
+import 'package:dunija/layout/alarm_widget.dart';
+import 'package:dunija/layout/dialog/infodialog.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/styles.dart';
@@ -8,15 +10,16 @@ import 'package:timer_count_down/timer_count_down.dart';
 
 class TimerWidget extends StatelessWidget {
   final duration;
+  final Function endAlarm;
 
-  TimerWidget({this.duration});
+  TimerWidget({this.duration, this.endAlarm});
 
   @override
   Widget build(BuildContext context) {
-    return createNewCountdown();
+    return createNewCountdown(context);
   }
 
-  Widget createNewCountdown() {
+  Widget createNewCountdown(BuildContext context) {
     return Countdown(
       onFinished: () {
         print('Countdown Finished');
@@ -26,6 +29,9 @@ class TimerWidget extends StatelessWidget {
           looping: true,
           asAlarm: true,
         );
+
+        InfoDialog.showAlarmDialog(context, AlarmWidget(),
+            endAlarm: endAlarm, msg: "End of Stage");
       },
       controller: CountdownController(),
       seconds: duration * 60,

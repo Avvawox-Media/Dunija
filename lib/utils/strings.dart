@@ -21,4 +21,18 @@ class AppStrings {
   static final exitKitchenTitle = 'Caution';
   static final exitKitchenMsg =
       'All progress will be lost. \nDo you realy want to leave the kitchen?';
+
+  static var keys = [
+    'health',
+    'alarm',
+    'voice',
+    'storage',
+    'full_name',
+    'email',
+    'occupation',
+    'interests',
+    'referrer',
+    'plan',
+    'badge'
+  ];
 }

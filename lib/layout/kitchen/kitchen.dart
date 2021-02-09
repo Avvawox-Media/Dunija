@@ -44,8 +44,13 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
   //Text to Speach Status
   bool isAlarmMuted = false;
 
+  //Animation Controller
+  AnimationController _animationController;
+
   @override
   void initState() {
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
     super.initState();
     setTtsText(stageId);
   }
@@ -394,6 +399,7 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
       fit: StackFit.expand,
       children: [
         PageView(
+          physics: NeverScrollableScrollPhysics(),
           children: widget.stages.map((e) {
             return createScene(
                 title: e.title,
@@ -413,9 +419,9 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
             });
           },
         ),
-        Container(
-          color: AppColors.darkAccent.withOpacity(0.0),
-        ),
+        // Container(
+        //   color: AppColors.darkAccent.withOpacity(0.0),
+        // ),
       ],
     );
   }
@@ -535,8 +541,40 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                         SizedBox(
                           height: 25.0,
                         ),
-                        TimerWidget(duration: duration),
+
+                        ///////////////////////////////////////
+                        //Timer Widget
+                        ///////////////////////////////////////
+                        TimerWidget(
+                            duration: duration,
+                            endAlarm: () {
+                              toggleAlarm(ring: false);
+                            }),
                       ],
+                    ),
+                  ),
+
+                  ///////////////////////////////////////
+                  //Stage Title
+                  ///////////////////////////////////////
+
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Container(
+                    margin:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                    width: Numbers.deviceWidth,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: AppColors.lightAccent.withOpacity(0.3),
+                    ),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                    child: Text(
+                      title,
+                      style: AppStyles.setTextStyle(
+                          weight: FontWeight.bold, color: 0xFFDDFFDD),
                     ),
                   ),
 
@@ -545,7 +583,7 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                   ///////////////////////////////////////
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 15.0),
+                      margin: EdgeInsets.symmetric(vertical: 10.0),
                       padding: EdgeInsets.symmetric(
                           horizontal: 15.0, vertical: 10.0),
                       decoration: BoxDecoration(
@@ -553,33 +591,11 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: ListView(
-                        controller: ScrollController(),
+                        // controller: ScrollController(),
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              ///////////////////////////////////////
-                              //Stage Title
-                              ///////////////////////////////////////
-                              Container(
-                                width: Numbers.deviceWidth,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                  color: AppColors.lightAccent.withOpacity(0.3),
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 5.0, horizontal: 10.0),
-                                child: Text(
-                                  title,
-                                  style: AppStyles.setTextStyle(
-                                      weight: FontWeight.bold,
-                                      color: 0xFFDDFFDD),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-
                               ///////////////////////////////////////
                               //Stage Procedures
                               ///////////////////////////////////////
@@ -629,7 +645,7 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
 
   void speakText() async {
     FlutterTts tts = FlutterTts();
-    tts.setSpeechRate(0.35);
+    tts.setSpeechRate(0.70);
     if (ttsEnabled) {
       await tts.stop();
       await tts.speak(ttsStageIntro);
@@ -640,13 +656,17 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
     }
   }
 
-  void ringAlarm() {
-    FlutterRingtonePlayer.play(
-      android: AndroidSounds.alarm,
-      ios: IosSounds.triTone,
-      looping: true,
-      asAlarm: true,
-    );
+  void toggleAlarm({bool ring}) {
+    if (ring) {
+      FlutterRingtonePlayer.play(
+        android: AndroidSounds.alarm,
+        ios: IosSounds.triTone,
+        looping: true,
+        asAlarm: true,
+      );
+    } else {
+      FlutterRingtonePlayer.stop();
+    }
   }
 
   //Toggle Mute
@@ -665,6 +685,7 @@ class _KitchenState extends State<Kitchen> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    _animationController.dispose();
     super.dispose();
   }
 }

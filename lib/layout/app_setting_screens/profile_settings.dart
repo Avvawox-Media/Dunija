@@ -1,5 +1,4 @@
 import 'package:dunija/utils/colors.dart';
-import 'package:dunija/utils/custom_icon_icons.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -9,12 +8,6 @@ class ProfileSettingScreen extends StatefulWidget {
 }
 
 class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
-  //Theme Variable
-  bool _isLightTheme = true;
-
-  //Enable Persistent Storage
-  bool _isStorageEnabled = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,10 +21,9 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
         leading: IconButton(
             splashRadius: 20.0,
             iconSize: 35.0,
-            color: AppColors.darkAccent,
             icon: Icon(
               Icons.arrow_left,
-              color: AppColors.darkAccent,
+              color: AppColors.blackColor,
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -48,27 +40,46 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
         color: AppColors.whiteColor,
         child: ListView(
           children: [
+            // SizedBox(height: 5.0),
             Container(
-              margin: EdgeInsets.only(right: 20.0),
-              color: Colors.grey.withOpacity(0.1),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    child: Icon(Icons.person),
-                    radius: 30.0,
-                    backgroundColor: Colors.grey.withOpacity(0.3),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Text('Anonymous User'),
-                ],
+              // color: AppColors.accent,
+              padding: EdgeInsets.symmetric(vertical: 25.0, horizontal: 10.0),
+              child: Container(
+                height: 160.0,
+                decoration: BoxDecoration(
+                  color: AppColors.whiteColor,
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 2),
+                      blurRadius: 5.0,
+                      spreadRadius: 5.0,
+                      color: Colors.grey.withOpacity(0.2),
+                    )
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      child: Icon(
+                        Icons.person,
+                        color: AppColors.darkAccent,
+                      ),
+                      radius: 30.0,
+                      backgroundColor: Colors.grey.withOpacity(0.3),
+                    ),
+                    SizedBox(
+                      width: 20.0,
+                    ),
+                    Text('Anonymous User'),
+                  ],
+                ),
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+                // height: 50.0,
               ),
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-              // height: 50.0,
             ),
             ListTile(
               title: Text('Edit Profile'),

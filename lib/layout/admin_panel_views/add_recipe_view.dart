@@ -424,7 +424,7 @@ class _AddRecipeListViewState extends State<AddRecipeListView> {
       child: TextField(
         style: AppStyles.setTextStyle(size: 14.0),
         cursorColor: AppColors.darkAccent,
-        controller: _stageDescController,
+        // controller: _stageDescController,
         textCapitalization: TextCapitalization.sentences,
         keyboardType: TextInputType.text,
         maxLines: 2,
@@ -445,7 +445,7 @@ class _AddRecipeListViewState extends State<AddRecipeListView> {
           maxHeight: 35.0, maxWidth: (Numbers.deviceWidth - 60) / 2),
       child: TextField(
         cursorColor: AppColors.darkAccent,
-        controller: _stageTitleController,
+        // controller: _stageTitleController,
         textCapitalization: TextCapitalization.sentences,
         style: AppStyles.setTextStyle(size: 14.0),
         decoration: InputDecoration(

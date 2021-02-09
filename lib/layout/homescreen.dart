@@ -9,7 +9,7 @@ import 'package:dunija/layout/cat_pages/porridgesscreen.dart';
 import 'package:dunija/layout/cat_pages/saladsscreen.dart';
 import 'package:dunija/layout/cat_pages/soupsscreen.dart';
 import 'package:dunija/layout/dialog/infodialog.dart';
-import 'package:dunija/layout/app_setting_screens/app_setting_screren.dart';
+import 'package:dunija/layout/app_setting_screens/app_setting_screen.dart';
 import 'package:dunija/models/recipe_category.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/custom_icon_icons.dart';
@@ -20,6 +20,7 @@ import 'package:dunija/utils/styles.dart';
 import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:share/share.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -986,7 +987,16 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 InkWell(
                   onTap: () {
                     //
-                    // toggleMenu();
+                    if (Platform.isAndroid) {
+                      Share.share(
+                          'Download Dunija from Google Play Store: https://play.google.com/store/apps/details?id=com.wowcatholic.wowcatholic');
+                      print('Shared Android');
+                    } else {
+                      Share.share(
+                          'Download Dunija from Apple\'s App Store: https://appstorelink',
+                          subject: 'Share App');
+                      print('Shared, Apple');
+                    }
                   },
                   child: ListTile(
                     contentPadding:
@@ -1005,7 +1015,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 InkWell(
                   onTap: () {
                     //
-                    // toggleMenu();
                   },
                   child: ListTile(
                     contentPadding:

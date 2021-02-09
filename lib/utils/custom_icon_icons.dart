@@ -77,6 +77,8 @@ class CustomIcon {
       IconData(0xf21e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData transgender =
       IconData(0xf224, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData assistive_listening_systems =
+      IconData(0xf2a2, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData arrow_alt_circle_left =
       IconData(0xf359, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData user_alt =

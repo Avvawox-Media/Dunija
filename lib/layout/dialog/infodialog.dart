@@ -111,6 +111,61 @@ class InfoDialog {
     );
   }
 
+  ///Show Loading Dialog when performing heavy liftings
+  static showAlarmDialog(BuildContext context, Widget widget,
+      {Function endAlarm, msg}) {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return Material(
+          type: MaterialType.transparency,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                widget,
+                SizedBox(
+                  height: 25.0,
+                ),
+                Text(
+                  msg,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppColors.whiteColor, fontSize: 14),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Align(
+                  child: Container(
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                            width: 1.0, color: AppColors.accentTrans),
+                        borderRadius: BorderRadius.circular(
+                          Numbers.largeBoxBorderRadius,
+                        ),
+                      ),
+                      color: AppColors.accent.withOpacity(0.8),
+                      child: Text(
+                        'End Alarm',
+                        style: AppStyles.whiteLabel,
+                      ),
+                      onPressed: () {
+                        endAlarm();
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   ///Show Dialog when Exit Button Clicked
   static showExitDialog(
       {@required BuildContext context, @required title, @required msg}) {

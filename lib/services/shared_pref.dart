@@ -1,43 +1,37 @@
-import 'dart:convert';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPref {
-  Future<bool> savePref(key, value) async {
+class SharedPrefs {
+  Future<dynamic> read(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    return await prefs.get(key);
+  }
+
+  Future<bool> save(String key, value) async {
     final prefs = await SharedPreferences.getInstance();
 
     //Verify Data Type
     if (value is int) {
       prefs.setInt(key, value);
+      return true;
     } else if (value is String) {
       prefs.setString(key, value);
+      return true;
     } else if (value is bool) {
       prefs.setBool(key, value);
+      return true;
     } else {
       print("Invalid Type");
+      return true;
     }
-  }
-
-  Future<dynamic> readPref(key) {
-    //Read
-  }
-
-  Future<bool> deletePref(key) {
-    //Delete
-  }
-
-  read(String key) async {
-    final prefs = await SharedPreferences.getInstance();
-    return json.decode(prefs.getString(key));
-  }
-
-  save(String key, value) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString(key, json.encode(value));
   }
 
   remove(String key) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove(key);
+  }
+
+  Future<bool> checkKey(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.containsKey(key);
   }
 }
