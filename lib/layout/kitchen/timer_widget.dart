@@ -1,8 +1,8 @@
 import 'package:dunija/layout/alarm_widget.dart';
 import 'package:dunija/layout/dialog/infodialog.dart';
-import 'package:dunija/utils/colors.dart';
-import 'package:dunija/utils/quantities.dart';
-import 'package:dunija/utils/styles.dart';
+import 'package:dunija/core/utils/colors.dart';
+import 'package:dunija/core/utils/quantities.dart';
+import 'package:dunija/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:timer_count_down/timer_controller.dart';

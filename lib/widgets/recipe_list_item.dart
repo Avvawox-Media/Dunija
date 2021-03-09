@@ -1,7 +1,7 @@
 import 'package:dunija/single_item_page/single_recipe_page.dart';
-import 'package:dunija/utils/colors.dart';
-import 'package:dunija/utils/quantities.dart';
-import 'package:dunija/utils/styles.dart';
+import 'package:dunija/core/utils/colors.dart';
+import 'package:dunija/core/utils/quantities.dart';
+import 'package:dunija/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class RecipeListItem extends StatefulWidget {

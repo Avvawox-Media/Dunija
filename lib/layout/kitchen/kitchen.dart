@@ -1,11 +1,11 @@
 import 'package:dunija/layout/dialog/infodialog.dart';
 import 'package:dunija/layout/kitchen/timer_widget.dart';
 import 'package:dunija/models/prep_stage.dart';
-import 'package:dunija/utils/colors.dart';
-import 'package:dunija/utils/custom_icon_icons.dart';
-import 'package:dunija/utils/quantities.dart';
-import 'package:dunija/utils/strings.dart';
-import 'package:dunija/utils/styles.dart';
+import 'package:dunija/core/utils/colors.dart';
+import 'package:dunija/core/utils/custom_icon_icons.dart';
+import 'package:dunija/core/utils/quantities.dart';
+import 'package:dunija/core/utils/strings.dart';
+import 'package:dunija/core/utils/styles.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

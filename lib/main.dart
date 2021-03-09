@@ -1,9 +1,8 @@
-import 'package:dunija/recipe_categories/recipe_category_page.dart';
 import 'package:dunija/layout/welcome_page.dart/welcome_page.dart';
 import 'package:dunija/services/shared_pref.dart';
-import 'package:dunija/utils/colors.dart';
-import 'package:dunija/utils/settings.dart';
-import 'package:dunija/utils/strings.dart';
+import 'package:dunija/core/utils/colors.dart';
+import 'package:dunija/core/utils/settings.dart';
+import 'package:dunija/core/utils/strings.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 

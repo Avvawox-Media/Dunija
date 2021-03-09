@@ -1,4 +1,4 @@
-import 'package:dunija/utils/colors.dart';
+import 'package:dunija/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:dunija/routes/bouncypageroute.dart';
 import 'package:dunija/layout/auth/login_screen.dart';

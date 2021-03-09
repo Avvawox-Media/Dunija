@@ -1,11 +1,11 @@
 import 'package:dunija/layout/admin_panel_views/add_recipe_view.dart';
 import 'package:dunija/layout/admin_panel_views/recipe_list_view.dart';
 import 'package:dunija/layout/admin_panel_views/user_list_view.dart';
-import 'package:dunija/utils/colors.dart';
-import 'package:dunija/utils/custom_icon_icons.dart';
-import 'package:dunija/utils/lists.dart';
-import 'package:dunija/utils/quantities.dart';
-import 'package:dunija/utils/styles.dart';
+import 'package:dunija/core/utils/colors.dart';
+import 'package:dunija/core/utils/custom_icon_icons.dart';
+import 'package:dunija/core/utils/lists.dart';
+import 'package:dunija/core/utils/quantities.dart';
+import 'package:dunija/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class AdminPage extends StatefulWidget {

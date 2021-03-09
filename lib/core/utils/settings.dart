@@ -1,5 +1,5 @@
 import 'package:dunija/services/shared_pref.dart';
-import 'package:dunija/utils/strings.dart';
+import 'package:dunija/core/utils/strings.dart';
 
 class AppSettings {
   var _getHealthTips,

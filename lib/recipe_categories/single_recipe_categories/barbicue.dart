@@ -1,10 +1,10 @@
 import 'package:dunija/layout/recipe_list_views/barbicue_listview.dart';
-import 'package:dunija/utils/colors.dart';
-import 'package:dunija/utils/custom_icon_icons.dart';
-import 'package:dunija/utils/lists.dart';
-import 'package:dunija/utils/quantities.dart';
-import 'package:dunija/utils/strings.dart';
-import 'package:dunija/utils/styles.dart';
+import 'package:dunija/core/utils/colors.dart';
+import 'package:dunija/core/utils/custom_icon_icons.dart';
+import 'package:dunija/core/utils/lists.dart';
+import 'package:dunija/core/utils/quantities.dart';
+import 'package:dunija/core/utils/strings.dart';
+import 'package:dunija/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class Barbicues extends StatefulWidget {

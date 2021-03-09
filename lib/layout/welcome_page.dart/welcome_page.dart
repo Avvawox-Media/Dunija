@@ -1,6 +1,6 @@
 import 'package:dunija/recipe_categories/recipe_category_page.dart';
 import 'package:dunija/layout/welcome_page.dart/widgets/main_item.dart';
-import 'package:dunija/utils/colors.dart';
+import 'package:dunija/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatefulWidget {

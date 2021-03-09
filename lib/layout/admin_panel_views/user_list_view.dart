@@ -1,4 +1,4 @@
-import 'package:dunija/utils/colors.dart';
+import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/widgets/user_list_item.dart';
 import 'package:dunija/models/user.dart';
 import 'package:dunija/widgets/custom_search_bar.dart';

@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:dunija/features/admininstration/admin_area.dart';
 import 'package:dunija/layout/app_setting_screens/app_setting_screen.dart';
 import 'package:dunija/layout/auth/login_screen.dart';
-import 'package:dunija/utils/colors.dart';
-import 'package:dunija/utils/strings.dart';
-import 'package:dunija/utils/styles.dart';
+import 'package:dunija/core/utils/colors.dart';
+import 'package:dunija/core/utils/strings.dart';
+import 'package:dunija/core/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 

@@ -1,5 +1,5 @@
-import 'package:dunija/utils/lists.dart';
-import 'package:dunija/utils/quantities.dart';
+import 'package:dunija/core/utils/lists.dart';
+import 'package:dunija/core/utils/quantities.dart';
 import 'package:flutter/material.dart';
 
 class GenterDropdown extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:dunija/utils/colors.dart';
+import 'package:dunija/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class MainItem extends StatelessWidget {
