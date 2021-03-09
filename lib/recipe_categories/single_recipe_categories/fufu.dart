@@ -7,19 +7,19 @@ import 'package:dunija/utils/strings.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-class SoupsScreen extends StatefulWidget {
+class Fufu extends StatefulWidget {
   @override
-  _SoupsScreenState createState() => _SoupsScreenState();
+  _FufuState createState() => _FufuState();
 }
 
-class _SoupsScreenState extends State<SoupsScreen> {
+class _FufuState extends State<Fufu> {
   @override
   Widget build(BuildContext context) {
     Numbers.deviceHeight = MediaQuery.of(context).size.height;
     Numbers.deviceWidth = MediaQuery.of(context).size.width;
 
     //Page Name
-    final pageName = AppStrings.soups;
+    final pageName = AppStrings.Fufu;
 
     //
     return Scaffold(

@@ -1,17 +1,20 @@
 import 'dart:io';
 
-import 'package:dunija/layout/admin_area.dart';
+import 'package:dunija/admin_area/admin_area.dart';
 import 'package:dunija/layout/auth/login_screen.dart';
-import 'package:dunija/layout/cat_pages/baked_fried_foods.dart';
-import 'package:dunija/layout/cat_pages/barbicue.dart';
-import 'package:dunija/layout/cat_pages/grain_based_foods.dart';
-import 'package:dunija/layout/cat_pages/porridges.dart';
-import 'package:dunija/layout/cat_pages/salads.dart';
-import 'package:dunija/layout/cat_pages/soups.dart';
-import 'package:dunija/layout/cat_pages/widgets/main_category_thumbnail.dart';
 import 'package:dunija/layout/dialog/infodialog.dart';
 import 'package:dunija/layout/app_setting_screens/app_setting_screen.dart';
+import 'package:dunija/layout/menus/main_menu.dart';
 import 'package:dunija/models/recipe_category.dart';
+import 'package:dunija/recipe_categories/single_recipe_categories/baked_fried_foods.dart';
+import 'package:dunija/recipe_categories/single_recipe_categories/barbicue.dart';
+import 'package:dunija/recipe_categories/single_recipe_categories/beverages.dart';
+import 'package:dunija/recipe_categories/single_recipe_categories/fufu.dart';
+import 'package:dunija/recipe_categories/single_recipe_categories/grain_pasters.dart';
+import 'package:dunija/recipe_categories/single_recipe_categories/porridges.dart';
+import 'package:dunija/recipe_categories/single_recipe_categories/salads.dart';
+import 'package:dunija/recipe_categories/single_recipe_categories/soups.dart';
+import 'package:dunija/recipe_categories/single_recipe_categories/widgets/main_category_thumbnail.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/custom_icon_icons.dart';
 import 'package:dunija/utils/lists.dart';
@@ -24,12 +27,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:share/share.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
-class RecipeCategoryScreen extends StatefulWidget {
+class RecipeCategoriesPage extends StatefulWidget {
   @override
-  _RecipeCategoryScreenState createState() => _RecipeCategoryScreenState();
+  _RecipeCategoriesPageState createState() => _RecipeCategoriesPageState();
 }
 
-class _RecipeCategoryScreenState extends State<RecipeCategoryScreen>
+class _RecipeCategoriesPageState extends State<RecipeCategoriesPage>
     with TickerProviderStateMixin {
   //Menu Collapse
   bool isCollapsed = true;
@@ -43,9 +46,6 @@ class _RecipeCategoryScreenState extends State<RecipeCategoryScreen>
   //Scale Animation Controller
   AnimationController _scaleController, _spinController;
   Animation<double> _scaleTransition;
-
-  //User Status
-  bool _isUserLogged = false;
 
   @override
   void initState() {
@@ -86,7 +86,9 @@ class _RecipeCategoryScreenState extends State<RecipeCategoryScreen>
         body: Stack(
           children: [
             //App Menu function callback
-            createAppMenu(context: context),
+            MainMenu(
+              onClosed: toggleMenu,
+            ),
 
             //Animate on Menu clicked
             AnimatedPositioned(
@@ -307,7 +309,9 @@ class _RecipeCategoryScreenState extends State<RecipeCategoryScreen>
                               return MainCategoryThumbnail(
                                 title: e.title,
                                 image: e.image,
-                                onTap: () {},
+                                onTap: () {
+                                  onTapThumbnail(context, e.title);
+                                },
                               );
                             }).toList());
                       } else {
@@ -415,7 +419,7 @@ class _RecipeCategoryScreenState extends State<RecipeCategoryScreen>
   }
 
   //
-  onTapThumbnail(String title) {
+  onTapThumbnail(ctx, String title) {
     // Collapse Menu
     setState(() {
       isCollapsed = true;
@@ -424,43 +428,63 @@ class _RecipeCategoryScreenState extends State<RecipeCategoryScreen>
 
     Future.delayed(Duration(seconds: 2), () {
       //
-      Navigator.popUntil(context, ModalRoute.withName('/'));
+      Navigator.pop(ctx);
 
       //Switch Category title
       switch (title) {
         case 'Baked & Fried':
           Navigator.push(
-              context,
+              ctx,
               MaterialPageRoute(
                   builder: (context) {
-                    return BakedFoodScreen();
+                    return BakedFriedFoods();
                   },
                   settings: RouteSettings(name: '/Baked')));
           break;
 
         case 'Barbicues':
           Navigator.push(
-              context,
+              ctx,
               MaterialPageRoute(
                   builder: (context) {
-                    return BarbicueScreen();
+                    return Barbicues();
                   },
                   settings: RouteSettings(name: '/Barbicues')));
           break;
 
-        case 'Grains & Pasters':
+        case 'Beverages':
           Navigator.push(
-              context,
+              ctx,
               MaterialPageRoute(
                   builder: (context) {
-                    return FriedFoodsScreen();
+                    return Beverages();
                   },
-                  settings: RouteSettings(name: '/Frieds')));
+                  settings: RouteSettings(name: '/Beverages')));
+          break;
+
+        case 'Fufu':
+          Navigator.push(
+              ctx,
+              MaterialPageRoute(
+                  builder: (context) {
+                    return Fufu();
+                  },
+                  settings: RouteSettings(name: '/Fufu')));
+          break;
+
+        case 'Grains & Pasters':
+          Navigator.push(
+              ctx,
+              MaterialPageRoute(
+                  builder: (context) {
+                    return GrainsPasters();
+                  },
+                  settings: RouteSettings(name: '/Grains')));
           break;
 
         case 'Porridges':
           Navigator.push(
-              context,
+              ctx,
               MaterialPageRoute(
                   builder: (context) {
                     return PorridgesScreen();
@@ -470,7 +494,7 @@ class _RecipeCategoryScreenState extends State<RecipeCategoryScreen>
 
         case 'Salads':
           Navigator.push(
-              context,
+              ctx,
               MaterialPageRoute(
                   builder: (context) {
                     return SaladsScreen();
@@ -480,7 +504,7 @@ class _RecipeCategoryScreenState extends State<RecipeCategoryScreen>
 
         case 'Soups':
           Navigator.push(
-              context,
+              ctx,
               MaterialPageRoute(
                   builder: (context) {
                     return SoupsScreen();
@@ -491,7 +515,7 @@ class _RecipeCategoryScreenState extends State<RecipeCategoryScreen>
     });
 
     //Show dialog while navigating to next page
-    InfoDialog.showLoadingDialog(context);
+    InfoDialog.showLoadingDialog(ctx);
 
     //
   }
@@ -701,355 +725,5 @@ class _RecipeCategoryScreenState extends State<RecipeCategoryScreen>
     setState(() {
       isCollapsed = !isCollapsed;
     });
-  }
-
-  ///App Menu
-  Widget createAppMenu({@required context, username, subtext}) {
-    final menuTitleStyle = TextStyle(
-        color: AppColors.whiteColor,
-        fontSize: 16.0,
-        fontWeight: FontWeight.bold);
-    final menuItemStyle = TextStyle(
-        color: AppColors.whiteColor.withOpacity(0.8),
-        fontSize: 15.0,
-        fontWeight: FontWeight.bold);
-    final subTextStyle =
-        TextStyle(color: AppColors.whiteColor.withOpacity(0.7), fontSize: 12.0);
-
-    return Container(
-      alignment: Alignment.centerRight,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 1.2 / 3,
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.only(right: 20.0),
-            decoration: BoxDecoration(
-              color: AppColors.darkAccent,
-              border: Border(
-                bottom: BorderSide(
-                  width: 1.0,
-                  color: Colors.grey.withOpacity(0.5),
-                ),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                InkWell(
-                  onTap: () {
-                    toggleMenu();
-                  },
-                  child: CircleAvatar(
-                    backgroundColor: Color(0x66000000),
-                    child: Icon(
-                      Icons.clear_rounded,
-                      size: 25,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                CircleAvatar(
-                  backgroundColor: AppColors.whiteColor.withOpacity(0.5),
-                  radius: 40.0,
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  username == null ? AppStrings.username : username,
-                  textAlign: TextAlign.right,
-                  style: menuTitleStyle,
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                Text(
-                  subtext == null ? AppStrings.userSubText : subtext,
-                  textAlign: TextAlign.right,
-                  style: subTextStyle,
-                ),
-                SizedBox(
-                  height: 15.0,
-                ),
-                Visibility(
-                  visible: !_isUserLogged,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              settings: RouteSettings(name: '/Login'),
-                              builder: (context) {
-                                return LoginScreen();
-                              },
-                            ),
-                          );
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 5.0),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20.0),
-                              border: Border.all(
-                                  width: 1.0,
-                                  color:
-                                      AppColors.whiteColor.withOpacity(0.5))),
-                          child: Text(
-                            'Login or Register',
-                            style: AppStyles.whiteLabel,
-                          ),
-                        ),
-                      ),
-                      // SizedBox(
-                      //   width: 10.0,
-                      // ),
-                      // GestureDetector(
-                      //   onTap: () {
-                      //     // toggleMenu();
-                      //     Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) {
-                      //             return SignUpScreen();
-                      //           },
-                      //           settings: RouteSettings(name: '/Register')),
-                      //     );
-                      //   },
-                      //   child: Container(
-                      //     padding: EdgeInsets.symmetric(
-                      //         horizontal: 10.0, vertical: 5.0),
-                      //     decoration: BoxDecoration(
-                      //         borderRadius: BorderRadius.circular(20.0),
-                      //         border: Border.all(
-                      //             width: 1.0,
-                      //             color:
-                      //                 AppColors.whiteColor.withOpacity(0.5))),
-                      //     child: Text(
-                      //       'Register',
-                      //       style: AppStyles.whiteLabel,
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.symmetric(vertical: 0.0),
-              children: [
-                SizedBox(
-                  height: 5.0,
-                ),
-                // InkWell(
-                //   onTap: () {
-                //     //
-                //   },
-                //   child: ListTile(
-                //     contentPadding:
-                //         EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                //     title: Text(
-                //       'Nutrition & Diet',
-                //       textAlign: TextAlign.right,
-                //       style: menuItemStyle,
-                //     ),
-                //     trailing: Icon(
-                //       Icons.accessibility,
-                //       color: AppColors.whiteColor,
-                //     ),
-                //   ),
-                // ),
-                InkWell(
-                  onTap: () {
-                    //
-                  },
-                  child: ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    title: Text(
-                      'Meal Planner',
-                      textAlign: TextAlign.right,
-                      style: menuItemStyle,
-                    ),
-                    trailing: Icon(
-                      Icons.next_plan_outlined,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    //
-                  },
-                  child: ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    title: Text(
-                      'Puchase Premium',
-                      textAlign: TextAlign.right,
-                      style: menuItemStyle,
-                    ),
-                    trailing: Icon(
-                      Icons.wallet_travel,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    //
-                    // toggleMenu();
-                  },
-                  child: ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    title: Text(
-                      'Shopping List',
-                      textAlign: TextAlign.right,
-                      style: menuItemStyle,
-                    ),
-                    trailing: Icon(
-                      Icons.list,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    //
-                    if (Platform.isAndroid) {
-                      Share.share(
-                          'Download Dunija from Google Play Store: https://play.google.com/store/apps/details?id=com.wowcatholic.wowcatholic');
-                      print('Shared Android');
-                    } else {
-                      Share.share(
-                          'Download Dunija from Apple\'s App Store: https://appstorelink',
-                          subject: 'Share App');
-                      print('Shared, Apple');
-                    }
-                  },
-                  child: ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    title: Text(
-                      'Share App',
-                      textAlign: TextAlign.right,
-                      style: menuItemStyle,
-                    ),
-                    trailing: Icon(
-                      Icons.share,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    //
-                  },
-                  child: ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    title: Text(
-                      'Feedback',
-                      textAlign: TextAlign.right,
-                      style: menuItemStyle,
-                    ),
-                    trailing: Icon(
-                      Icons.feedback,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    //
-                    // toggleMenu();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return SystemSettings();
-                    }));
-                  },
-                  child: ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    title: Text(
-                      'Settings',
-                      textAlign: TextAlign.right,
-                      style: menuItemStyle,
-                    ),
-                    trailing: Icon(
-                      Icons.settings,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    //
-                    // toggleMenu();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) {
-                              return AdminArea();
-                            },
-                            settings: RouteSettings(name: '/AdminArea')));
-                  },
-                  child: ListTile(
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                    title: Text(
-                      'Admin Area',
-                      textAlign: TextAlign.right,
-                      style: menuItemStyle,
-                    ),
-                    trailing: Icon(
-                      Icons.dashboard,
-                      color: AppColors.whiteColor,
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    //
-                  },
-                  child: Visibility(
-                    visible: _isUserLogged,
-                    child: ListTile(
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
-                      title: Text(
-                        'Logout',
-                        textAlign: TextAlign.right,
-                        style: menuItemStyle,
-                      ),
-                      trailing: Icon(
-                        Icons.logout,
-                        color: AppColors.whiteColor,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:dunija/layout/recipe_list_views/soups_listview.dart';
+import 'package:dunija/layout/recipe_list_views/baked_food_listview.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/custom_icon_icons.dart';
 import 'package:dunija/utils/lists.dart';
@@ -7,19 +7,19 @@ import 'package:dunija/utils/strings.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-class SoupsScreen extends StatefulWidget {
+class BakedFriedFoods extends StatefulWidget {
   @override
-  _SoupsScreenState createState() => _SoupsScreenState();
+  _BakedFriedFoodsState createState() => _BakedFriedFoodsState();
 }
 
-class _SoupsScreenState extends State<SoupsScreen> {
+class _BakedFriedFoodsState extends State<BakedFriedFoods> {
   @override
   Widget build(BuildContext context) {
     Numbers.deviceHeight = MediaQuery.of(context).size.height;
     Numbers.deviceWidth = MediaQuery.of(context).size.width;
 
     //Page Name
-    final pageName = AppStrings.soups;
+    final pageName = AppStrings.bakedFood;
 
     //
     return Scaffold(
@@ -76,7 +76,8 @@ class _SoupsScreenState extends State<SoupsScreen> {
                           color: AppColors.whiteColor,
                         ),
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.popUntil(
+                              context, ModalRoute.withName('/Recipe'));
                         },
                       ),
                     ]),
@@ -92,22 +93,6 @@ class _SoupsScreenState extends State<SoupsScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // InkWell(
-                    //   child: CircleAvatar(
-                    //     backgroundColor: AppColors.darkAccent.withOpacity(0.5),
-                    //     child: Icon(
-                    //       Icons.search,
-                    //       color: AppColors.whiteColor,
-                    //     ),
-                    //   ),
-                    //   onTap: () {
-                    //     //Handle on tap
-                    //     showSearch(
-                    //       context: context,
-                    //       delegate: SearchField(),
-                    //     );
-                    //   },
-                    // ),
                     SizedBox(
                       width: 20.0,
                     ),
@@ -141,26 +126,30 @@ class _SoupsScreenState extends State<SoupsScreen> {
         Positioned(
           bottom: 0,
           child: Container(
-              width: Numbers.deviceWidth,
-              height: Numbers.deviceHeight * (3 / 4),
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(
-                    Numbers.mediumBoxBorderRadius,
-                  ),
-                  topRight: Radius.circular(
-                    Numbers.mediumBoxBorderRadius,
-                  ),
+            width: Numbers.deviceWidth,
+            height: Numbers.deviceHeight * (3 / 4) + 20.0,
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(
+                  Numbers.mediumBoxBorderRadius,
                 ),
-                boxShadow: [
-                  BoxShadow(
-                      color: Color(0x33000000),
-                      spreadRadius: 1.0,
-                      blurRadius: 15.0)
-                ],
+                topRight: Radius.circular(
+                  Numbers.mediumBoxBorderRadius,
+                ),
               ),
-              child: SoupssListView(AppLists.fetchSoupsList())),
+              boxShadow: [
+                BoxShadow(
+                    color: Color(0x33000000),
+                    spreadRadius: 1.0,
+                    blurRadius: 15.0)
+              ],
+            ),
+            //Page List items
+            child: Container(
+              child: BakedFoodListView(AppLists.fetchBakedFoodList()),
+            ),
+          ),
         ),
       ]),
     );

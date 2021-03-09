@@ -1,4 +1,4 @@
-import 'package:dunija/layout/recipe_category_page.dart';
+import 'package:dunija/recipe_categories/recipe_category_page.dart';
 import 'package:dunija/layout/welcome_page.dart/widgets/main_item.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -91,8 +91,8 @@ class _WelcomePageState extends State<WelcomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RecipeCategoryScreen(),
-                            settings: RouteSettings(name: '/recipe'),
+                            builder: (context) => RecipeCategoriesPage(),
+                            settings: RouteSettings(name: '/Recipe'),
                           ),
                         );
                       },

@@ -1,4 +1,4 @@
-import 'package:dunija/layout/recipe_category_page.dart';
+import 'package:dunija/recipe_categories/recipe_category_page.dart';
 import 'package:dunija/layout/welcome_page.dart/welcome_page.dart';
 import 'package:dunija/services/shared_pref.dart';
 import 'package:dunija/utils/colors.dart';

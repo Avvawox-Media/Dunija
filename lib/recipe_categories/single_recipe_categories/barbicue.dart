@@ -1,4 +1,4 @@
-import 'package:dunija/layout/recipe_list_views/baked_food_listview.dart';
+import 'package:dunija/layout/recipe_list_views/barbicue_listview.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/custom_icon_icons.dart';
 import 'package:dunija/utils/lists.dart';
@@ -7,12 +7,12 @@ import 'package:dunija/utils/strings.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-class BakedFoodScreen extends StatefulWidget {
+class Barbicues extends StatefulWidget {
   @override
-  _BakedFoodScreenState createState() => _BakedFoodScreenState();
+  _BarbicuesState createState() => _BarbicuesState();
 }
 
-class _BakedFoodScreenState extends State<BakedFoodScreen> {
+class _BarbicuesState extends State<Barbicues> {
   @override
   Widget build(BuildContext context) {
     Numbers.deviceHeight = MediaQuery.of(context).size.height;
@@ -92,6 +92,22 @@ class _BakedFoodScreenState extends State<BakedFoodScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    // InkWell(
+                    //   child: CircleAvatar(
+                    //     backgroundColor: AppColors.darkAccent.withOpacity(0.5),
+                    //     child: Icon(
+                    //       Icons.search,
+                    //       color: AppColors.whiteColor,
+                    //     ),
+                    //   ),
+                    //   onTap: () {
+                    //     //Handle on tap
+                    //     showSearch(
+                    //       context: context,
+                    //       delegate: SearchField(),
+                    //     );
+                    //   },
+                    // ),
                     SizedBox(
                       width: 20.0,
                     ),
@@ -146,7 +162,7 @@ class _BakedFoodScreenState extends State<BakedFoodScreen> {
             ),
             //Page List items
             child: Container(
-              child: BakedFoodListView(AppLists.fetchBakedFoodList()),
+              child: BarbicueListView(AppLists.fetchBarbicueList()),
             ),
           ),
         ),
