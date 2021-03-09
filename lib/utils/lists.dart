@@ -7,23 +7,43 @@ class AppLists {
   ///App's List
   static List<FoodCategory> foodCatList = [
     FoodCategory(
-        title: 'Baked Foods',
-        image: 'assets/imgs/baked_foods.png',
-        description: ''),
+      title: 'Baked & Fried',
+      image: 'assets/imgs/baked_foods.png',
+      description: '',
+    ),
     FoodCategory(
-        title: 'Barbicues', image: 'assets/imgs/barbicue.png', description: ''),
+      title: 'Barbicues',
+      image: 'assets/imgs/barbicue.png',
+      description: '',
+    ),
     FoodCategory(
-        title: 'Fried Foods',
+        title: 'Beverages',
         image: 'assets/imgs/fried_foods.png',
         description: ''),
+    FoodCategory(
+      title: 'Fufu',
+      image: 'assets/imgs/fried_foods.png',
+      description: '',
+    ),
+    FoodCategory(
+      title: 'Grains & Pasters',
+      image: 'assets/imgs/fried_foods.png',
+      description: '',
+    ),
     FoodCategory(
         title: 'Porridges',
         image: 'assets/imgs/porridges.png',
         description: ''),
     FoodCategory(
-        title: 'Salads', image: 'assets/imgs/salads.png', description: ''),
+      title: 'Salads',
+      image: 'assets/imgs/salads.png',
+      description: '',
+    ),
     FoodCategory(
-        title: 'Soups', image: 'assets/imgs/soups.png', description: '')
+      title: 'Soups',
+      image: 'assets/imgs/soups.png',
+      description: '',
+    )
   ];
 
   static List<String> categoryNames = [

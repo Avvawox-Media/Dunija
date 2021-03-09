@@ -1,20 +1,16 @@
-import 'package:dunija/layout/homescreen.dart';
+import 'package:dunija/layout/recipe_category_page.dart';
+import 'package:dunija/layout/welcome_page.dart/welcome_page.dart';
 import 'package:dunija/services/shared_pref.dart';
 import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/settings.dart';
 import 'package:dunija/utils/strings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_session/flutter_session.dart';
 import 'dart:math';
 
 void main() async {
   var token;
 
   WidgetsFlutterBinding.ensureInitialized();
-
-  await FlutterSession()
-      .get('token')
-      .then((value) => token = value == null ? '' : value.toString());
 
   runApp(Dunija(token: token));
 }
@@ -55,7 +51,7 @@ class _DunijaState extends State<Dunija> {
       ),
 
       //Home Screen
-      home: HomeScreen(),
+      home: WelcomePage(),
     );
   }
 

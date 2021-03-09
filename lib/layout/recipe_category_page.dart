@@ -2,12 +2,13 @@ import 'dart:io';
 
 import 'package:dunija/layout/admin_area.dart';
 import 'package:dunija/layout/auth/login_screen.dart';
-import 'package:dunija/layout/cat_pages/bakedfoodsscreen.dart';
-import 'package:dunija/layout/cat_pages/barbicuescreen.dart';
-import 'package:dunija/layout/cat_pages/friedfoodsscreen.dart';
-import 'package:dunija/layout/cat_pages/porridgesscreen.dart';
-import 'package:dunija/layout/cat_pages/saladsscreen.dart';
-import 'package:dunija/layout/cat_pages/soupsscreen.dart';
+import 'package:dunija/layout/cat_pages/baked_fried_foods.dart';
+import 'package:dunija/layout/cat_pages/barbicue.dart';
+import 'package:dunija/layout/cat_pages/grain_based_foods.dart';
+import 'package:dunija/layout/cat_pages/porridges.dart';
+import 'package:dunija/layout/cat_pages/salads.dart';
+import 'package:dunija/layout/cat_pages/soups.dart';
+import 'package:dunija/layout/cat_pages/widgets/main_category_thumbnail.dart';
 import 'package:dunija/layout/dialog/infodialog.dart';
 import 'package:dunija/layout/app_setting_screens/app_setting_screen.dart';
 import 'package:dunija/models/recipe_category.dart';
@@ -23,12 +24,13 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:share/share.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
-class HomeScreen extends StatefulWidget {
+class RecipeCategoryScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _RecipeCategoryScreenState createState() => _RecipeCategoryScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+class _RecipeCategoryScreenState extends State<RecipeCategoryScreen>
+    with TickerProviderStateMixin {
   //Menu Collapse
   bool isCollapsed = true;
 
@@ -302,8 +304,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                             crossAxisSpacing: 20.0,
                             mainAxisSpacing: 20.0,
                             children: AppLists.foodCatList.map((e) {
-                              return buildMainCategories(
-                                  title: e.title, image: e.image);
+                              return MainCategoryThumbnail(
+                                title: e.title,
+                                image: e.image,
+                                onTap: () {},
+                              );
                             }).toList());
                       } else {
                         return Container(
@@ -410,145 +415,85 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   //
-  Widget buildMainCategories({@required title, @required image}) {
-    return InkWell(
-      child: Align(
-        child: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(Numbers.smallBoxBorderRadius),
-            color: AppColors.accent,
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.shade300,
-                  blurRadius: 3.0,
-                  spreadRadius: 1.0)
-            ],
-          ),
-          width: 0.45 * Numbers.deviceWidth,
-          height: 0.46 * Numbers.deviceWidth,
-          clipBehavior: Clip.hardEdge,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              //
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.circular(Numbers.smallBoxBorderRadius),
-                  color: AppColors.lightAccent,
-                  boxShadow: [
-                    BoxShadow(
-                        color: AppColors.darkAccent.withOpacity(0.5),
-                        blurRadius: 10.0,
-                        spreadRadius: 1.0)
-                  ],
-                ),
-                width: 0.45 * Numbers.deviceWidth,
-                height: 0.36 * Numbers.deviceWidth,
-                child: Image(
-                  image: AssetImage(image),
-                  fit: BoxFit.cover,
-                ),
-                alignment: Alignment.center,
-              ),
-              Center(
-                child: Text(
-                  title,
-                  style: Numbers.deviceWidth > 500
-                      ? AppStyles.catBigLabel
-                      : AppStyles.catLabel,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              SizedBox(
-                height: 2.0,
-              )
-            ],
-          ),
-        ),
-      ),
-      onTap: () {
-        // Collapse Menu
-        setState(() {
-          isCollapsed = true;
-          _scaleController.reverse();
-        });
+  onTapThumbnail(String title) {
+    // Collapse Menu
+    setState(() {
+      isCollapsed = true;
+      _scaleController.reverse();
+    });
 
-        Future.delayed(Duration(seconds: 2), () {
-          //
-          Navigator.popUntil(context, ModalRoute.withName('/'));
+    Future.delayed(Duration(seconds: 2), () {
+      //
+      Navigator.popUntil(context, ModalRoute.withName('/'));
 
-          //Switch Category title
-          switch (title) {
-            case 'Baked Foods':
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) {
-                        return BakedFoodScreen();
-                      },
-                      settings: RouteSettings(name: '/Baked')));
-              break;
+      //Switch Category title
+      switch (title) {
+        case 'Baked & Fried':
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) {
+                    return BakedFoodScreen();
+                  },
+                  settings: RouteSettings(name: '/Baked')));
+          break;
 
-            case 'Barbicues':
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) {
-                        return BarbicueScreen();
-                      },
-                      settings: RouteSettings(name: '/Barbicues')));
-              break;
+        case 'Barbicues':
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) {
+                    return BarbicueScreen();
+                  },
+                  settings: RouteSettings(name: '/Barbicues')));
+          break;
 
-            case 'Fried Foods':
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) {
-                        return FriedFoodsScreen();
-                      },
-                      settings: RouteSettings(name: '/Frieds')));
-              break;
+        case 'Grains & Pasters':
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) {
+                    return FriedFoodsScreen();
+                  },
+                  settings: RouteSettings(name: '/Frieds')));
+          break;
 
-            case 'Porridges':
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) {
-                        return PorridgesScreen();
-                      },
-                      settings: RouteSettings(name: '/Porridges')));
-              break;
+        case 'Porridges':
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) {
+                    return PorridgesScreen();
+                  },
+                  settings: RouteSettings(name: '/Porridges')));
+          break;
 
-            case 'Salads':
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) {
-                        return SaladsScreen();
-                      },
-                      settings: RouteSettings(name: '/Salads')));
-              break;
+        case 'Salads':
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) {
+                    return SaladsScreen();
+                  },
+                  settings: RouteSettings(name: '/Salads')));
+          break;
 
-            case 'Soups':
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) {
-                        return SoupsScreen();
-                      },
-                      settings: RouteSettings(name: '/Soups')));
-              break;
-          }
-        });
+        case 'Soups':
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) {
+                    return SoupsScreen();
+                  },
+                  settings: RouteSettings(name: '/Soups')));
+          break;
+      }
+    });
 
-        //Show dialog while navigating to next page
-        InfoDialog.showLoadingDialog(context);
+    //Show dialog while navigating to next page
+    InfoDialog.showLoadingDialog(context);
 
-        //
-      },
-    );
+    //
   }
 
   //
