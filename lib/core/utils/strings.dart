@@ -18,6 +18,10 @@ class AppStrings {
   ///
   static String username = 'Anonymous User';
   static String userSubText = 'Sign up and get more benefits';
+  static String playstoreLink =
+      'Download Dunija from Google Play Store: https://play.google.com/store/apps/details?id=com.wowcatholic.wowcatholic';
+  static String appstoreLink =
+      'Download Dunija from Apple\'s App Store: https://appstorelink';
 
   ///Dialog Texts
   static final exitKitchenTitle = 'Caution';

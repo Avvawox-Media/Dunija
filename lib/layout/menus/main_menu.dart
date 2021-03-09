@@ -229,12 +229,10 @@ class _MainMenuState extends State<MainMenu> {
                   onTap: () {
                     //
                     if (Platform.isAndroid) {
-                      Share.share(
-                          'Download Dunija from Google Play Store: https://play.google.com/store/apps/details?id=com.wowcatholic.wowcatholic');
+                      Share.share(AppStrings.playstoreLink);
                       print('Shared Android');
                     } else {
-                      Share.share(
-                          'Download Dunija from Apple\'s App Store: https://appstorelink',
+                      Share.share(AppStrings.appstoreLink,
                           subject: 'Share App');
                       print('Shared, Apple');
                     }

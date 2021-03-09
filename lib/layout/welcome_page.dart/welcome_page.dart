@@ -1,7 +1,12 @@
+import 'dart:io';
+
+import 'package:dunija/core/utils/strings.dart';
+import 'package:dunija/features/shopping_list/app/pages/shopping_list.dart';
 import 'package:dunija/recipe_categories/recipe_category_page.dart';
 import 'package:dunija/layout/welcome_page.dart/widgets/main_item.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -100,12 +105,28 @@ class _WelcomePageState extends State<WelcomePage> {
                     MainItem(
                       image: 'plan',
                       title: 'Plan a Meal',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ShoppingListView(),
+                            settings: RouteSettings(name: '/List'),
+                          ),
+                        );
+                      },
                     ),
                     MainItem(
                       image: 'list',
                       title: 'Shopping Book',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ShoppingListView(),
+                            settings: RouteSettings(name: '/List'),
+                          ),
+                        );
+                      },
                     ),
                     MainItem(
                       image: 'premium',
@@ -121,9 +142,22 @@ class _WelcomePageState extends State<WelcomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Icon(
-                      Icons.share,
-                      color: AppColors.lightAccent,
+                    InkWell(
+                      borderRadius: BorderRadius.circular(32.0),
+                      child: Icon(
+                        Icons.share,
+                        color: AppColors.lightAccent,
+                      ),
+                      onTap: () {
+                        if (Platform.isAndroid) {
+                          Share.share(AppStrings.playstoreLink);
+                          print('Shared Android');
+                        } else {
+                          Share.share(AppStrings.appstoreLink,
+                              subject: 'Share App');
+                          print('Shared, Apple');
+                        }
+                      },
                     ),
                     Icon(
                       Icons.mark_chat_unread_rounded,

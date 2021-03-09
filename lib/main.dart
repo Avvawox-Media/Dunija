@@ -1,17 +1,23 @@
+import 'dart:math';
 import 'package:dunija/layout/welcome_page.dart/welcome_page.dart';
 import 'package:dunija/services/shared_pref.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/settings.dart';
 import 'package:dunija/core/utils/strings.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:path_provider/path_provider.dart' as path_provider;
+
+import 'package:hive/hive.dart';
 
 void main() async {
-  var token;
-
   WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(Dunija(token: token));
+  //Initialize hive database
+  initDatabase();
+
+  final shoppingBook = Hive.openBox('shopping_book');
+
+  runApp(Dunija());
 }
 
 class Dunija extends StatefulWidget {
@@ -148,4 +154,12 @@ class _DunijaState extends State<Dunija> {
       }
     });
   }
+}
+
+//Initializes Hive database
+void initDatabase() async {
+  final documentDirectory =
+      await path_provider.getApplicationDocumentsDirectory();
+
+  Hive.init(documentDirectory.path);
 }

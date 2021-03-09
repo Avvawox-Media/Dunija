@@ -1,4 +1,5 @@
 import 'package:dunija/features/shopping_list/data/models/shopping_list_model.dart';
+import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 
 abstract class ShoppingListDataSource {
@@ -21,7 +22,7 @@ abstract class ShoppingListDataSource {
   });
 
   ///* [GetAllShoppingList]
-  Future<ShoppingListModel> getAllShoppingList();
+  Future<List<ShoppingListModel>> getAllShoppingList();
 
   ///* [RemoveShoppingList] item possessing a specified [itemId]
   Future<bool> removeShoppingList({
@@ -29,17 +30,22 @@ abstract class ShoppingListDataSource {
   });
 }
 
+/////////////////////////////////////////////////////////////////////
+///Shopping List Data Source Implementation
+////////////////////////////////////////////////////////////////////
+
 class ShoppingListDataSourceImpl implements ShoppingListDataSource {
   //final Hive Database Instance
-  @override
-  Future<bool> createShoppingList(
-      {String listTitle, List<Map<String, dynamic>> items, String itemId}) {
-    // TODO: implement createShoppingList
-    throw UnimplementedError();
-  }
 
   @override
-  Future<ShoppingListModel> getAllShoppingList() {
+  Future<bool> createShoppingList({
+    String listTitle,
+    List<Map<String, dynamic>> items,
+    String itemId,
+  }) {}
+
+  @override
+  Future<List<ShoppingListModel>> getAllShoppingList() {
     // TODO: implement getAllShoppingList
     throw UnimplementedError();
   }
