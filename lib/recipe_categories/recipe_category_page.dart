@@ -12,11 +12,11 @@ import 'package:dunija/recipe_categories/single_recipe_categories/porridges.dart
 import 'package:dunija/recipe_categories/single_recipe_categories/salads.dart';
 import 'package:dunija/recipe_categories/single_recipe_categories/soups.dart';
 import 'package:dunija/recipe_categories/single_recipe_categories/widgets/main_category_thumbnail.dart';
-import 'package:dunija/utils/colors.dart';
-import 'package:dunija/utils/custom_icon_icons.dart';
-import 'package:dunija/utils/lists.dart';
-import 'package:dunija/utils/quantities.dart';
-import 'package:dunija/utils/styles.dart';
+import 'package:dunija/core/utils/colors.dart';
+import 'package:dunija/core/utils/custom_icon_icons.dart';
+import 'package:dunija/core/utils/lists.dart';
+import 'package:dunija/core/utils/quantities.dart';
+import 'package:dunija/core/utils/styles.dart';
 import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
