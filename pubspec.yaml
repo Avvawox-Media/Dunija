@@ -43,6 +43,7 @@ dependencies:
   shared_preferences_windows: ^2.0.0
   tab_indicator_styler: ^1.0.0
   timer_count_down: ^1.0.4+1
+  # dartz,mockito,get_it
 
 dev_dependencies:
   flutter_test:
