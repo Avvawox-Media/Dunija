@@ -1,9 +1,6 @@
 import 'dart:io';
 
-import 'package:dunija/admin_area/admin_area.dart';
-import 'package:dunija/layout/auth/login_screen.dart';
 import 'package:dunija/layout/dialog/infodialog.dart';
-import 'package:dunija/layout/app_setting_screens/app_setting_screen.dart';
 import 'package:dunija/layout/menus/main_menu.dart';
 import 'package:dunija/models/recipe_category.dart';
 import 'package:dunija/recipe_categories/single_recipe_categories/baked_fried_foods.dart';
@@ -19,12 +16,10 @@ import 'package:dunija/utils/colors.dart';
 import 'package:dunija/utils/custom_icon_icons.dart';
 import 'package:dunija/utils/lists.dart';
 import 'package:dunija/utils/quantities.dart';
-import 'package:dunija/utils/strings.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:dunija/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:share/share.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class RecipeCategoriesPage extends StatefulWidget {

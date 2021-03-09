@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dunija/admin_area/admin_area.dart';
+import 'package:dunija/features/admininstration/admin_area.dart';
 import 'package:dunija/layout/app_setting_screens/app_setting_screen.dart';
 import 'package:dunija/layout/auth/login_screen.dart';
 import 'package:dunija/utils/colors.dart';
@@ -302,7 +302,7 @@ class _MainMenuState extends State<MainMenu> {
                         context,
                         MaterialPageRoute(
                             builder: (context) {
-                              return AdminArea();
+                              return AdminPage();
                             },
                             settings: RouteSettings(name: '/AdminArea')));
                   },

@@ -8,14 +8,14 @@ import 'package:dunija/utils/quantities.dart';
 import 'package:dunija/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-class AdminArea extends StatefulWidget {
+class AdminPage extends StatefulWidget {
   @override
-  _AdminAreaState createState() => _AdminAreaState();
+  _AdminPageState createState() => _AdminPageState();
 }
 
 // final style = TextStyle(color: AppSettings.bgColor);
 
-class _AdminAreaState extends State<AdminArea> with TickerProviderStateMixin {
+class _AdminPageState extends State<AdminPage> with TickerProviderStateMixin {
   var pageName = 'Admin';
 
   TabController _tabController;
