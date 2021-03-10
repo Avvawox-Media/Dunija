@@ -5,7 +5,6 @@ import 'package:dunija/features/shopping_book/app/bloc/shopping_book_bloc.dart';
 import 'package:dunija/features/shopping_book/app/widgets/initial_state_view.dart';
 import 'package:dunija/features/shopping_book/app/widgets/shopping_list_item.dart';
 import 'package:dunija/features/shopping_book/data/models/shopping_list_model.dart';
-import 'package:dunija/features/shopping_book/domain/usecases/get_all_shopping_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
@@ -26,6 +25,9 @@ class _ShoppingBookViewState extends State<ShoppingBookView> {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 2), () {
+      loadShoppingList();
+    });
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -134,15 +136,16 @@ class _ShoppingBookViewState extends State<ShoppingBookView> {
                 onPressed: () async {
                   //Test Saving to database
                   await instance.save(
-                      SHOPPING_BOOK,
-                      ShoppingListModel(
-                        date: DateTime.now(),
-                        listTitle: 'Okro Soup',
-                        items: [
-                          {'name': 'Okro', 'description': 'Drawllllllllll'},
-                          {'name': 'Pepper', 'description': 'Chillie'},
-                        ],
-                      ).toJson());
+                    SHOPPING_BOOK,
+                    ShoppingListModel(
+                      date: DateTime.now(),
+                      listTitle: 'Okro Soup',
+                      items: [
+                        {'name': 'Okro', 'description': 'Drawllllllllll'},
+                        {'name': 'Pepper', 'description': 'Chillie'},
+                      ],
+                    ).toJson(),
+                  );
                 },
               ),
             ],

@@ -8,7 +8,6 @@ import 'package:dunija/recipe_categories/recipe_category_page.dart';
 import 'package:dunija/layout/welcome_page.dart/widgets/main_item.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:share/share.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -95,7 +94,15 @@ class _WelcomePageState extends State<WelcomePage> {
                     MainItem(
                       image: 'prepare',
                       title: 'Prepare a Meal',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RecipeCategoriesPage(),
+                            settings: RouteSettings(name: '/Recipes'),
+                          ),
+                        );
+                      },
                     ),
                     MainItem(
                       image: 'plan',

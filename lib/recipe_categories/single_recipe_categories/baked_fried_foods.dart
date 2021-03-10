@@ -76,8 +76,7 @@ class _BakedFriedFoodsState extends State<BakedFriedFoods> {
                           color: AppColors.whiteColor,
                         ),
                         onTap: () {
-                          Navigator.popUntil(
-                              context, ModalRoute.withName('/Recipe'));
+                          Navigator.pop(context);
                         },
                       ),
                     ]),
