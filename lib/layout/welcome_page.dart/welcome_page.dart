@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:dunija/core/utils/strings.dart';
-import 'package:dunija/features/shopping_list/app/pages/shopping_list.dart';
+import 'package:dunija/features/meal_planner/app/pages/meal_planner_view.dart';
+import 'package:dunija/features/shopping_book/app/bloc/shopping_book_bloc.dart';
+import 'package:dunija/features/shopping_book/app/pages/shopping_book_page.dart';
 import 'package:dunija/recipe_categories/recipe_category_page.dart';
 import 'package:dunija/layout/welcome_page.dart/widgets/main_item.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:share/share.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -92,15 +95,7 @@ class _WelcomePageState extends State<WelcomePage> {
                     MainItem(
                       image: 'prepare',
                       title: 'Prepare a Meal',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => RecipeCategoriesPage(),
-                            settings: RouteSettings(name: '/Recipe'),
-                          ),
-                        );
-                      },
+                      onTap: () {},
                     ),
                     MainItem(
                       image: 'plan',
@@ -109,8 +104,8 @@ class _WelcomePageState extends State<WelcomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ShoppingListView(),
-                            settings: RouteSettings(name: '/List'),
+                            builder: (context) => MealPlannerView(),
+                            settings: RouteSettings(name: '/Planner'),
                           ),
                         );
                       },
@@ -122,7 +117,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ShoppingListView(),
+                            builder: (context) => ShoppingBookView(),
                             settings: RouteSettings(name: '/List'),
                           ),
                         );
