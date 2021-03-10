@@ -1,21 +1,22 @@
 import 'dart:math';
+import 'package:dunija/core/database/database_helper.dart';
 import 'package:dunija/layout/welcome_page.dart/welcome_page.dart';
 import 'package:dunija/services/shared_pref.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/settings.dart';
 import 'package:dunija/core/utils/strings.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
-
-import 'package:hive/hive.dart';
+import 'package:dunija/injection_container.dart' as ic;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  //Initialize hive database
-  initDatabase();
+  // //Initialize hive database
+  // DatabaseHelper instance = DatabaseHelper.instance;
+  // instance.initDatabase();
 
-  final shoppingBook = Hive.openBox('shopping_book');
+  //Inject Dependencies
+  ic.init();
 
   runApp(Dunija());
 }
@@ -157,9 +158,12 @@ class _DunijaState extends State<Dunija> {
 }
 
 //Initializes Hive database
-void initDatabase() async {
-  final documentDirectory =
-      await path_provider.getApplicationDocumentsDirectory();
+// void initDatabase() async {
+//   final documentDirectory =
+//       await path_provider.getApplicationDocumentsDirectory();
 
-  Hive.init(documentDirectory.path);
-}
+//   Hive.init(documentDirectory.path);
+
+//   final shoppingBook = await Hive.openBox('shopping_book');
+//   // shoppingBook.put(key, value);
+// }

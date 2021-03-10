@@ -19,7 +19,7 @@ class _FufuState extends State<Fufu> {
     Numbers.deviceWidth = MediaQuery.of(context).size.width;
 
     //Page Name
-    final pageName = AppStrings.Fufu;
+    final pageName = AppStrings.fufu;
 
     //
     return Scaffold(

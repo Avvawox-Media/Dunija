@@ -11,7 +11,7 @@ class AppStrings {
       salads = 'Salads',
       soups = 'Soups',
       grains = 'Grains & Pasters',
-      Fufu = 'Fufu',
+      fufu = 'Fufu',
       favorite = 'Favorites',
       account = 'User Dashboard';
 
@@ -42,3 +42,5 @@ class AppStrings {
     'badge'
   ];
 }
+
+const String SHOPPING_BOOK = 'shopping_lists';
