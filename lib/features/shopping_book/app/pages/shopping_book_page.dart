@@ -77,7 +77,7 @@ class _ShoppingBookViewState extends State<ShoppingBookView> {
         child: Container(
           height: MediaQuery.of(context).size.height,
           alignment: Alignment.topCenter,
-          child: BlocConsumer<ShoppingBookBloc, ShoppingBookState>(
+          child: BlocBuilder<ShoppingBookBloc, ShoppingBookState>(
             builder: (context, state) {
               if (state is ShoppingBookInitial) {
                 return InitialStateView();
@@ -105,7 +105,6 @@ class _ShoppingBookViewState extends State<ShoppingBookView> {
                 return Container();
               }
             },
-            listener: (context, state) {},
           ),
         ),
       ),

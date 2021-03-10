@@ -61,7 +61,7 @@ class ShoppingBookBloc extends Bloc<ShoppingBookEvent, ShoppingBookState> {
         (failure) => ShoppingBookError(failure),
         (_) => ShoppingBookEdited(),
       );
-    } else if (event is GetListEvent) {
+    } else if (event is GetAllListEvent) {
       //Emit Loading State
       yield ShoppingBookLoading();
 
