@@ -1,19 +1,18 @@
 import 'dart:math';
-import 'package:dunija/core/database/database_helper.dart';
 import 'package:dunija/layout/welcome_page.dart/welcome_page.dart';
 import 'package:dunija/services/shared_pref.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/settings.dart';
 import 'package:dunija/core/utils/strings.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:dunija/injection_container.dart' as ic;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // //Initialize hive database
-  // DatabaseHelper instance = DatabaseHelper.instance;
-  // instance.initDatabase();
+  //Initialize firebase App
+  await Firebase.initializeApp();
 
   //Inject Dependencies
   await ic.init();

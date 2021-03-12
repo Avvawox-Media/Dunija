@@ -1,12 +1,12 @@
 import 'package:dunija/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-class MainItem extends StatelessWidget {
+class AppSectionItem extends StatelessWidget {
   final String title;
   final String image;
   final Function onTap;
 
-  const MainItem({
+  const AppSectionItem({
     Key key,
     @required this.title,
     @required this.image,
@@ -17,6 +17,7 @@ class MainItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.0),
         alignment: Alignment.center,
         child: Column(
           children: [

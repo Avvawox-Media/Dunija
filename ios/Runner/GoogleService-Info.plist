@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>360352034659-782nqqdl65a4drk39t52iktgth5nl88v.apps.googleusercontent.com</string>
+	<string>436063485404-rvl96spbvd7noj1tsa32j50mq7o93d4h.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.360352034659-782nqqdl65a4drk39t52iktgth5nl88v</string>
+	<string>com.googleusercontent.apps.436063485404-rvl96spbvd7noj1tsa32j50mq7o93d4h</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCR3DO3JQ-o8seA41Ns5mwsUksLhdJWoNw</string>
+	<string>AIzaSyAb6GGn2grLVSLKGmu24ehKlNuFhvXQCV0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>360352034659</string>
+	<string>436063485404</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.dunija.app</string>
 	<key>PROJECT_ID</key>
-	<string>dunija-mobile-app</string>
+	<string>dunija-27d0d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>dunija-mobile-app.appspot.com</string>
+	<string>dunija-27d0d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:360352034659:ios:f8f7cca5f0a6d93fd06d56</string>
+	<string>1:436063485404:ios:ac7d2696d56b19ed99e319</string>
 </dict>
 </plist>

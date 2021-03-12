@@ -5,7 +5,7 @@ import 'package:dunija/features/meal_planner/app/pages/meal_planner_view.dart';
 import 'package:dunija/features/shopping_book/app/bloc/shopping_book_bloc.dart';
 import 'package:dunija/features/shopping_book/app/pages/shopping_book_page.dart';
 import 'package:dunija/recipe_categories/recipe_category_page.dart';
-import 'package:dunija/layout/welcome_page.dart/widgets/main_item.dart';
+import 'package:dunija/layout/welcome_page.dart/widgets/app_section_item.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,6 +67,7 @@ class _WelcomePageState extends State<WelcomePage> {
             fit: BoxFit.cover,
           ),
         ),
+        padding: EdgeInsets.symmetric(horizontal: 10.0),
         alignment: Alignment.center,
         child: SafeArea(
           child: Column(
@@ -89,9 +90,9 @@ class _WelcomePageState extends State<WelcomePage> {
                 child: GridView.count(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                   crossAxisCount: 2,
-                  mainAxisSpacing: 20.0,
+                  mainAxisSpacing: 30.0,
                   children: [
-                    MainItem(
+                    AppSectionItem(
                       image: 'prepare',
                       title: 'Prepare a Meal',
                       onTap: () {
@@ -104,7 +105,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         );
                       },
                     ),
-                    MainItem(
+                    AppSectionItem(
                       image: 'plan',
                       title: 'Plan a Meal',
                       onTap: () {
@@ -117,7 +118,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         );
                       },
                     ),
-                    MainItem(
+                    AppSectionItem(
                       image: 'list',
                       title: 'Shopping Book',
                       onTap: () async {
@@ -127,7 +128,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         }));
                       },
                     ),
-                    MainItem(
+                    AppSectionItem(
                       image: 'premium',
                       title: 'Premium Offers',
                       onTap: () {},
