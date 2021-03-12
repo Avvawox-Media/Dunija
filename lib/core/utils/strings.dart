@@ -43,4 +43,4 @@ class AppStrings {
   ];
 }
 
-const String SHOPPING_BOOK = 'shopping_lists';
+const String SHOPPING_BOOK = 'shopping_lists_test';

@@ -2,8 +2,8 @@ import 'package:equatable/equatable.dart';
 
 class ShoppingList extends Equatable {
   final String listTitle;
-  final List<Map<String, dynamic>> items;
-  final DateTime date;
+  final List<dynamic> items;
+  final String date;
 
   const ShoppingList(this.listTitle, this.items, this.date);
 

@@ -7,9 +7,9 @@ import 'package:dunija/features/shopping_book/domain/entities/shopping_list_enti
 // @HiveType()
 class ShoppingListModel extends ShoppingList {
   // @HiveField(0)
-  final DateTime date;
+  final String date;
   // @HiveField(1)
-  final List<Map<String, dynamic>> items;
+  final List<dynamic> items;
   // @HiveField(2)
   final String listTitle;
 
@@ -24,19 +24,11 @@ class ShoppingListModel extends ShoppingList {
         date: result['date']);
   }
 
-  Map<String, dynamic> toJson() {
-    return {
+  String toJson() {
+    Map<String, dynamic> map = {
       'title': listTitle,
       'items': items,
       'date': date,
-    };
-  }
-
-  String toJsonString(ShoppingListModel shoppingListModel) {
-    Map<String, dynamic> map = {
-      'title': shoppingListModel.listTitle,
-      'items': shoppingListModel.items,
-      'date': shoppingListModel.date,
     };
     return json.encode(map);
   }

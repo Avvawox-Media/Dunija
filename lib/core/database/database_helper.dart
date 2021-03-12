@@ -52,16 +52,16 @@ class DatabaseHelper {
     return boxAction.getAt(key);
   }
 
-  Future<List<dynamic>> getAllItem(String box) async {
-    final List items = [];
+  Future<List<String>> getAllItem(String box) async {
+    final List<String> items = [];
 
     final boxAction = await Hive.openBox(box);
 
     for (int index = 0; index < boxAction.length; index++) {
-      items.add(boxAction.getAt(index));
+      items.add(boxAction.getAt(index).toString());
     }
 
-    return items;
+    return Future.value(items);
   }
 
   /// [remove] the object specified by the [key], from

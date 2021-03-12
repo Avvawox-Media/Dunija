@@ -23,7 +23,7 @@ class CreateShoppingList extends Usecase<int, ShoppingListParams> {
 class ShoppingListParams extends Equatable {
   final String listTitle;
   final List<Map<String, dynamic>> items;
-  final DateTime date;
+  final String date;
 
   const ShoppingListParams({
     @required this.listTitle,

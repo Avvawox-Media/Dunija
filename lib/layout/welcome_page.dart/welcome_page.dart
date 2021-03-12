@@ -8,7 +8,9 @@ import 'package:dunija/recipe_categories/recipe_category_page.dart';
 import 'package:dunija/layout/welcome_page.dart/widgets/main_item.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:share/share.dart';
+import 'package:dunija/injection_container.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -86,8 +88,6 @@ class _WelcomePageState extends State<WelcomePage> {
               Expanded(
                 child: GridView.count(
                   padding: EdgeInsets.symmetric(horizontal: 10.0),
-                  // keyboardDismissBehavior:
-                  //     ScrollViewKeyboardDismissBehavior.onDrag,
                   crossAxisCount: 2,
                   mainAxisSpacing: 20.0,
                   children: [
@@ -120,14 +120,11 @@ class _WelcomePageState extends State<WelcomePage> {
                     MainItem(
                       image: 'list',
                       title: 'Shopping Book',
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ShoppingBookView(),
-                            settings: RouteSettings(name: '/List'),
-                          ),
-                        );
+                      onTap: () async {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return ShoppingBookPage();
+                        }));
                       },
                     ),
                     MainItem(

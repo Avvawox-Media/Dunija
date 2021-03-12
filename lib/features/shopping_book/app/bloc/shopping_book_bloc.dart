@@ -38,7 +38,7 @@ class ShoppingBookBloc extends Bloc<ShoppingBookEvent, ShoppingBookState> {
       final shoppingListOrFailure = await createShoppingList(ShoppingListParams(
         listTitle: event.listTitle,
         items: event.items,
-        date: event.date,
+        date: event.date.toString(),
       ));
 
       yield shoppingListOrFailure.fold(
@@ -53,7 +53,7 @@ class ShoppingBookBloc extends Bloc<ShoppingBookEvent, ShoppingBookState> {
         EditListParams(
           listTitle: event.listTitle,
           items: event.items,
-          date: event.date,
+          date: event.date.toString(),
         ),
       );
 
@@ -77,8 +77,8 @@ class ShoppingBookBloc extends Bloc<ShoppingBookEvent, ShoppingBookState> {
       //Emit Loading State
       yield ShoppingBookLoading();
 
-      final deleteListOrFailure = await getShoppingList(
-        GetListParams(event.key),
+      final deleteListOrFailure = await removeShoppingList(
+        RemoveListParams(event.key),
       );
 
       yield deleteListOrFailure.fold(

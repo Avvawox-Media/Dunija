@@ -9,12 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 
-class ShoppingBookView extends StatefulWidget {
+import '../../../../injection_container.dart';
+
+class ShoppingBookPage extends StatefulWidget {
   @override
-  _ShoppingBookViewState createState() => _ShoppingBookViewState();
+  _ShoppingBookPageState createState() => _ShoppingBookPageState();
 }
 
-class _ShoppingBookViewState extends State<ShoppingBookView> {
+class _ShoppingBookPageState extends State<ShoppingBookPage> {
   DatabaseHelper instance = DatabaseHelper.instance;
 
   @override
@@ -25,9 +27,9 @@ class _ShoppingBookViewState extends State<ShoppingBookView> {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 2), () {
-      loadShoppingList();
-    });
+    //Shopping List Bloc
+    final shoppingListBloc = sl<ShoppingBookBloc>();
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -73,39 +75,32 @@ class _ShoppingBookViewState extends State<ShoppingBookView> {
         ],
       ),
       body: BlocProvider<ShoppingBookBloc>(
-        create: (context) => ShoppingBookBloc(),
+        create: (context) => shoppingListBloc..add(GetAllListEvent()),
         child: Container(
           height: MediaQuery.of(context).size.height,
           alignment: Alignment.topCenter,
-          child: BlocBuilder<ShoppingBookBloc, ShoppingBookState>(
-            builder: (context, state) {
-              if (state is ShoppingBookInitial) {
-                return InitialStateView();
-              } else if (state is ShoppingBookLoading) {
-                return InitialStateView();
-              } else if (state is ShoppingBookLoaded) {
-                return ListView(
-                  children: state.shoppingList
-                      .map(
-                        (e) => ShoppingListItem(
-                          key: widget.key,
-                          title: e.listTitle,
-                          subText: e.date.toString(),
-                          onEdit: () {},
-                          onDelete: () {
-                            print(
-                              Hive.box(SHOPPING_BOOK).getAt(0),
-                            );
-                          },
-                        ),
-                      )
-                      .toList(),
-                );
-              } else {
-                return Container();
-              }
-            },
-          ),
+          child: BlocConsumer<ShoppingBookBloc, ShoppingBookState>(
+              listener: (context, state) async {},
+              builder: (context, state) {
+                if (state is ShoppingBookLoaded) {
+                  return ListView.builder(
+                    itemCount: state.shoppingList.length,
+                    itemBuilder: (context, index) {
+                      return ShoppingListItem(
+                        key: Key('key'),
+                        title: state.shoppingList.elementAt(index).listTitle,
+                        subText: state.shoppingList.elementAt(index).date,
+                        onEdit: () {},
+                        onDelete: () {
+                          shoppingListBloc.add(RemoveListEvent(index));
+                        },
+                      );
+                    },
+                  );
+                } else {
+                  return CircularProgressIndicator();
+                }
+              }),
         ),
       ),
     );
@@ -137,7 +132,7 @@ class _ShoppingBookViewState extends State<ShoppingBookView> {
                   await instance.save(
                     SHOPPING_BOOK,
                     ShoppingListModel(
-                      date: DateTime.now(),
+                      date: DateTime.now().toString(),
                       listTitle: 'Okro Soup',
                       items: [
                         {'name': 'Okro', 'description': 'Drawllllllllll'},
@@ -159,9 +154,5 @@ class _ShoppingBookViewState extends State<ShoppingBookView> {
     super.dispose();
 
     instance.close(SHOPPING_BOOK);
-  }
-
-  void loadShoppingList() {
-    BlocProvider.of<ShoppingBookBloc>(context).add(GetAllListEvent());
   }
 }

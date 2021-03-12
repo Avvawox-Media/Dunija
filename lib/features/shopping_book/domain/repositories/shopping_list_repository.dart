@@ -8,7 +8,7 @@ abstract class ShoppingListRepository {
   Future<Either<Failure, int>> createShoppingList({
     @required String listTitle,
     @required List<Map<String, dynamic>> items,
-    @required DateTime date,
+    @required String date,
   });
 
   Future<Either<Failure, ShoppingList>> getShoppingList({@required int index});
@@ -21,6 +21,6 @@ abstract class ShoppingListRepository {
     @required int index,
     @required String listTitle,
     @required List<Map<String, dynamic>> items,
-    @required DateTime date,
+    @required String date,
   });
 }

@@ -24,7 +24,7 @@ class EditListParams extends Equatable {
   final int index;
   final String listTitle;
   final List<Map<String, dynamic>> items;
-  final DateTime date;
+  final String date;
 
   EditListParams({
     this.date,

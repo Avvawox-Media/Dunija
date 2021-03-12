@@ -16,7 +16,7 @@ void main() async {
   // instance.initDatabase();
 
   //Inject Dependencies
-  ic.init();
+  await ic.init();
 
   runApp(Dunija());
 }

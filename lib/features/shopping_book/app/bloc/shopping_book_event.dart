@@ -18,7 +18,7 @@ class CreateListEvent extends ShoppingBookEvent {
 class EditListEvent extends ShoppingBookEvent {
   final int key;
   final String listTitle;
-  final List<Map<String, dynamic>> items;
+  final List<dynamic> items;
   final String itemId;
   final DateTime date;
 

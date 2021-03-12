@@ -7,8 +7,8 @@ abstract class ShoppingListDataSource {
   ///* [CreatesShppingList]
   Future<int> createShoppingList({
     @required String listTitle,
-    @required List<Map<String, dynamic>> items,
-    @required DateTime date,
+    @required List<dynamic> items,
+    @required String date,
   });
 
   ///* [GetShoppingList] with a specific [itemId]
@@ -19,8 +19,8 @@ abstract class ShoppingListDataSource {
   Future<void> updateShoppingList({
     @required int index,
     @required String listTitle,
-    @required List<Map<String, dynamic>> items,
-    @required DateTime date,
+    @required List<dynamic> items,
+    @required String date,
   });
 
   ///* [GetAllShoppingList]
@@ -44,8 +44,8 @@ class ShoppingListDataSourceImpl implements ShoppingListDataSource {
   @override
   Future<int> createShoppingList({
     String listTitle,
-    List<Map<String, dynamic>> items,
-    DateTime date,
+    List<dynamic> items,
+    String date,
   }) {
     final shoppingListModel = ShoppingListModel(
       listTitle: listTitle,
@@ -73,8 +73,8 @@ class ShoppingListDataSourceImpl implements ShoppingListDataSource {
     List<String> jsonStringList =
         await databaseHelper.getAllItem(SHOPPING_BOOK);
 
-    for (String value in jsonStringList) {
-      shoppingListModel.add(ShoppingListModel.fromJson(value));
+    for (var value in jsonStringList) {
+      shoppingListModel.add(ShoppingListModel.fromJson(value.toString()));
     }
 
     return shoppingListModel;
@@ -89,8 +89,8 @@ class ShoppingListDataSourceImpl implements ShoppingListDataSource {
   Future<void> updateShoppingList({
     @required final int index,
     String listTitle,
-    List<Map<String, dynamic>> items,
-    DateTime date,
+    List<dynamic> items,
+    String date,
   }) async {
     final shoppingList = ShoppingListModel(
       listTitle: listTitle,

@@ -6,17 +6,17 @@ import 'package:dunija/features/shopping_book/domain/entities/shopping_list_enti
 import 'package:dunija/features/shopping_book/domain/repositories/shopping_list_repository.dart';
 
 class ShoppingListRepositoryImpl implements ShoppingListRepository {
-  final ShoppingListDataSourceImpl shoppingListDataSourceImpl;
+  final ShoppingListDataSource shoppingListDataSource;
 
-  ShoppingListRepositoryImpl(this.shoppingListDataSourceImpl);
+  ShoppingListRepositoryImpl(this.shoppingListDataSource);
   @override
   Future<Either<Failure, int>> createShoppingList({
     String listTitle,
     List<Map<String, dynamic>> items,
-    DateTime date,
+    String date,
   }) async {
     try {
-      return Right(await shoppingListDataSourceImpl.createShoppingList(
+      return Right(await shoppingListDataSource.createShoppingList(
         listTitle: listTitle,
         items: items,
         date: date,
@@ -32,7 +32,7 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
   Future<Either<Failure, ShoppingList>> getShoppingList({int index}) async {
     try {
       return Right(
-        await shoppingListDataSourceImpl.getShoppingList(index),
+        await shoppingListDataSource.getShoppingList(index),
       );
     } on DatabaseException {
       return Left(
@@ -45,7 +45,7 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
   Future<Either<Failure, List<ShoppingList>>> getAllShoppingList() async {
     try {
       return Right(
-        await shoppingListDataSourceImpl.getAllShoppingList(),
+        await shoppingListDataSource.getAllShoppingList(),
       );
     } on DatabaseException {
       return Left(
@@ -58,7 +58,7 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
   Future<Either<Failure, void>> removeShoppingList(int index) async {
     try {
       return Right(
-        await shoppingListDataSourceImpl.removeShoppingList(index: index),
+        await shoppingListDataSource.removeShoppingList(index: index),
       );
     } on DatabaseException {
       return Left(
@@ -71,11 +71,11 @@ class ShoppingListRepositoryImpl implements ShoppingListRepository {
   Future<Either<Failure, void>> updateShoppingList({
     int index,
     String listTitle,
-    List<Map<String, dynamic>> items,
-    DateTime date,
+    List<dynamic> items,
+    String date,
   }) async {
     try {
-      return Right(await shoppingListDataSourceImpl.updateShoppingList(
+      return Right(await shoppingListDataSource.updateShoppingList(
         index: index,
         date: date,
         items: items,
