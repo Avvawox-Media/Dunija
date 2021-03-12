@@ -71,6 +71,12 @@ class DatabaseHelper {
     return boxAction.deleteAt(key);
   }
 
+  ///Returns the Hive database. Observing best practices
+  ///necesaary to avoid memory leaks
+  Stream<BoxEvent> watch(String box) {
+    return Hive.box(box).watch();
+  }
+
   ///Closes the Hive database. Observing best practices
   ///necesaary to avoid memory leaks
   Future<void> close(String box) {

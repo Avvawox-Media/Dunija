@@ -2,6 +2,7 @@ import 'package:dunija/core/database/database_helper.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/strings.dart';
 import 'package:dunija/features/shopping_book/app/bloc/shopping_book_bloc.dart';
+import 'package:dunija/features/shopping_book/app/pages/expanded_shopping_list_page.dart';
 import 'package:dunija/features/shopping_book/app/widgets/initial_state_view.dart';
 import 'package:dunija/features/shopping_book/app/widgets/shopping_list_item.dart';
 import 'package:dunija/features/shopping_book/data/models/shopping_list_model.dart';
@@ -19,6 +20,9 @@ class ShoppingBookPage extends StatefulWidget {
 class _ShoppingBookPageState extends State<ShoppingBookPage> {
   DatabaseHelper instance = DatabaseHelper.instance;
 
+  //Shopping List Bloc
+  final shoppingListBloc = sl<ShoppingBookBloc>();
+
   @override
   void initState() {
     super.initState();
@@ -27,9 +31,6 @@ class _ShoppingBookPageState extends State<ShoppingBookPage> {
 
   @override
   Widget build(BuildContext context) {
-    //Shopping List Bloc
-    final shoppingListBloc = sl<ShoppingBookBloc>();
-
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -93,6 +94,18 @@ class _ShoppingBookPageState extends State<ShoppingBookPage> {
                         onEdit: () {},
                         onDelete: () {
                           shoppingListBloc.add(RemoveListEvent(index));
+                          shoppingListBloc.add(GetAllListEvent());
+                        },
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ExpandedShoppingListPage(
+                                shoppingList:
+                                    state.shoppingList.elementAt(index),
+                              ),
+                            ),
+                          );
                         },
                       );
                     },
@@ -128,11 +141,14 @@ class _ShoppingBookPageState extends State<ShoppingBookPage> {
               TextButton(
                 child: Text('Create List'),
                 onPressed: () async {
+                  DateTime dateTime = DateTime.now();
+                  final now = '${dateTime.day}-${dateTime.month}-' +
+                      '${dateTime.year} \t ${timeIn12(dateTime)}';
                   //Test Saving to database
                   await instance.save(
                     SHOPPING_BOOK,
                     ShoppingListModel(
-                      date: DateTime.now().toString(),
+                      date: now,
                       listTitle: 'Okro Soup',
                       items: [
                         {'name': 'Okro', 'description': 'Drawllllllllll'},
@@ -140,6 +156,8 @@ class _ShoppingBookPageState extends State<ShoppingBookPage> {
                       ],
                     ).toJson(),
                   );
+
+                  shoppingListBloc.add(GetAllListEvent());
                 },
               ),
             ],
@@ -149,10 +167,25 @@ class _ShoppingBookPageState extends State<ShoppingBookPage> {
     );
   }
 
+  String timeIn12(DateTime value) {
+    if (value.hour > 12) {
+      final hour = value.hour - 12;
+      final minute = value.minute;
+
+      return '$hour:$minute';
+    } else {
+      final hour = value.hour;
+      final minute = value.minute;
+
+      return '$hour:${minute}PM';
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();
 
     instance.close(SHOPPING_BOOK);
+    shoppingListBloc.close();
   }
 }

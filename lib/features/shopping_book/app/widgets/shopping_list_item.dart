@@ -1,3 +1,4 @@
+import 'package:dunija/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class ShoppingListItem extends StatefulWidget {
@@ -5,6 +6,7 @@ class ShoppingListItem extends StatefulWidget {
   final String subText;
   final Function onDelete;
   final Function onEdit;
+  final Function onTap;
 
   const ShoppingListItem({
     Key key,
@@ -12,6 +14,7 @@ class ShoppingListItem extends StatefulWidget {
     this.subText,
     this.onDelete,
     this.onEdit,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -25,9 +28,21 @@ class _ShoppingListItemState extends State<ShoppingListItem> {
       // padding: EdgeInsets.symmetric(),
       child: Card(
         child: ListTile(
-          leading: Icon(Icons.list),
-          title: Text(widget.title),
-          subtitle: Text(widget.subText),
+          leading: Container(
+              alignment: Alignment.center,
+              width: 30.0,
+              child: Icon(Icons.list)),
+          title: Text(
+            widget.title,
+            style: TextStyle(
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold,
+                color: AppColors.darkAccent),
+          ),
+          subtitle: Text(
+            widget.subText,
+            style: TextStyle(fontSize: 11.0),
+          ),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -42,6 +57,7 @@ class _ShoppingListItemState extends State<ShoppingListItem> {
                   child: Icon(
                     Icons.edit,
                     size: 18.0,
+                    color: AppColors.darkAccent,
                   ),
                 ),
                 onTap: () {
@@ -49,7 +65,7 @@ class _ShoppingListItemState extends State<ShoppingListItem> {
                 },
               ),
               SizedBox(
-                width: 10.0,
+                width: 5.0,
               ),
 
               //Delete Button
@@ -71,7 +87,9 @@ class _ShoppingListItemState extends State<ShoppingListItem> {
               )
             ],
           ),
-          onTap: () {},
+          onTap: () {
+            widget.onTap();
+          },
         ),
       ),
     );

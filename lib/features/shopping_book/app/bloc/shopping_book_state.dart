@@ -25,7 +25,7 @@ class ShoppingBookLoaded extends ShoppingBookState {
 
 class ShoppingBookEdited extends ShoppingBookState {}
 
-class ShoppingBookDeleted extends ShoppingBookState {}
+class ShoppingListDeleted extends ShoppingBookState {}
 
 class ShoppingBookError extends ShoppingBookState {
   final Failure failure;

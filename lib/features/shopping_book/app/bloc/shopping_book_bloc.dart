@@ -83,7 +83,7 @@ class ShoppingBookBloc extends Bloc<ShoppingBookEvent, ShoppingBookState> {
 
       yield deleteListOrFailure.fold(
         (failure) => ShoppingBookError(failure),
-        (shoppingList) => ShoppingBookDeleted(),
+        (shoppingList) => ShoppingListDeleted(),
       );
     }
   }
