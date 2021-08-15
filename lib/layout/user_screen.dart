@@ -1,4 +1,4 @@
-import 'package:dunija/layout/auth/login_screen.dart';
+import 'package:dunija/features/auth/app/pages/login_screen.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/quantities.dart';
 import 'package:dunija/core/utils/strings.dart';

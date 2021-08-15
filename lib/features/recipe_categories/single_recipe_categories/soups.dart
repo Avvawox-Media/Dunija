@@ -4,22 +4,22 @@ import 'package:dunija/core/utils/lists.dart';
 import 'package:dunija/core/utils/quantities.dart';
 import 'package:dunija/core/utils/strings.dart';
 import 'package:dunija/core/utils/styles.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/widgets/salads_listview.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/widgets/soups_listview.dart';
 import 'package:flutter/material.dart';
 
-class SaladsScreen extends StatefulWidget {
+class SoupsScreen extends StatefulWidget {
   @override
-  _SaladsScreenState createState() => _SaladsScreenState();
+  _SoupsScreenState createState() => _SoupsScreenState();
 }
 
-class _SaladsScreenState extends State<SaladsScreen> {
+class _SoupsScreenState extends State<SoupsScreen> {
   @override
   Widget build(BuildContext context) {
     Numbers.deviceHeight = MediaQuery.of(context).size.height;
     Numbers.deviceWidth = MediaQuery.of(context).size.width;
 
     //Page Name
-    final pageName = AppStrings.salads;
+    final pageName = AppStrings.soups;
 
     //
     return Scaffold(
@@ -160,7 +160,7 @@ class _SaladsScreenState extends State<SaladsScreen> {
                       blurRadius: 15.0)
                 ],
               ),
-              child: SaladsListView(AppLists.fetchSaladList())),
+              child: SoupssListView(AppLists.fetchSoupsList())),
         ),
       ]),
     );

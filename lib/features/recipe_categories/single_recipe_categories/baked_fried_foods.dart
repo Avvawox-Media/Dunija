@@ -4,22 +4,22 @@ import 'package:dunija/core/utils/lists.dart';
 import 'package:dunija/core/utils/quantities.dart';
 import 'package:dunija/core/utils/strings.dart';
 import 'package:dunija/core/utils/styles.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/widgets/soups_listview.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/widgets/baked_food_listview.dart';
 import 'package:flutter/material.dart';
 
-class Fufu extends StatefulWidget {
+class BakedFriedFoods extends StatefulWidget {
   @override
-  _FufuState createState() => _FufuState();
+  _BakedFriedFoodsState createState() => _BakedFriedFoodsState();
 }
 
-class _FufuState extends State<Fufu> {
+class _BakedFriedFoodsState extends State<BakedFriedFoods> {
   @override
   Widget build(BuildContext context) {
     Numbers.deviceHeight = MediaQuery.of(context).size.height;
     Numbers.deviceWidth = MediaQuery.of(context).size.width;
 
     //Page Name
-    final pageName = AppStrings.fufu;
+    final pageName = AppStrings.bakedFood;
 
     //
     return Scaffold(
@@ -92,22 +92,6 @@ class _FufuState extends State<Fufu> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // InkWell(
-                    //   child: CircleAvatar(
-                    //     backgroundColor: AppColors.darkAccent.withOpacity(0.5),
-                    //     child: Icon(
-                    //       Icons.search,
-                    //       color: AppColors.whiteColor,
-                    //     ),
-                    //   ),
-                    //   onTap: () {
-                    //     //Handle on tap
-                    //     showSearch(
-                    //       context: context,
-                    //       delegate: SearchField(),
-                    //     );
-                    //   },
-                    // ),
                     SizedBox(
                       width: 20.0,
                     ),
@@ -141,26 +125,30 @@ class _FufuState extends State<Fufu> {
         Positioned(
           bottom: 0,
           child: Container(
-              width: Numbers.deviceWidth,
-              height: Numbers.deviceHeight * (3 / 4),
-              decoration: BoxDecoration(
-                color: AppColors.whiteColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(
-                    Numbers.mediumBoxBorderRadius,
-                  ),
-                  topRight: Radius.circular(
-                    Numbers.mediumBoxBorderRadius,
-                  ),
+            width: Numbers.deviceWidth,
+            height: Numbers.deviceHeight * (3 / 4) + 20.0,
+            decoration: BoxDecoration(
+              color: AppColors.whiteColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(
+                  Numbers.mediumBoxBorderRadius,
                 ),
-                boxShadow: [
-                  BoxShadow(
-                      color: Color(0x33000000),
-                      spreadRadius: 1.0,
-                      blurRadius: 15.0)
-                ],
+                topRight: Radius.circular(
+                  Numbers.mediumBoxBorderRadius,
+                ),
               ),
-              child: SoupssListView(AppLists.fetchSoupsList())),
+              boxShadow: [
+                BoxShadow(
+                    color: Color(0x33000000),
+                    spreadRadius: 1.0,
+                    blurRadius: 15.0)
+              ],
+            ),
+            //Page List items
+            child: Container(
+              child: BakedFoodListView(AppLists.fetchBakedFoodList()),
+            ),
+          ),
         ),
       ]),
     );

@@ -1,17 +1,17 @@
 import 'dart:io';
 
 import 'package:dunija/layout/dialog/infodialog.dart';
-import 'package:dunija/layout/menus/main_menu.dart';
+import 'package:dunija/core/menus/main_menu.dart';
 import 'package:dunija/models/recipe_category.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/baked_fried_foods.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/barbicue.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/beverages.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/fufu.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/grain_pasters.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/porridges.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/salads.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/soups.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/widgets/main_category_thumbnail.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/baked_fried_foods.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/barbicue.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/beverages.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/fufu.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/grain_pasters.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/porridges.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/salads.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/soups.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/widgets/main_category_thumbnail.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/custom_icon_icons.dart';
 import 'package:dunija/core/utils/lists.dart';

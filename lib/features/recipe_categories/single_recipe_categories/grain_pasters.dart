@@ -4,22 +4,22 @@ import 'package:dunija/core/utils/lists.dart';
 import 'package:dunija/core/utils/quantities.dart';
 import 'package:dunija/core/utils/strings.dart';
 import 'package:dunija/core/utils/styles.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/widgets/baked_food_listview.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/widgets/fried_food_listview.dart';
 import 'package:flutter/material.dart';
 
-class BakedFriedFoods extends StatefulWidget {
+class GrainsPasters extends StatefulWidget {
   @override
-  _BakedFriedFoodsState createState() => _BakedFriedFoodsState();
+  _GrainsPastersState createState() => _GrainsPastersState();
 }
 
-class _BakedFriedFoodsState extends State<BakedFriedFoods> {
+class _GrainsPastersState extends State<GrainsPasters> {
   @override
   Widget build(BuildContext context) {
     Numbers.deviceHeight = MediaQuery.of(context).size.height;
     Numbers.deviceWidth = MediaQuery.of(context).size.width;
 
     //Page Name
-    final pageName = AppStrings.bakedFood;
+    final pageName = AppStrings.grains;
 
     //
     return Scaffold(
@@ -92,6 +92,22 @@ class _BakedFriedFoodsState extends State<BakedFriedFoods> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    // InkWell(
+                    //   child: CircleAvatar(
+                    //     backgroundColor: AppColors.darkAccent.withOpacity(0.5),
+                    //     child: Icon(
+                    //       Icons.search,
+                    //       color: AppColors.whiteColor,
+                    //     ),
+                    //   ),
+                    //   onTap: () {
+                    //     //Handle on tap
+                    //     showSearch(
+                    //       context: context,
+                    //       delegate: SearchField(),
+                    //     );
+                    //   },
+                    // ),
                     SizedBox(
                       width: 20.0,
                     ),
@@ -126,7 +142,7 @@ class _BakedFriedFoodsState extends State<BakedFriedFoods> {
           bottom: 0,
           child: Container(
             width: Numbers.deviceWidth,
-            height: Numbers.deviceHeight * (3 / 4) + 20.0,
+            height: Numbers.deviceHeight * (3 / 4),
             decoration: BoxDecoration(
               color: AppColors.whiteColor,
               borderRadius: BorderRadius.only(
@@ -144,10 +160,7 @@ class _BakedFriedFoodsState extends State<BakedFriedFoods> {
                     blurRadius: 15.0)
               ],
             ),
-            //Page List items
-            child: Container(
-              child: BakedFoodListView(AppLists.fetchBakedFoodList()),
-            ),
+            child: FriedFoodListView(AppLists.fetchFriedFoodsList()),
           ),
         ),
       ]),

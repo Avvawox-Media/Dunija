@@ -4,22 +4,22 @@ import 'package:dunija/core/utils/lists.dart';
 import 'package:dunija/core/utils/quantities.dart';
 import 'package:dunija/core/utils/strings.dart';
 import 'package:dunija/core/utils/styles.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/widgets/porridge_listview.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/widgets/soups_listview.dart';
 import 'package:flutter/material.dart';
 
-class PorridgesScreen extends StatefulWidget {
+class Beverages extends StatefulWidget {
   @override
-  _PorridgesScreenState createState() => _PorridgesScreenState();
+  _BeveragesState createState() => _BeveragesState();
 }
 
-class _PorridgesScreenState extends State<PorridgesScreen> {
+class _BeveragesState extends State<Beverages> {
   @override
   Widget build(BuildContext context) {
     Numbers.deviceHeight = MediaQuery.of(context).size.height;
     Numbers.deviceWidth = MediaQuery.of(context).size.width;
 
     //Page Name
-    final pageName = AppStrings.porridges;
+    final pageName = AppStrings.beverages;
 
     //
     return Scaffold(
@@ -160,7 +160,7 @@ class _PorridgesScreenState extends State<PorridgesScreen> {
                       blurRadius: 15.0)
                 ],
               ),
-              child: PorridgeListView(AppLists.fetchPorridgeList())),
+              child: SoupssListView(AppLists.fetchSoupsList())),
         ),
       ]),
     );

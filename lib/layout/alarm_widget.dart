@@ -6,13 +6,22 @@ class AlarmWidget extends StatefulWidget {
 }
 
 class _AlarmWidgetState extends State<AlarmWidget>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   AnimationController _animationController;
+  Animation rotateAnimation;
 
   @override
   void initState() {
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 500),
+    );
+
+    rotateAnimation = TweenSequence<double>(<TweenSequenceItem<double>>[
+      TweenSequenceItem(tween: Tween(begin: -1.0, end: 1.0), weight: 50),
+      TweenSequenceItem(tween: Tween(begin: 1.0, end: -1.0), weight: 50),
+    ]).animate(_animationController);
+
     super.initState();
   }
 
@@ -20,9 +29,7 @@ class _AlarmWidgetState extends State<AlarmWidget>
   Widget build(BuildContext context) {
     return Container(
       child: RotationTransition(
-        turns: Tween(begin: 0.0, end: -1.0)
-            .chain(CurveTween(curve: Curves.elasticIn))
-            .animate(_animationController),
+        turns: rotateAnimation,
         child: Icon(
           Icons.alarm,
           size: 35.0,

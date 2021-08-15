@@ -4,22 +4,22 @@ import 'package:dunija/core/utils/lists.dart';
 import 'package:dunija/core/utils/quantities.dart';
 import 'package:dunija/core/utils/strings.dart';
 import 'package:dunija/core/utils/styles.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/widgets/fried_food_listview.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/widgets/soups_listview.dart';
 import 'package:flutter/material.dart';
 
-class GrainsPasters extends StatefulWidget {
+class Fufu extends StatefulWidget {
   @override
-  _GrainsPastersState createState() => _GrainsPastersState();
+  _FufuState createState() => _FufuState();
 }
 
-class _GrainsPastersState extends State<GrainsPasters> {
+class _FufuState extends State<Fufu> {
   @override
   Widget build(BuildContext context) {
     Numbers.deviceHeight = MediaQuery.of(context).size.height;
     Numbers.deviceWidth = MediaQuery.of(context).size.width;
 
     //Page Name
-    final pageName = AppStrings.grains;
+    final pageName = AppStrings.fufu;
 
     //
     return Scaffold(
@@ -141,27 +141,26 @@ class _GrainsPastersState extends State<GrainsPasters> {
         Positioned(
           bottom: 0,
           child: Container(
-            width: Numbers.deviceWidth,
-            height: Numbers.deviceHeight * (3 / 4),
-            decoration: BoxDecoration(
-              color: AppColors.whiteColor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(
-                  Numbers.mediumBoxBorderRadius,
+              width: Numbers.deviceWidth,
+              height: Numbers.deviceHeight * (3 / 4),
+              decoration: BoxDecoration(
+                color: AppColors.whiteColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(
+                    Numbers.mediumBoxBorderRadius,
+                  ),
+                  topRight: Radius.circular(
+                    Numbers.mediumBoxBorderRadius,
+                  ),
                 ),
-                topRight: Radius.circular(
-                  Numbers.mediumBoxBorderRadius,
-                ),
+                boxShadow: [
+                  BoxShadow(
+                      color: Color(0x33000000),
+                      spreadRadius: 1.0,
+                      blurRadius: 15.0)
+                ],
               ),
-              boxShadow: [
-                BoxShadow(
-                    color: Color(0x33000000),
-                    spreadRadius: 1.0,
-                    blurRadius: 15.0)
-              ],
-            ),
-            child: FriedFoodListView(AppLists.fetchFriedFoodsList()),
-          ),
+              child: SoupssListView(AppLists.fetchSoupsList())),
         ),
       ]),
     );

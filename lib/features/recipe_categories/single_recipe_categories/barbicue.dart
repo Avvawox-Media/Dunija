@@ -4,7 +4,7 @@ import 'package:dunija/core/utils/lists.dart';
 import 'package:dunija/core/utils/quantities.dart';
 import 'package:dunija/core/utils/strings.dart';
 import 'package:dunija/core/utils/styles.dart';
-import 'package:dunija/recipe_categories/single_recipe_categories/widgets/barbicue_listview.dart';
+import 'package:dunija/features/recipe_categories/single_recipe_categories/widgets/barbicue_listview.dart';
 import 'package:flutter/material.dart';
 
 class Barbicues extends StatefulWidget {

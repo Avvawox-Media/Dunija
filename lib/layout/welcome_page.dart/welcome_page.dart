@@ -2,15 +2,12 @@ import 'dart:io';
 
 import 'package:dunija/core/utils/strings.dart';
 import 'package:dunija/features/meal_planner/app/pages/meal_planner_view.dart';
-import 'package:dunija/features/shopping_book/app/bloc/shopping_book_bloc.dart';
 import 'package:dunija/features/shopping_book/app/pages/shopping_book_page.dart';
-import 'package:dunija/recipe_categories/recipe_category_page.dart';
+import 'package:dunija/features/recipe_categories/recipe_category_page.dart';
 import 'package:dunija/layout/welcome_page.dart/widgets/app_section_item.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:share/share.dart';
-import 'package:dunija/injection_container.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
