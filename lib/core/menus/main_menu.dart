@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:dunija/features/admininstration/admin_area.dart';
-import 'package:dunija/layout/app_setting_screens/app_setting_screen.dart';
+import 'package:dunija/features/admin_panel/admin_area.dart';
+import 'package:dunija/features/app_setting_screens/app_setting_screen.dart';
 import 'package:dunija/features/auth/app/pages/login_screen.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/strings.dart';

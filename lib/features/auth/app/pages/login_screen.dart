@@ -2,7 +2,7 @@ import 'package:dunija/features/auth/app/pages/recovery_screen.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/quantities.dart';
 import 'package:dunija/core/utils/styles.dart';
-import 'package:dunija/widgets/textfield_custom.dart';
+import 'package:dunija/core/widgets/textfield_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:dunija/features/auth/app/pages/signup.dart';
 

@@ -1,6 +1,6 @@
-import 'package:dunija/layout/dialog/infodialog.dart';
-import 'package:dunija/layout/kitchen/kitchen.dart';
-import 'package:dunija/services/data_manager.dart';
+import 'package:dunija/core/dialog/infodialog.dart';
+import 'package:dunija/features/kitchen/kitchen.dart';
+import 'package:dunija/core/services/data_manager.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/styles.dart';
 import 'package:flutter/material.dart';

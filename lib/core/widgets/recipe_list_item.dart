@@ -1,4 +1,4 @@
-import 'package:dunija/single_item_page/single_recipe_page.dart';
+import 'package:dunija/features/single_item_page/single_recipe_page.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/quantities.dart';
 import 'package:dunija/core/utils/styles.dart';

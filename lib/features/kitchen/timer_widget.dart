@@ -1,5 +1,5 @@
 import 'package:dunija/layout/alarm_widget.dart';
-import 'package:dunija/layout/dialog/infodialog.dart';
+import 'package:dunija/core/dialog/infodialog.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/quantities.dart';
 import 'package:dunija/core/utils/styles.dart';

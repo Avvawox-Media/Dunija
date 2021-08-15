@@ -1,4 +1,4 @@
-import 'package:dunija/services/shared_pref.dart';
+import 'package:dunija/core/services/shared_pref.dart';
 import 'package:dunija/core/utils/strings.dart';
 
 class AppSettings {

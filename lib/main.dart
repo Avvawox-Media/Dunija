@@ -1,6 +1,6 @@
 import 'dart:math';
-import 'package:dunija/layout/welcome_page.dart/welcome_page.dart';
-import 'package:dunija/services/shared_pref.dart';
+import 'package:dunija/features/welcome_page.dart/welcome_page.dart';
+import 'package:dunija/core/services/shared_pref.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/settings.dart';
 import 'package:dunija/core/utils/strings.dart';

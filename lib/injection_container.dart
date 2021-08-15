@@ -9,8 +9,6 @@ import 'package:dunija/features/shopping_book/domain/usecases/edit_shopping_list
 import 'package:dunija/features/shopping_book/domain/usecases/get_shopping_list.dart';
 import 'package:dunija/features/shopping_book/domain/usecases/remove_shopping_list.dart';
 import 'package:get_it/get_it.dart';
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
 
 import 'features/shopping_book/app/bloc/shopping_book_bloc.dart';
 import 'features/shopping_book/domain/usecases/get_all_shopping_list.dart';

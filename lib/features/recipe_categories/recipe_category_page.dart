@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dunija/layout/dialog/infodialog.dart';
+import 'package:dunija/core/dialog/infodialog.dart';
 import 'package:dunija/core/menus/main_menu.dart';
 import 'package:dunija/models/recipe_category.dart';
 import 'package:dunija/features/recipe_categories/single_recipe_categories/baked_fried_foods.dart';
@@ -17,7 +17,7 @@ import 'package:dunija/core/utils/custom_icon_icons.dart';
 import 'package:dunija/core/utils/lists.dart';
 import 'package:dunija/core/utils/quantities.dart';
 import 'package:dunija/core/utils/styles.dart';
-import 'package:dunija/widgets/search_field.dart';
+import 'package:dunija/core/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
