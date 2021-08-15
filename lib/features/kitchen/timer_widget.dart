@@ -1,4 +1,4 @@
-import 'package:dunija/layout/alarm_widget.dart';
+import 'package:dunija/core/widgets/alarm_widget.dart';
 import 'package:dunija/core/dialog/infodialog.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/quantities.dart';
