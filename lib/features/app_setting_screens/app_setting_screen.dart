@@ -1,4 +1,4 @@
-import 'package:dunija/layout/app_setting_screens/profile_settings.dart';
+import 'package:dunija/features/app_setting_screens/profile_settings.dart';
 import 'package:dunija/core/utils/colors.dart';
 import 'package:dunija/core/utils/custom_icon_icons.dart';
 import 'package:dunija/core/utils/styles.dart';
